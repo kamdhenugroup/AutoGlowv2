@@ -64,7 +64,7 @@ export function Button({
 
 export function TextLink({href, children, className}: {href: string; children: ReactNode; className?: string}) {
   return (
-    <SmartLink href={href} className={cn('link-underline shrink-0 text-[18px] font-medium whitespace-nowrap', className)}>
+    <SmartLink href={href} data-scramble className={cn('link-underline shrink-0 text-[18px] font-medium whitespace-nowrap', className)}>
       {children}
     </SmartLink>
   )
