@@ -1,26 +1,102 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* AutoGlow — Studio Light */
+@theme {
+  --color-ink: #031533;
+  --color-body: #3b4556;
+  --color-muted: #5f6875;
+  --color-line: #dde0e5;
+  --color-line-strong: #c5cad2;
+  --color-mist: #f2f3f5;
+  --color-paper: #ffffff;
+  --color-logo-red: #cd2b34;
+
+  --font-sans: var(--font-mona), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: 2px;
+
+  --breakpoint-xs: 26rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-stretch: 100%;
+  }
+  ::selection {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@utility display {
+  font-stretch: 108%;
+  font-weight: 420;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  text-wrap: balance;
+}
+
+@utility gutter {
+  padding-inline: clamp(20px, 5.5vw, 80px);
+}
+
+@utility wrap {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 5.5vw, 80px);
+}
+
+@utility link-underline {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 6px;
+  transition: text-underline-offset 200ms ease;
+  &:hover {
+    text-underline-offset: 3px;
+  }
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Hero photo settles from a slight zoom on load: the one motion moment. */
+@keyframes settle {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+.animate-settle {
+  animation: settle 2.4s cubic-bezier(0.16, 1, 0.3, 1) both;
 }

@@ -1,0 +1,93 @@
+import {defineArrayMember, defineField, defineType} from 'sanity'
+import {WrenchIcon} from '@sanity/icons/Wrench'
+
+export const service = defineType({
+  name: 'service',
+  title: 'Service',
+  type: 'document',
+  icon: WrenchIcon,
+  groups: [
+    {name: 'content', title: 'Content', default: true},
+    {name: 'media', title: 'Media'},
+    {name: 'seo', title: 'SEO'},
+  ],
+  fields: [
+    defineField({name: 'title', type: 'string', group: 'content', validation: (rule) => rule.required()}),
+    defineField({
+      name: 'slug',
+      type: 'slug',
+      group: 'content',
+      description: 'Forms the URL: /services/<slug>. Changing it breaks existing links and search rankings.',
+      options: {source: 'title'},
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'orderRank',
+      title: 'Display order',
+      type: 'number',
+      group: 'content',
+      validation: (rule) => rule.required().integer().min(1),
+    }),
+    defineField({name: 'oneLiner', title: 'One-liner', type: 'text', rows: 2, group: 'content', validation: (rule) => rule.required()}),
+    defineField({
+      name: 'isGlanzPro',
+      title: 'Powered by GlanzPro',
+      type: 'boolean',
+      group: 'content',
+      initialValue: false,
+    }),
+    defineField({name: 'warranty', type: 'string', group: 'content'}),
+    defineField({
+      name: 'body',
+      title: 'The Protocol',
+      type: 'array',
+      group: 'content',
+      description: 'One entry per paragraph.',
+      of: [defineArrayMember({type: 'text', rows: 4})],
+    }),
+    defineField({name: 'faqs', title: 'FAQs', type: 'array', group: 'content', of: [defineArrayMember({type: 'faq'})]}),
+    defineField({
+      name: 'image',
+      title: 'Photo',
+      type: 'imageWithAlt',
+      group: 'media',
+      description: 'Used on the service card and at the top of the service page.',
+    }),
+    defineField({
+      name: 'legacyImageUrl',
+      title: 'Legacy image URL',
+      type: 'url',
+      group: 'media',
+      description: 'Image from the previous site. Used only when no photo is uploaded above.',
+    }),
+    defineField({
+      name: 'shortsUrls',
+      title: 'YouTube Shorts',
+      type: 'array',
+      group: 'media',
+      of: [defineArrayMember({type: 'url'})],
+    }),
+    defineField({name: 'videoUrl', title: 'Featured video URL', type: 'url', group: 'media'}),
+    defineField({
+      name: 'seoTitle',
+      title: 'Meta title',
+      type: 'string',
+      group: 'seo',
+      description: 'Leave empty to use "<Title> in Ahmedabad & Kochi | AutoGlow".',
+    }),
+    defineField({
+      name: 'description',
+      title: 'Meta description',
+      type: 'text',
+      rows: 3,
+      group: 'seo',
+      description: 'Also used in the Service structured data.',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({name: 'ogImageUrl', title: 'Social share image URL', type: 'url', group: 'seo'}),
+  ],
+  orderings: [{title: 'Display order', name: 'order', by: [{field: 'orderRank', direction: 'asc'}]}],
+  preview: {
+    select: {title: 'title', subtitle: 'oneLiner', media: 'image'},
+  },
+})
