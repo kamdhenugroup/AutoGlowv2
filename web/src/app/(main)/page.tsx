@@ -6,6 +6,7 @@ import {imageSrc} from '@/sanity/image'
 import {getBrands, getLocations, getServices} from '@/lib/data'
 import {pageMetadata} from '@/lib/seo'
 import {Carousel} from '@/components/ServiceCarousel'
+import {HeroGL} from '@/components/fx/HeroGL'
 import {ServiceCardItem, Stats, StudioCard} from '@/components/blocks'
 import {Button, Section, TextLink} from '@/components/ui'
 
@@ -28,13 +29,14 @@ export default async function HomePage() {
     <>
       {/* Hero */}
       <section className="relative isolate flex min-h-[max(640px,100svh)] flex-col justify-end overflow-hidden bg-[#05070b] text-paper">
+<div data-hero-media className="absolute inset-0 -z-10 will-change-transform">
         <Image
           src={heroSrc}
           alt={hero?.image?.alt ?? ''}
           fill
           priority
           sizes="100vw"
-          className={`animate-settle -z-10 object-cover object-[60%_50%] ${heroMobileSrc ? 'max-md:hidden' : ''}`}
+          className={`animate-settle object-cover object-[60%_50%] ${heroMobileSrc ? 'max-md:hidden' : ''}`}
         />
         {heroMobileSrc && (
           <Image
@@ -43,11 +45,13 @@ export default async function HomePage() {
             fill
             priority
             sizes="100vw"
-            className="animate-settle -z-10 object-cover md:hidden"
+            className="animate-settle object-cover md:hidden"
           />
         )}
+          <HeroGL />
+        </div>
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/70 via-black/20 to-black/30" aria-hidden="true" />
-        <div className="wrap flex flex-col gap-10 pb-[124px] md:pb-[clamp(40px,7vw,96px)] lg:flex-row lg:items-end lg:justify-between">
+        <div data-hero-copy className="wrap flex flex-col gap-10 pb-[124px] md:pb-[clamp(40px,7vw,96px)] lg:flex-row lg:items-end lg:justify-between">
           <h1 className="display text-[clamp(46px,7.6vw,112px)]">
             {hero?.headingLines?.map((line, i) => (
               <span key={i} className="block">

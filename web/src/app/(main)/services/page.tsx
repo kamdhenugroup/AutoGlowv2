@@ -27,7 +27,7 @@ export default async function ServicesPage() {
             return (
               <li key={s._id} className="rounded-sm bg-mist transition-colors hover:bg-[#e9ebee]">
                 <Link href={`/services/${s.slug}`} className="group grid items-center gap-6 p-4 md:grid-cols-12 md:gap-8 md:p-5">
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-sm bg-mist md:col-span-3">
+                  <div data-ascii className="relative aspect-[4/3] overflow-hidden rounded-sm bg-mist md:col-span-3">
                     {src && (
                       <Image
                         src={src}

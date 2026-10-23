@@ -8,7 +8,7 @@ export function ServiceCardItem({s, sizes, className}: {s: ServiceCard; sizes: s
   const src = imageSrc(s.image, s.legacyImageUrl, 900)
   return (
     <Link href={`/services/${s.slug}`} className={cn('group block', className)}>
-      <div className="relative aspect-[4/5] overflow-hidden rounded-sm bg-mist">
+      <div data-ascii className="relative aspect-[4/5] overflow-hidden rounded-sm bg-mist">
         {src && (
           <Image
             src={src}

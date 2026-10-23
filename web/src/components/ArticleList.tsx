@@ -84,7 +84,7 @@ export function ArticleList({
             return (
               <li key={a._id} className={cn(lead && 'md:col-span-2 lg:col-span-3')}>
                 <article className={cn('group relative flex h-full flex-col', lead && 'lg:grid lg:grid-cols-12 lg:items-end lg:gap-12')}>
-                  <div className={cn('relative aspect-[16/10] overflow-hidden rounded-sm bg-mist', lead && 'lg:col-span-7')}>
+                  <div data-ascii className={cn('relative aspect-[16/10] overflow-hidden rounded-sm bg-mist', lead && 'lg:col-span-7')}>
                     {a.cover && (
                       <Image
                         src={a.cover}

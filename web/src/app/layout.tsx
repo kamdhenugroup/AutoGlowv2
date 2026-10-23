@@ -9,6 +9,10 @@ import {CookieConsent} from '@/components/CookieConsent'
 import {Analytics} from '@/components/Analytics'
 import {MobileActions} from '@/components/MobileActions'
 import {Reveal} from '@/components/Reveal'
+import {UiFx} from '@/components/fx/UiFx'
+import {SmoothScroll} from '@/components/fx/SmoothScroll'
+import {PageTransition} from '@/components/fx/PageTransition'
+import {AsciiLens} from '@/components/fx/AsciiLens'
 import './globals.css'
 
 const mona = Mona_Sans({subsets: ['latin'], axes: ['wdth'], variable: '--font-mona', display: 'swap'})
@@ -71,6 +75,10 @@ export default async function RootLayout({children}: {children: React.ReactNode}
         <MobileActions phones={phones} callLabel={s.stickyBar?.callLabel ?? ''} whatsappLabel={s.stickyBar?.whatsappLabel ?? ''} />
         <CookieConsent c={s.cookieConsent} />
         <Reveal />
+        <UiFx />
+        <SmoothScroll />
+        <PageTransition />
+        <AsciiLens />
         <Toaster position="bottom-right" theme="light" />
       </body>
     </html>

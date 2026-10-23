@@ -113,3 +113,29 @@
   opacity: 1;
   transform: none;
 }
+
+/* Sound toggle: four bars that breathe while sound is on. */
+@keyframes sound-bar {
+  0%,
+  100% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+.sound-bar {
+  animation: sound-bar 0.9s ease-in-out infinite;
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}

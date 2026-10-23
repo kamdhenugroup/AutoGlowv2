@@ -3,6 +3,7 @@ import {Logo} from './Logo'
 import {NewsletterForm} from './NewsletterForm'
 import {ManageCookiesButton} from './CookieConsent'
 import {SmartLink, buttonClass} from './ui'
+import {AsciiWordmark} from './fx/AsciiWordmark'
 
 export function Footer({s}: {s: Settings}) {
   const ask = s.askAi
@@ -77,7 +78,7 @@ export function Footer({s}: {s: Settings}) {
                 <ul className="mt-5 space-y-3">
                   {col.links?.map((l) => (
                     <li key={l._key}>
-                      <SmartLink href={l.href ?? '/'} className="text-[15px] text-ink hover:underline hover:underline-offset-4">
+                      <SmartLink href={l.href ?? '/'} data-scramble className="text-[15px] text-ink hover:underline hover:underline-offset-4">
                         {l.label}
                       </SmartLink>
                     </li>
@@ -131,6 +132,9 @@ export function Footer({s}: {s: Settings}) {
             )}
           </p>
         )}
+      </div>
+      <div className="wrap pb-[max(24px,env(safe-area-inset-bottom))]">
+        <AsciiWordmark word={(s.siteName ?? 'AutoGlow').toUpperCase()} />
       </div>
     </footer>
   )
