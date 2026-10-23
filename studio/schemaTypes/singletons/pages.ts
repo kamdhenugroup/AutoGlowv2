@@ -78,6 +78,17 @@ export const servicesPage = page('servicesPage', 'Services', [
   str('warrantyLabel', 'Warranty label'),
   str('exploreLabel', 'Card link label'),
   str('glanzProBadge', 'GlanzPro badge'),
+  obj('detail', 'Service page labels', [
+    str('breadcrumbHome', 'Breadcrumb: home'),
+    str('breadcrumbServices', 'Breadcrumb: services'),
+    str('poweredByLabel', 'Powered by label'),
+    str('protocolLabel', 'Protocol heading'),
+    str('faqHeading', 'FAQ heading'),
+    str('ctaHeading', 'Closing box heading'),
+    txt('ctaBody', 'Closing box text'),
+    str('ctaButtonPrefix', 'Button text before the service name'),
+    str('shortsHeading', 'Videos heading'),
+  ]),
 ])
 
 export const aboutPage = page('aboutPage', 'About', [
@@ -115,6 +126,10 @@ export const articlesPage = page('articlesPage', 'Articles', [
   str('backLabel', 'Back link on articles'),
   str('shareLabel', 'Share label'),
   str('authorLabel', 'Author label'),
+  str('tocLabel', 'Table of contents label'),
+  str('searchPlaceholder'),
+  str('noResultsHeading'),
+  txt('noResultsBody'),
 ])
 
 export const bookInspectionPage = page('bookInspectionPage', 'Book Inspection', [

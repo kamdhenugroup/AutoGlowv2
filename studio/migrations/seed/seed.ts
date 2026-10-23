@@ -95,7 +95,7 @@ async function build() {
       isGlanzPro: !!s.isGlanzPro,
       ...(s.warranty ? {warranty: s.warranty} : {}),
       body: d?.paragraphs ?? [],
-      faqs: (d?.faqs ?? []).map((f) => ({_key: k(), _type: 'faq', question: f.question, answer: f.answer})),
+      faqs: (d?.faqs ?? []).map((f: {question: string; answer: string}) => ({_key: k(), _type: 'faq', question: f.question, answer: f.answer})),
       ...(s.imageUrl ? {legacyImageUrl: s.imageUrl} : {}),
       ...(s.shortsUrls ? {shortsUrls: s.shortsUrls} : {}),
       ...(s.videoUrl ? {videoUrl: s.videoUrl} : {}),
@@ -262,7 +262,31 @@ async function build() {
     companyLine: 'A Kamdhenu Group company.',
     creditText: 'Idea, Design & Technology built from the ground up by',
     creditLink: link('Rishi Shah', 'https://rishishah.in'),
-    statusBadgeUrl: 'https://status.autoglowcare.in/badge?theme=dark',
+    statusBadgeUrl: 'https://status.autoglowcare.in/badge?theme=light',
+    cookieConsent: {
+      heading: 'Cookie Preferences',
+      body: 'We use cookies to enhance your experience, analyze our traffic, and serve tailored content.',
+      learnMore: 'Learn more',
+      accept: 'Okay',
+      prefsHeading: 'Manage Preferences',
+      prefsBody: 'Customize your cookie settings below.',
+      categories: keyed([
+        {_type: 'feature', title: 'Strictly Necessary', body: 'Required for the website to function.'},
+        {_type: 'feature', title: 'Analytics', body: 'Help us understand how you use our site.'},
+        {_type: 'feature', title: 'Marketing', body: 'Used to deliver tailored advertisements.'},
+      ]),
+      save: 'Save Preferences',
+      back: 'Back',
+    },
+    notFound: {
+      heading: 'Dead End.',
+      body: "Looks like you drifted off track. The page you are looking for doesn't exist.",
+      link: link('Return to Studio', '/'),
+    },
+    formMessages: {
+      newsletterSuccess: 'Thank you for joining AutoGlow Updates!',
+      genericError: 'Something went wrong. Please try again.',
+    },
     defaultTitle: 'AutoGlow | Luxury Automotive Protection',
     defaultDescription: 'Premium automotive protection and detailing, crafted for those who demand perfection.',
     defaultOgImageUrl: 'https://res.cloudinary.com/dnf24p24f/image/upload/v1781864421/Auto_Glow_Logo.png',
@@ -330,6 +354,17 @@ async function build() {
     warrantyLabel: 'Warranty:',
     exploreLabel: 'Explore Service',
     glanzProBadge: 'GlanzPro',
+    detail: {
+      breadcrumbHome: 'Home',
+      breadcrumbServices: 'Services',
+      poweredByLabel: 'Powered by GlanzPro',
+      protocolLabel: 'The Protocol',
+      faqHeading: 'Frequently Asked Questions',
+      ctaHeading: 'Ready to transform your vehicle?',
+      ctaBody: 'Book a consultation with AutoGlow. We will walk you through finish options and give you a complete picture before anything is decided.',
+      ctaButtonPrefix: 'Book',
+      shortsHeading: 'See It In Action',
+    },
     seo: seo(
       'Car Protection & Detailing Services | AutoGlow',
       'Twelve disciplines of automotive care: PPF, window tint, ceramic & graphene coating, paint correction, detailing, denting & painting, rim repair and leather restoration — engineered for Indian conditions.',
@@ -400,6 +435,10 @@ async function build() {
     backLabel: 'Back to Articles',
     shareLabel: 'Share Article',
     authorLabel: 'Author',
+    tocLabel: 'On this page',
+    searchPlaceholder: 'Search articles...',
+    noResultsHeading: 'No results found',
+    noResultsBody: "We couldn't find any articles matching your search criteria.",
     seo: seo('Articles & Insights | AutoGlow', 'Premium insights, detailing tips, and automotive protection guides from the experts at AutoGlow.', false, false),
   })
 
@@ -652,7 +691,7 @@ async function write() {
   if (DRY) {
     const byType = docs.reduce<Record<string, number>>((a, d) => ((a[d._type] = (a[d._type] ?? 0) + 1), a), {})
     console.log('Dry run. Documents:', byType)
-    fs.writeFileSync(path.join(__dirname, 'seed-preview.json'), JSON.stringify(docs, null, 1))
+    fs.writeFileSync(path.join(process.cwd(), 'migrations/seed/seed-preview.json'), JSON.stringify(docs, null, 1))
     return
   }
   const res = await tx.commit({visibility: 'async'})

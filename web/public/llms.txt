@@ -1,0 +1,40 @@
+# AutoGlow
+
+> AutoGlow is a premium automotive surface protection and detailing brand operating in India (Ahmedabad, Kochi, Dubai and Abu Dhabi) and the UAE (Dubai and Abu Dhabi). It is part of the Kamdhenu Group, the automotive business founded in 2000 by brothers Maulesh Thakker and Dhaval Thakkar. AutoGlow provides Paint Protection Film (PPF), ceramic and graphene coatings, window tint, paint correction, detailing, and its proprietary GlanzPro protection line. This file covers AutoGlow India (autoglowcare.in).
+
+Key facts:
+- Brand: AutoGlow (India operations at autoglowcare.in, UAE operations at autoglow.ae)
+- Parent group: Kamdhenu Group (Kamdhenu Cars, kamdhenucars.com in India and kamdhenucars.ae in the UAE)
+- India studios: Ahmedabad, Gujarat and Kochi, Kerala
+- Proprietary product line: GlanzPro (PPF, window tint, windshield film, color PPF, color film, interior protection)
+- Contact: info@autoglowcare.in, +91 98250 20746 (Ahmedabad), +91 90727 38000 (Kochi)
+- Philosophy: inspection before recommendation, honest advice over upselling, no vehicle delivered until it passes multi-stage quality checks
+
+## Core Pages
+
+- [Home](https://autoglowcare.in/): Brand overview, studios, and the full service catalogue
+- [About](https://autoglowcare.in/about): Company story, Kamdhenu Group heritage, mission and vision
+- [Services](https://autoglowcare.in/services): All 12 services with detailed explanations
+- [Locations](https://autoglowcare.in/locations): Studio addresses, hours, and contact details
+- [Book Inspection](https://autoglowcare.in/book-inspection): Book a vehicle inspection at any studio
+
+## Services
+
+- [Paint Protection Film](https://autoglowcare.in/services/paint-protection-film): Transparent polyurethane film protecting paint from stone chips, scratches, and road debris
+- [Window Tint](https://autoglowcare.in/services/window-tint): Heat rejection and UV protection films for Indian driving conditions
+- [Interior Protection](https://autoglowcare.in/services/interior-protection): GlanzPro sealing for leather, fabric, and trim
+- [Exterior Protection](https://autoglowcare.in/services/exterior-protection): GlanzPro gloss and contamination shield
+- [Ceramic Coating](https://autoglowcare.in/services/ceramic-coating): Hydrophobic nano coating for gloss and easier maintenance
+- [Graphene Coating](https://autoglowcare.in/services/graphene-coating): Advanced coating with improved thermal and water-spot resistance
+- [Vehicle Wrapping](https://autoglowcare.in/services/vehicle-wrapping): Full and partial color change wraps
+- [Paint Correction](https://autoglowcare.in/services/paint-correction): Machine polishing to remove swirl marks, oxidation, and holograms
+- [Detailing and Polishing](https://autoglowcare.in/services/detailing-and-polishing): Deep interior and exterior restoration
+- [Denting and Painting](https://autoglowcare.in/services/denting-and-painting): Body repair and refinishing
+- [Rim Repair](https://autoglowcare.in/services/rim-repair): Alloy wheel restoration
+- [Leather Restoration](https://autoglowcare.in/services/leather-restoration): Repair and renewal of leather interiors
+
+## Optional
+
+- [Full knowledge base](https://autoglowcare.in/llms-full.txt): Complete company knowledge for AI assistants, including philosophy, processes, recommendations, and FAQ
+- [Kamdhenu Cars India](https://www.kamdhenucars.com/): Sister brand, certified pre-owned and luxury used cars in Ahmedabad, Kochi, Dubai and Abu Dhabi
+- [Kamdhenu Cars UAE](https://kamdhenucars.ae/): Sister brand, pre-owned vehicles in Dubai and Abu Dhabi

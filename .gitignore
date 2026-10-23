@@ -9,3 +9,4 @@ dist/
 .DS_Store
 .vercel
 studio/migrations/seed/seed-preview.json
+studio/schema.json
