@@ -31,25 +31,26 @@ export function RichText({value, variant = 'article'}: {value: Block[]; variant?
   const {ids} = headingIds(value)
   const components: PortableTextComponents = {
     block: {
-      normal: ({children}) => <p className="text-[18px] leading-[1.75] text-[#2e3746]">{children}</p>,
+      normal: ({children}) => <p className="text-[18px] leading-[1.75] text-body">{children}</p>,
+      // The page title is the only h1; headings marked h1 in the migrated body render as h2.
       h1: ({children, value: v}) => (
-        <h1
+        <h2
           id={ids.get(v._key ?? '')}
-          className="display scroll-mt-24 pt-10 text-[clamp(30px,3.2vw,40px)] leading-[1.1] tracking-[-0.03em]"
+          className="display scroll-mt-24 pt-10 text-[clamp(24px,2.6vw,34px)] leading-[1.15] tracking-[-0.02em]"
         >
           {children}
-        </h1>
+        </h2>
       ),
       h2: ({children, value: v}) => (
         <h2
           id={ids.get(v._key ?? '')}
-          className="display scroll-mt-24 pt-10 text-[clamp(26px,2.6vw,32px)] leading-[1.15] tracking-[-0.02em]"
+          className="display scroll-mt-24 pt-10 text-[clamp(24px,2.6vw,34px)] leading-[1.15] tracking-[-0.02em]"
         >
           {children}
         </h2>
       ),
       h3: ({children, value: v}) => (
-        <h3 id={ids.get(v._key ?? '')} className="scroll-mt-24 pt-6 text-[21px] leading-snug font-medium">
+        <h3 id={ids.get(v._key ?? '')} className="scroll-mt-24 pt-6 text-[22px] leading-snug font-medium">
           {children}
         </h3>
       ),
@@ -58,13 +59,13 @@ export function RichText({value, variant = 'article'}: {value: Block[]; variant?
           {children}
         </h4>
       ),
-      blockquote: ({children}) => <blockquote className="border-l-2 border-ink pl-6 text-[20px] leading-relaxed">{children}</blockquote>,
+      blockquote: ({children}) => <blockquote className="rounded-sm bg-mist p-6 text-[22px] leading-relaxed md:p-8">{children}</blockquote>,
     },
     list: {
       bullet: ({children}) => <ul className="list-disc space-y-2 pl-6 marker:text-[#8a93a1]">{children}</ul>,
       number: ({children}) => <ol className="list-decimal space-y-2 pl-6 marker:text-muted">{children}</ol>,
     },
-    listItem: ({children}) => <li className="pl-1.5 text-[18px] leading-[1.75] text-[#2e3746]">{children}</li>,
+    listItem: ({children}) => <li className="pl-1.5 text-[18px] leading-[1.75] text-body">{children}</li>,
     marks: {
       strong: ({children}) => <strong className="font-semibold text-ink">{children}</strong>,
       em: ({children}) => <em>{children}</em>,

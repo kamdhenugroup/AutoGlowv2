@@ -53,7 +53,7 @@ export function NewsletterForm({
           onClick={() => setMore((m) => !m)}
           aria-expanded={more}
           aria-label="Add name and phone"
-          className="grid h-[52px] w-[52px] shrink-0 place-items-center rounded-sm border border-line-strong text-ink hover:border-ink"
+          className="grid h-[52px] w-[52px] shrink-0 place-items-center rounded-sm bg-mist text-ink hover:bg-[#e4e7eb]"
         >
           {more ? '−' : '+'}
         </button>
@@ -82,7 +82,7 @@ export function NewsletterForm({
       >
         {button}
       </button>
-      <p className="mt-3 text-[13px] text-muted">{note}</p>
+      <p className="mt-3 text-[15px] text-muted">{note}</p>
     </form>
   )
 }

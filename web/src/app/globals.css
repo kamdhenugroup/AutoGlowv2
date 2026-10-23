@@ -3,8 +3,8 @@
 /* AutoGlow — Studio Light */
 @theme {
   --color-ink: #031533;
-  --color-body: #3b4556;
-  --color-muted: #5f6875;
+  --color-body: #18243a;
+  --color-muted: #556070;
   --color-line: #dde0e5;
   --color-line-strong: #c5cad2;
   --color-mist: #f2f3f5;
@@ -99,4 +99,17 @@
 }
 .animate-settle {
   animation: settle 2.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Section entrances (components/Reveal.tsx). Without script nothing is hidden. */
+.rv-on .rv {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) var(--rv-d, 0ms),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) var(--rv-d, 0ms);
+}
+.rv-on .rv.rv-in {
+  opacity: 1;
+  transform: none;
 }

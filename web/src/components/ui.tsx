@@ -26,17 +26,19 @@ export function SmartLink({href, children, ...rest}: {href: string; children: Re
   )
 }
 
-type Variant = 'primary' | 'secondary' | 'onImage' | 'onImageGhost'
+type Variant = 'primary' | 'secondary' | 'quiet' | 'onImage' | 'onImageGhost'
 const VARIANTS: Record<Variant, string> = {
   primary: 'bg-ink text-paper hover:bg-[#0b2550]',
-  secondary: 'border border-line-strong text-ink hover:border-ink',
+  secondary: 'bg-mist text-ink hover:bg-[#e4e7eb]',
+  /** On a mist field: a white fill keeps it a button without an outline. */
+  quiet: 'bg-paper text-ink hover:bg-[#e4e7eb]',
   onImage: 'bg-paper text-ink hover:bg-mist',
-  onImageGhost: 'border border-white/55 text-paper hover:border-paper hover:bg-white/10',
+  onImageGhost: 'bg-white/14 text-paper hover:bg-white/24',
 }
 
 export function buttonClass(variant: Variant = 'primary', extra?: string) {
   return cn(
-    'inline-flex h-[52px] items-center justify-center rounded-sm px-7 text-[15px] font-medium whitespace-nowrap transition-colors duration-200',
+    'inline-flex h-[52px] items-center justify-center rounded-sm px-7 text-[15px] font-medium whitespace-nowrap transition-[background-color,transform] duration-200 active:scale-[0.97]',
     VARIANTS[variant],
     extra,
   )
@@ -62,7 +64,7 @@ export function Button({
 
 export function TextLink({href, children, className}: {href: string; children: ReactNode; className?: string}) {
   return (
-    <SmartLink href={href} className={cn('link-underline shrink-0 text-[16px] font-medium whitespace-nowrap', className)}>
+    <SmartLink href={href} className={cn('link-underline shrink-0 text-[18px] font-medium whitespace-nowrap', className)}>
       {children}
     </SmartLink>
   )

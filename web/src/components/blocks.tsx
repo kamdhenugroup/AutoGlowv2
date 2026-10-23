@@ -19,23 +19,23 @@ export function ServiceCardItem({s, sizes, className}: {s: ServiceCard; sizes: s
           />
         )}
       </div>
-      <h3 className="mt-5 text-[20px] font-medium">{s.title}</h3>
-      <p className="mt-2 text-[14px] leading-relaxed text-muted">{s.oneLiner}</p>
+      <h3 className="mt-5 text-[22px] font-medium">{s.title}</h3>
+      <p className="mt-2 text-[18px] leading-relaxed text-body">{s.oneLiner}</p>
     </Link>
   )
 }
 
 export function StudioCard({l, className}: {l: Location; className?: string}) {
   return (
-    <article className={cn('flex flex-col gap-4 rounded-sm bg-paper p-8', className)}>
+    <article className={cn('flex flex-col gap-4', className)}>
       <div>
-        <h3 className="display text-[26px] tracking-[-0.02em]">{l.title}</h3>
+        <h3 className="display text-[clamp(24px,2.6vw,34px)] tracking-[-0.02em]">{l.title}</h3>
         <p className="mt-1 text-[15px] text-muted">
           {l.city}, {l.country}
         </p>
       </div>
-      <p className="text-[15px] leading-relaxed text-body">{l.address}</p>
-      {l.hours && <p className="text-[15px]">{l.hours}</p>}
+      <p className="text-[18px] leading-relaxed text-body">{l.address}</p>
+      {l.hours && <p className="text-[18px]">{l.hours}</p>}
       {(l.phone || l.whatsapp) && (
         <div className="mt-auto flex flex-wrap gap-x-5 gap-y-2 pt-2 text-[15px] font-medium">
           {l.phone && (
@@ -64,10 +64,10 @@ export function Stats({
   return (
     <dl className={cn('grid grid-cols-3 gap-4 md:gap-6', className)}>
       {stats.map((s) => (
-        <div key={s._key} className="border-t border-line pt-5">
+        <div key={s._key}>
           <dt className="sr-only">{s.label}</dt>
-          <dd className="display text-[clamp(30px,4vw,56px)]">{`${s.value ?? ''}${s.suffix ?? ''}`}</dd>
-          <dd className="mt-2 text-[13px] leading-snug text-muted md:text-[15px]">{s.label}</dd>
+          <dd className="display text-[clamp(36px,4.8vw,68px)]">{`${s.value ?? ''}${s.suffix ?? ''}`}</dd>
+          <dd className="mt-2 text-[15px] leading-snug text-muted">{s.label}</dd>
         </div>
       ))}
     </dl>

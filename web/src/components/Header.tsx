@@ -29,7 +29,7 @@ export function Header({nav, cta}: {nav: NavLink[]; cta: {label: string | null; 
   const links = nav.filter((l) => l.href && l.href !== '/')
 
   return (
-    <header className={cn(overlay ? 'absolute inset-x-0 top-0 z-40' : 'relative z-40 border-b border-line bg-paper')}>
+    <header className={cn(overlay ? 'absolute inset-x-0 top-0 z-40' : 'relative z-40 bg-paper')}>
       <div className="wrap flex h-[88px] items-center justify-between gap-6">
         <Logo className="h-9 w-auto lg:h-10" priority />
         <nav aria-label="Main" className="hidden lg:block">
@@ -85,7 +85,7 @@ export function Header({nav, cta}: {nav: NavLink[]; cta: {label: string | null; 
               <Link
                 key={l._key}
                 href={l.href ?? '/'}
-                className="display border-b border-line py-5 text-[34px] text-ink"
+                className="display py-4 text-[clamp(24px,2.6vw,34px)] text-ink"
                 aria-current={pathname === l.href ? 'page' : undefined}
               >
                 {l.label}

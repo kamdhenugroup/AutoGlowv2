@@ -37,31 +37,31 @@ export default async function LocationsPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(ld)} />
       <section className="wrap pt-[clamp(56px,8vw,112px)] pb-[clamp(48px,6vw,80px)]">
-        <h1 className="display text-[clamp(52px,7.6vw,112px)]">{p?.heading}</h1>
-        <p className="mt-6 max-w-[560px] text-[19px] leading-relaxed text-body">{p?.intro}</p>
+        <h1 className="display text-[clamp(46px,7.6vw,112px)]">{p?.heading}</h1>
+        <p className="mt-6 max-w-[560px] text-[18px] leading-relaxed text-body">{p?.intro}</p>
       </section>
 
       <section className="wrap pb-[clamp(72px,10vw,144px)]">
-        <ul className="border-t border-ink">
+        <ul className="space-y-3">
           {locations.map((l) => (
-            <li key={l._id} className="grid gap-8 border-b border-line py-12 lg:grid-cols-12 lg:gap-10">
+            <li key={l._id} className="grid gap-8 rounded-sm bg-mist p-[clamp(24px,3.4vw,48px)] lg:grid-cols-12 lg:gap-10">
               <div className="lg:col-span-5">
-                <h2 className="display text-[clamp(32px,3.4vw,48px)]">{l.title}</h2>
+                <h2 className="display text-[clamp(24px,2.6vw,34px)]">{l.title}</h2>
                 <p className="mt-2 text-[15px] text-muted">
                   {l.city}, {l.country}
                 </p>
-                <dl className="mt-8 grid gap-6 text-[16px] sm:grid-cols-2">
+                <dl className="mt-8 grid gap-6 text-[18px] sm:grid-cols-2">
                   <div className="sm:col-span-2">
-                    <dt className="text-[14px] text-muted">{p?.addressLabel}</dt>
+                    <dt className="text-[15px] text-muted">{p?.addressLabel}</dt>
                     <dd className="mt-1 leading-relaxed">{l.address}</dd>
                   </div>
                   <div>
-                    <dt className="text-[14px] text-muted">{p?.hoursLabel}</dt>
+                    <dt className="text-[15px] text-muted">{p?.hoursLabel}</dt>
                     <dd className="mt-1">{l.hours}</dd>
                   </div>
                   {l.phone && (
                     <div>
-                      <dt className="text-[14px] text-muted">{p?.contactLabel}</dt>
+                      <dt className="text-[15px] text-muted">{p?.contactLabel}</dt>
                       <dd className="mt-1">
                         <a href={`tel:+91${l.phone}`} className="link-underline">
                           {l.phone}
