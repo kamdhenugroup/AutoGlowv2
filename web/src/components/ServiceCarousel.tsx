@@ -24,7 +24,7 @@ export function Carousel({children, label, heading, link}: {children: ReactNode;
               type="button"
               aria-label="Previous"
               onClick={() => go(-1)}
-              className="grid h-12 w-12 place-items-center rounded-full border border-line-strong text-ink transition-colors hover:border-ink"
+              className="grid h-12 w-12 place-items-center rounded-full bg-paper text-ink transition-[background-color,transform] hover:bg-[#e4e7eb] active:scale-95"
             >
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                 <path d="M10 3 5 8l5 5" stroke="currentColor" strokeWidth="1.5" />
@@ -34,7 +34,7 @@ export function Carousel({children, label, heading, link}: {children: ReactNode;
               type="button"
               aria-label="Next"
               onClick={() => go(1)}
-              className="grid h-12 w-12 place-items-center rounded-full bg-ink text-paper transition-colors hover:bg-[#0b2550]"
+              className="grid h-12 w-12 place-items-center rounded-full bg-ink text-paper transition-[background-color,transform] hover:bg-[#0b2550] active:scale-95"
             >
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                 <path d="m6 3 5 5-5 5" stroke="currentColor" strokeWidth="1.5" />

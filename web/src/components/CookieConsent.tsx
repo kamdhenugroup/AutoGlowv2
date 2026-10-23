@@ -41,12 +41,18 @@ export function CookieConsent({c}: {c: Settings['cookieConsent']}) {
   useEffect(() => {
     const stored = readStored()
     let timer: ReturnType<typeof setTimeout> | undefined
+    let cleanupScroll: (() => void) | undefined
     if (stored) {
       // eslint-disable-next-line react-hooks/set-state-in-effect -- syncing from localStorage on mount
       setPrefs(stored)
       applyConsent(stored)
     } else {
-      timer = setTimeout(() => setVisible(true), 1500)
+      // Ask once the visitor starts reading (first scroll) or after a few seconds, so the
+      // banner never sits over the first screen's buttons. Consent defaults to denied until then.
+      const show = () => setVisible(true)
+      timer = setTimeout(show, 6000)
+      window.addEventListener('scroll', show, {once: true, passive: true})
+      cleanupScroll = () => window.removeEventListener('scroll', show)
     }
     const open = () => {
       setVisible(true)
@@ -55,6 +61,7 @@ export function CookieConsent({c}: {c: Settings['cookieConsent']}) {
     window.addEventListener('open-cookie-preferences', open)
     return () => {
       if (timer) clearTimeout(timer)
+      cleanupScroll?.()
       window.removeEventListener('open-cookie-preferences', open)
     }
   }, [])
@@ -72,35 +79,29 @@ export function CookieConsent({c}: {c: Settings['cookieConsent']}) {
   const [necessary, analytics, marketing] = c.categories ?? []
 
   return (
-    <div
-      role="dialog"
-      aria-live="polite"
-      aria-label={c.heading ?? 'Cookies'}
-      className="fixed inset-x-4 bottom-4 z-[60] md:inset-x-auto md:right-6 md:bottom-6 md:w-[420px]"
-    >
-      <div className="rounded-sm border border-line bg-paper p-6 shadow-[0_20px_60px_-20px_rgba(3,21,51,0.35)]">
+    <div role="dialog" aria-live="polite" aria-label={c.heading ?? 'Cookies'} className="fixed inset-x-0 bottom-0 z-[60] bg-ink text-paper">
+      <div className="wrap py-4 md:py-5">
         {!manage ? (
-          <>
-            <h2 className="text-[18px] font-medium">{c.heading}</h2>
-            <p className="mt-2 text-[14px] leading-relaxed text-body">
-              {c.body}{' '}
-              <Link href="/privacy" className="text-ink underline underline-offset-4">
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between md:gap-10">
+            <p className="max-w-[880px] text-[15px] leading-snug text-[#c9d0db]">
+              <span className="font-medium text-paper">{c.heading}</span> {c.body}{' '}
+              <Link href="/privacy" className="text-paper underline underline-offset-4">
                 {c.learnMore}
               </Link>
             </p>
             <button
               type="button"
               onClick={() => save({necessary: true, analytics: true, marketing: true})}
-              className="mt-5 h-11 rounded-sm bg-ink px-6 text-[15px] font-medium text-paper hover:bg-[#0b2550]"
+              className="h-11 shrink-0 self-start rounded-sm bg-paper px-6 text-[15px] font-medium text-ink transition-[background-color,transform] hover:bg-mist active:scale-[0.97] md:self-auto"
             >
               {c.accept}
             </button>
-          </>
+          </div>
         ) : (
-          <>
+          <div className="py-2">
             <h2 className="text-[18px] font-medium">{c.prefsHeading}</h2>
-            <p className="mt-2 text-[14px] text-body">{c.prefsBody}</p>
-            <ul className="mt-5 divide-y divide-line border-y border-line">
+            <p className="mt-1 text-[15px] text-[#c9d0db]">{c.prefsBody}</p>
+            <ul className="mt-4 grid gap-2 md:grid-cols-3">
               {[
                 [necessary, 'necessary'],
                 [analytics, 'analytics'],
@@ -111,10 +112,10 @@ export function CookieConsent({c}: {c: Settings['cookieConsent']}) {
                 if (!item) return null
                 const locked = field === 'necessary'
                 return (
-                  <li key={item._key} className="flex items-center justify-between gap-4 py-4">
+                  <li key={item._key} className="flex items-center justify-between gap-4 rounded-sm bg-white/8 p-4">
                     <div>
                       <h3 className="text-[15px] font-medium">{item.title}</h3>
-                      <p className="text-[13px] text-muted">{item.body}</p>
+                      <p className="text-[15px] text-[#aab3c2]">{item.body}</p>
                     </div>
                     <button
                       type="button"
@@ -125,35 +126,38 @@ export function CookieConsent({c}: {c: Settings['cookieConsent']}) {
                       onClick={() => setPrefs((p) => ({...p, [field]: !p[field]}))}
                       className={cn(
                         'relative h-6 w-11 shrink-0 rounded-full transition-colors',
-                        prefs[field] ? 'bg-ink' : 'bg-line-strong',
+                        prefs[field] ? 'bg-paper' : 'bg-white/25',
                         locked && 'opacity-50',
                       )}
                     >
                       <span
-                        className={cn('absolute top-1 h-4 w-4 rounded-full bg-paper transition-all', prefs[field] ? 'left-6' : 'left-1')}
+                        className={cn(
+                          'absolute top-1 h-4 w-4 rounded-full transition-[left]',
+                          prefs[field] ? 'left-6 bg-ink' : 'left-1 bg-paper',
+                        )}
                       />
                     </button>
                   </li>
                 )
               })}
             </ul>
-            <div className="mt-5 flex gap-3">
+            <div className="mt-4 flex gap-2">
               <button
                 type="button"
                 onClick={() => save(prefs)}
-                className="h-11 flex-1 rounded-sm bg-ink px-5 text-[15px] font-medium text-paper hover:bg-[#0b2550]"
+                className="h-11 rounded-sm bg-paper px-6 text-[15px] font-medium text-ink hover:bg-mist"
               >
                 {c.save}
               </button>
               <button
                 type="button"
                 onClick={() => setManage(false)}
-                className="h-11 rounded-sm border border-line-strong px-5 text-[15px] font-medium hover:border-ink"
+                className="h-11 rounded-sm bg-white/14 px-6 text-[15px] font-medium text-paper hover:bg-white/24"
               >
                 {c.back}
               </button>
             </div>
-          </>
+          </div>
         )}
       </div>
     </div>

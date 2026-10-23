@@ -17,8 +17,8 @@ export default async function WhatsAppPage() {
   return (
     <section className="wrap py-[clamp(56px,8vw,112px)]">
       <Eyebrow>{p?.eyebrow}</Eyebrow>
-      <h1 className="display mt-5 text-[clamp(52px,7.6vw,112px)]">{p?.heading}</h1>
-      <p className="mt-6 max-w-[560px] text-[19px] leading-relaxed text-body">{p?.intro}</p>
+      <h1 className="display mt-5 text-[clamp(46px,7.6vw,112px)]">{p?.heading}</h1>
+      <p className="mt-6 max-w-[560px] text-[18px] leading-relaxed text-body">{p?.intro}</p>
       <ul className="mt-14 grid gap-4 md:grid-cols-2">
         {studios.map((l) => (
           <li key={l._id}>
@@ -29,7 +29,7 @@ export default async function WhatsAppPage() {
               className="group flex flex-col items-start gap-6 rounded-sm bg-mist p-8 sm:flex-row sm:items-end sm:justify-between transition-colors hover:bg-[#e9ebee] md:p-10"
             >
               <span>
-                <span className="display block text-[clamp(32px,3.4vw,48px)]">{l.city}</span>
+                <span className="display block text-[clamp(24px,2.6vw,34px)]">{l.city}</span>
                 <span className="mt-2 block text-[15px] text-muted">{p?.studioLabel}</span>
               </span>
               <span className={buttonClass('primary', 'h-11 px-5')}>{p?.chatLabel}</span>

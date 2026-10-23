@@ -18,8 +18,8 @@ export default async function BookInspectionPage() {
   return (
     <>
       <section className="wrap pt-[clamp(56px,8vw,112px)] pb-12 text-center">
-        <h1 className="display text-[clamp(48px,6.6vw,96px)]">{p.heading}</h1>
-        <p className="mx-auto mt-6 max-w-[600px] text-[19px] leading-relaxed text-body">{p.intro}</p>
+        <h1 className="display text-[clamp(46px,7.6vw,112px)]">{p.heading}</h1>
+        <p className="mx-auto mt-6 max-w-[600px] text-[18px] leading-relaxed text-body">{p.intro}</p>
       </section>
 
       <section className="wrap pb-12">
@@ -29,7 +29,7 @@ export default async function BookInspectionPage() {
             <ul className="mt-4 space-y-2">
               {p.callLines?.map((c) => (
                 <li key={c._key}>
-                  <SmartLink href={c.href ?? '#'} className="text-[19px] font-medium hover:underline hover:underline-offset-4">
+                  <SmartLink href={c.href ?? '#'} className="text-[18px] font-medium hover:underline hover:underline-offset-4">
                     {c.label}
                   </SmartLink>
                 </li>
@@ -49,9 +49,9 @@ export default async function BookInspectionPage() {
 
       <section className="wrap pb-[clamp(72px,10vw,144px)]">
         <div className="grid gap-6 lg:grid-cols-12">
-          <div className="rounded-sm border border-line p-[clamp(24px,4vw,48px)] lg:col-span-7">
-            <h2 className="display text-[clamp(28px,2.6vw,36px)] tracking-[-0.025em]">{p.formHeading}</h2>
-            <p className="mt-3 text-[16px] text-body">{p.formIntro}</p>
+          <div className="lg:col-span-7 lg:pr-8">
+            <h2 className="display text-[clamp(24px,2.6vw,34px)] tracking-[-0.025em]">{p.formHeading}</h2>
+            <p className="mt-3 text-[18px] text-body">{p.formIntro}</p>
             <div className="mt-8">
               <BookingForm
                 labels={p.fields}
@@ -62,16 +62,16 @@ export default async function BookInspectionPage() {
             </div>
           </div>
           <aside className="rounded-sm bg-mist p-[clamp(24px,4vw,48px)] lg:col-span-5">
-            <h2 className="display text-[clamp(26px,2.2vw,30px)] tracking-[-0.02em]">{p.studiosHeading}</h2>
-            <ul className="mt-6 border-t border-line">
+            <h2 className="display text-[clamp(24px,2.6vw,34px)] tracking-[-0.02em]">{p.studiosHeading}</h2>
+            <ul className="mt-6 space-y-3">
               {locations.map((l) => (
-                <li key={l._id} className="border-b border-line py-4 text-[16px] text-body">
+                <li key={l._id} className="text-[18px] text-body">
                   {l.city}: {l.shortAddress}
                 </li>
               ))}
             </ul>
-            <h2 className="display mt-12 text-[clamp(26px,2.2vw,30px)] tracking-[-0.02em]">{p.hoursHeading}</h2>
-            <p className="mt-6 flex justify-between border-y border-line py-4 text-[16px]">
+            <h2 className="display mt-12 text-[clamp(24px,2.6vw,34px)] tracking-[-0.02em]">{p.hoursHeading}</h2>
+            <p className="mt-6 flex justify-between gap-4 text-[18px]">
               <span className="text-body">{p.hoursDays}</span>
               <span className="font-medium">
                 {s.businessHoursOpens} — {s.businessHoursCloses}

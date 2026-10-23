@@ -8,6 +8,7 @@ import {Footer} from '@/components/Footer'
 import {CookieConsent} from '@/components/CookieConsent'
 import {Analytics} from '@/components/Analytics'
 import {MobileActions} from '@/components/MobileActions'
+import {Reveal} from '@/components/Reveal'
 import './globals.css'
 
 const mona = Mona_Sans({subsets: ['latin'], axes: ['wdth'], variable: '--font-mona', display: 'swap'})
@@ -69,6 +70,7 @@ export default async function RootLayout({children}: {children: React.ReactNode}
         <Footer s={s} />
         <MobileActions phones={phones} callLabel={s.stickyBar?.callLabel ?? ''} whatsappLabel={s.stickyBar?.whatsappLabel ?? ''} />
         <CookieConsent c={s.cookieConsent} />
+        <Reveal />
         <Toaster position="bottom-right" theme="light" />
       </body>
     </html>

@@ -23,8 +23,8 @@ type Props = {
 }
 
 const input =
-  'h-[52px] w-full rounded-sm border border-line-strong bg-paper px-4 text-[16px] text-ink placeholder:text-muted focus:border-ink focus:outline-none'
-const lbl = 'text-[14px] font-medium'
+  'h-[52px] w-full rounded-sm border border-line-strong bg-paper px-4 text-[18px] text-ink placeholder:text-muted focus:border-ink focus:outline-none'
+const lbl = 'text-[15px] font-medium'
 
 export function LandingForm(p: Props) {
   const [location, setLocation] = useState(p.studios[0]?.city ?? '')
@@ -66,10 +66,10 @@ export function LandingForm(p: Props) {
   if (done)
     return (
       <div className="py-12 text-center" role="status">
-        <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-mist text-[24px]" aria-hidden="true">
+        <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-mist text-[22px]" aria-hidden="true">
           ✓
         </div>
-        <h3 className="display mt-6 text-[28px]">{p.successHeading}</h3>
+        <h3 className="display mt-6 text-[22px]">{p.successHeading}</h3>
         <p className="mx-auto mt-3 max-w-[340px] text-[15px] text-body">{p.successBody}</p>
         <a
           href={`https://wa.me/91${wa}`}
@@ -83,7 +83,7 @@ export function LandingForm(p: Props) {
   return (
     <form onSubmit={onSubmit} className="grid gap-5" noValidate>
       {error && (
-        <p role="alert" className="rounded-sm border border-logo-red/40 bg-[#fdf2f2] px-4 py-3 text-[14px] text-[#8a1c22]">
+        <p role="alert" className="rounded-sm border border-logo-red/40 bg-[#fdf2f2] px-4 py-3 text-[15px] text-[#8a1c22]">
           {error}
         </p>
       )}

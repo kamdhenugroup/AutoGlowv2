@@ -20,14 +20,14 @@ export function MobileActions({
   return (
     <>
       <div className="h-[76px] md:hidden" aria-hidden="true" />
-      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-paper/95 px-4 pt-3 pb-[max(12px,env(safe-area-inset-bottom))] backdrop-blur md:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-30 bg-paper px-4 pt-3 pb-[max(12px,env(safe-area-inset-bottom))] shadow-[0_-10px_30px_-18px_rgba(3,21,51,0.35)] md:hidden">
         {open && (
           <ul className="mb-3 grid grid-cols-2 gap-2">
             {phones.map((p) => (
               <li key={p.phone}>
                 <a
                   href={`tel:+91${p.phone}`}
-                  className="flex h-11 items-center justify-center rounded-sm border border-line-strong text-[15px] font-medium"
+                  className="flex h-11 items-center justify-center rounded-sm bg-mist text-[15px] font-medium"
                 >
                   {p.city}
                 </a>
@@ -41,7 +41,7 @@ export function MobileActions({
             aria-label={callLabel}
             aria-expanded={open}
             onClick={() => setOpen((o) => !o)}
-            className="h-12 rounded-sm border border-line-strong text-[15px] font-medium text-ink"
+            className="h-12 rounded-sm bg-mist text-[15px] font-medium text-ink active:scale-[0.98]"
           >
             {callLabel}
           </button>
