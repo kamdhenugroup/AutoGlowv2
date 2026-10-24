@@ -58,7 +58,7 @@ export default async function HomePage() {
             />
           )}
         </div>
-        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/70 via-black/20 to-black/30" aria-hidden="true" />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,rgba(3,21,51,0.6)_0%,rgba(3,21,51,0)_20%,rgba(3,21,51,0)_40%,rgba(3,21,51,0.55)_64%,rgba(3,21,51,0.88)_100%)]" aria-hidden="true" />
         <div
           data-hero-copy
           className="wrap flex flex-col gap-10 pb-[124px] md:pb-[clamp(40px,7vw,96px)] lg:flex-row lg:items-end lg:justify-between"
