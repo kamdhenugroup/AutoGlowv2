@@ -47,6 +47,12 @@ export const homePage = page(
       defineField({name: 'primary', type: 'link'}),
       defineField({name: 'secondary', type: 'link'}),
       defineField({name: 'image', type: 'imageWithAlt'}),
+      defineField({
+        name: 'mobileImage',
+        title: 'Image on phones',
+        type: 'imageWithAlt',
+        description: 'Portrait (9:16). Leave empty to crop the main image.',
+      }),
     ]),
     obj('standard', 'The AutoGlow Standard', [
       str('eyebrow'),

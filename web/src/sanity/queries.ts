@@ -45,7 +45,7 @@ export const ARTICLE_SLUGS_QUERY = defineQuery(`*[_type == "article" && defined(
 export const ARTICLE_QUERY = defineQuery(`*[_type == "article" && slug.current == $slug][0]{${ARTICLE_CARD}, tags, body}`)
 
 export const HOME_QUERY = defineQuery(`*[_type == "homePage" && _id == "homePage"][0]{
-  hero{headingLines, subheading, primary${LINK}, secondary${LINK}, image},
+  hero{headingLines, subheading, primary${LINK}, secondary${LINK}, image, mobileImage},
   standard{eyebrow, statement, tagline, link${LINK}},
   brandsHeading, servicesHeading, servicesLink${LINK},
   glanzPro{label, heading, statement, body, features[]{_key, title, body}, image},

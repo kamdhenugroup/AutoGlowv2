@@ -1,10 +1,10 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* AutoGlow — Studio Light */
 @theme {
   --color-ink: #031533;
-  --color-body: #3b4556;
-  --color-muted: #5f6875;
+  --color-body: #18243a;
+  --color-muted: #556070;
   --color-line: #dde0e5;
   --color-line-strong: #c5cad2;
   --color-mist: #f2f3f5;
@@ -99,4 +99,84 @@
 }
 .animate-settle {
   animation: settle 2.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Section entrances (components/Reveal.tsx). Without script nothing is hidden. */
+.rv-on .rv {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) var(--rv-d, 0ms),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) var(--rv-d, 0ms);
+}
+.rv-on .rv.rv-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+/* Page change (app/template.tsx): an ink curtain lifts off while the new page rises in. */
+@keyframes curtain-up {
+  from {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(0);
+  }
+}
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 48px, 0);
+  }
+}
+.page-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  background: var(--color-ink);
+  transform-origin: 50% 0;
+  animation: curtain-up 0.75s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+.page-enter {
+  animation: page-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+
+/* Phone menu (components/Header.tsx) */
+.mobile-menu {
+  visibility: hidden;
+  clip-path: inset(0 0 100% 0);
+  transition:
+    clip-path 0.6s cubic-bezier(0.76, 0, 0.24, 1),
+    visibility 0s linear 0.6s;
+}
+.mobile-menu[data-open] {
+  visibility: visible;
+  clip-path: inset(0 0 0 0);
+  transition:
+    clip-path 0.6s cubic-bezier(0.76, 0, 0.24, 1),
+    visibility 0s;
+}
+.mobile-menu .menu-item {
+  opacity: 0;
+  transform: translate3d(0, 110%, 0);
+  transition:
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.5s ease;
+}
+.mobile-menu[data-open] .menu-item {
+  opacity: 1;
+  transform: none;
 }

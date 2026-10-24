@@ -2,12 +2,12 @@ import Image from 'next/image'
 import type {Metadata} from 'next'
 import {sanityFetch} from '@/sanity/client'
 import {HOME_QUERY} from '@/sanity/queries'
-import {imageSrc} from '@/sanity/image'
-import {getBrands, getLocations, getServices} from '@/lib/data'
+import {imageSrc, urlFor} from '@/sanity/image'
+import {getBrands, getLocations, getServices, getSettings} from '@/lib/data'
 import {pageMetadata} from '@/lib/seo'
-import {Carousel} from '@/components/ServiceCarousel'
+import {MarqueePause} from '@/components/fx/MarqueePause'
 import {ServiceCardItem, Stats, StudioCard} from '@/components/blocks'
-import {Button, Eyebrow, Section, TextLink} from '@/components/ui'
+import {Button, Section, TextLink} from '@/components/ui'
 
 const getHome = () => sanityFetch({query: HOME_QUERY, tags: ['homePage']})
 
@@ -17,27 +17,52 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function HomePage() {
-  const [home, services, locations, brands] = await Promise.all([getHome(), getServices(), getLocations(), getBrands()])
+  const [home, services, locations, brands, settings] = await Promise.all([
+    getHome(),
+    getServices(),
+    getLocations(),
+    getBrands(),
+    getSettings(),
+  ])
   if (!home) return null
   const {hero, standard, glanzPro} = home
   const heroSrc = imageSrc(hero?.image, '/placeholder/darkroom.jpg', 2400)!
+  const heroMobileSrc = hero?.mobileImage?.asset ? imageSrc(hero.mobileImage, undefined, 1200) : null
   const glanzSrc = imageSrc(glanzPro?.image, '/placeholder/whiteroom.jpg', 1800)!
 
   return (
     <>
       {/* Hero */}
-      <section className="relative isolate flex min-h-[max(640px,100svh)] flex-col justify-end overflow-hidden bg-[#05070b] text-paper">
-        <Image
-          src={heroSrc}
-          alt={hero?.image?.alt ?? ''}
-          fill
-          priority
-          sizes="100vw"
-          className="animate-settle -z-10 object-cover object-[60%_50%]"
-        />
+      <section
+        data-hero
+        className="relative isolate flex min-h-[max(640px,100svh)] flex-col justify-end overflow-hidden bg-[#05070b] text-paper"
+      >
+        <div data-hero-media className="absolute inset-0 -z-10 origin-top will-change-transform">
+          <Image
+            src={heroSrc}
+            alt={hero?.image?.alt ?? ''}
+            fill
+            priority
+            sizes="100vw"
+            className={`animate-settle object-cover object-[60%_50%] ${heroMobileSrc ? 'max-md:hidden' : ''}`}
+          />
+          {heroMobileSrc && (
+            <Image
+              src={heroMobileSrc}
+              alt={hero?.mobileImage?.alt ?? hero?.image?.alt ?? ''}
+              fill
+              priority
+              sizes="100vw"
+              className="animate-settle object-cover md:hidden"
+            />
+          )}
+        </div>
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/70 via-black/20 to-black/30" aria-hidden="true" />
-        <div className="wrap flex flex-col gap-10 pb-[clamp(40px,7vw,96px)] lg:flex-row lg:items-end lg:justify-between">
-          <h1 className="display text-[clamp(54px,8.2vw,124px)]">
+        <div
+          data-hero-copy
+          className="wrap flex flex-col gap-10 pb-[124px] md:pb-[clamp(40px,7vw,96px)] lg:flex-row lg:items-end lg:justify-between"
+        >
+          <h1 className="display text-[clamp(46px,7.6vw,112px)]">
             {hero?.headingLines?.map((line, i) => (
               <span key={i} className="block">
                 {line}
@@ -45,7 +70,7 @@ export default async function HomePage() {
             ))}
           </h1>
           <div className="max-w-[400px] lg:pb-3">
-            <p className="text-[17px] leading-relaxed text-[#dce0e6] md:text-[18px]">{hero?.subheading}</p>
+            <p className="text-[18px] leading-relaxed text-[#dce0e6]">{hero?.subheading}</p>
             <div className="mt-7 flex flex-wrap gap-3">
               {hero?.primary?.href && (
                 <Button href={hero.primary.href} variant="onImage">
@@ -65,74 +90,107 @@ export default async function HomePage() {
       {/* The AutoGlow Standard */}
       <Section>
         <div className="grid gap-8 lg:grid-cols-12">
-          <Eyebrow className="lg:col-span-4">{standard?.eyebrow}</Eyebrow>
+          <h2 className="text-[22px] font-medium lg:col-span-4">{standard?.eyebrow}</h2>
           <div className="lg:col-span-8">
-            <p className="display text-[clamp(28px,3.4vw,46px)] leading-[1.14] tracking-[-0.03em]">{standard?.statement}</p>
+            <p className="display max-w-[880px] text-[clamp(24px,2.2vw,30px)] leading-[1.25] tracking-[-0.02em]">{standard?.statement}</p>
             <p className="mt-8 max-w-[560px] text-[18px] leading-relaxed text-body">{standard?.tagline}</p>
+            {home.stats && <Stats stats={home.stats} className="mt-14" />}
             {standard?.link?.href && (
-              <TextLink href={standard.link.href} className="mt-8 inline-block">
+              <TextLink href={standard.link.href} className="mt-12 inline-block">
                 {standard.link.label}
               </TextLink>
             )}
-            {home.stats && <Stats stats={home.stats} className="mt-16" />}
           </div>
         </div>
       </Section>
 
-      {/* Brands */}
+      {/* Brands: a row that runs on its own and answers the scroll */}
       {brands.length > 0 && (
-        <section className="border-y border-line py-12 md:py-14" aria-labelledby="brands-heading">
-          <div className="wrap grid gap-6 lg:grid-cols-12">
-            <h2 id="brands-heading" className="text-[15px] font-medium text-muted lg:col-span-3">
+        <section className="overflow-hidden pb-[clamp(72px,10vw,144px)]" aria-labelledby="brands-heading">
+          <div className="wrap flex items-center justify-between gap-6">
+            <h2 id="brands-heading" className="text-[22px] font-medium">
               {home.brandsHeading}
             </h2>
-            <ul className="flex flex-wrap gap-x-8 gap-y-3 text-[17px] text-ink md:text-[19px] lg:col-span-9">
-              {brands.map((b) => (
-                <li key={b._id}>{b.name}</li>
+            <MarqueePause target="brands-marquee" />
+          </div>
+          <div className="mt-10 motion-reduce:wrap">
+            <div id="brands-marquee" data-marquee className="flex w-max will-change-transform motion-reduce:w-auto">
+              {[0, 1].map((copy) => (
+                <ul
+                  key={copy}
+                  aria-hidden={copy === 1 || undefined}
+                  className={`display flex shrink-0 gap-x-[clamp(32px,4vw,64px)] pr-[clamp(32px,4vw,64px)] text-[clamp(36px,4.8vw,68px)] whitespace-nowrap text-ink motion-reduce:flex-wrap motion-reduce:gap-y-2 motion-reduce:whitespace-normal ${copy === 1 ? 'motion-reduce:hidden' : ''}`}
+                >
+                  {brands.map((b) => (
+                    <li key={b._id} className="flex items-center gap-[0.35em]">
+                      {b.logo?.asset && (
+                        // eslint-disable-next-line @next/next/no-img-element -- vector logo served as-is
+                        <img src={urlFor(b.logo).url()} alt="" width={64} height={64} loading="lazy" className="h-[0.9em] w-auto" />
+                      )}
+                      {b.name}
+                    </li>
+                  ))}
+                </ul>
               ))}
-            </ul>
+            </div>
           </div>
         </section>
       )}
 
-      {/* Our Discipline */}
-      <section className="overflow-hidden bg-mist py-[clamp(72px,10vw,144px)]" aria-labelledby="services-heading">
-        <Carousel
-          label={home.servicesHeading ?? 'Services'}
-          heading={
-            <h2 id="services-heading" className="display text-[clamp(40px,4.6vw,64px)]">
+      {/* Our Discipline: pinned on desktop, the row travels sideways as the page scrolls */}
+      <section data-rail className="relative bg-mist" aria-labelledby="services-heading">
+        <div className="flex flex-col justify-center overflow-hidden py-[clamp(72px,10vw,144px)] lg:sticky lg:top-0 lg:h-svh lg:py-0">
+          <div className="wrap flex items-end justify-between gap-6">
+            <h2 id="services-heading" className="display text-[clamp(36px,4.8vw,68px)]">
               {home.servicesHeading}
             </h2>
-          }
-          link={home.servicesLink?.href ? <TextLink href={home.servicesLink.href}>{home.servicesLink.label}</TextLink> : null}
-        >
-          {services.map((s) => (
-            <li key={s._id} className="w-[76vw] max-w-[400px] shrink-0 snap-start sm:w-[320px] lg:w-[400px]">
-              <ServiceCardItem s={s} sizes="(min-width: 1024px) 400px, 76vw" />
-            </li>
-          ))}
-        </Carousel>
+            {home.servicesLink?.href && (
+              <TextLink href={home.servicesLink.href} className="mb-2">
+                {home.servicesLink.label}
+              </TextLink>
+            )}
+          </div>
+          <ul
+            data-rail-track
+            aria-label={home.servicesHeading ?? 'Services'}
+            className="no-scrollbar mt-10 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 [scroll-padding-inline:clamp(20px,5.5vw,80px)] [padding-inline:clamp(20px,5.5vw,80px)] md:gap-5 lg:mt-14 lg:snap-none lg:overflow-visible lg:will-change-transform"
+          >
+            {services.map((s) => (
+              <li key={s._id} className="w-[76vw] max-w-[400px] shrink-0 snap-start sm:w-[320px] lg:w-[min(30vw,420px)] lg:max-w-none">
+                <ServiceCardItem s={s} sizes="(min-width: 1024px) 880px, 160vw" rail />
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
 
       {/* GlanzPro */}
       {glanzPro && (
         <Section>
           <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-20">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-sm bg-mist lg:col-span-7">
-              <Image src={glanzSrc} alt={glanzPro.image?.alt ?? ''} fill sizes="(min-width: 1024px) 55vw, 100vw" className="object-cover" />
+            <div className="relative aspect-[4/3] overflow-hidden rounded-sm bg-mist lg:col-span-6">
+              <div data-parallax="0.12" className="absolute inset-0 will-change-transform">
+                <Image
+                  src={glanzSrc}
+                  alt={glanzPro.image?.alt ?? ''}
+                  fill
+                  sizes="(min-width: 1024px) 55vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
             </div>
-            <div className="lg:col-span-5">
-              <Eyebrow>{glanzPro.heading}</Eyebrow>
-              <h2 className="display mt-5 text-[clamp(36px,3.8vw,54px)] leading-[1.04]">{glanzPro.statement}</h2>
-              <p className="mt-6 text-[17px] leading-relaxed text-body">{glanzPro.body}</p>
-              <dl className="mt-8">
+            <div className="lg:col-span-6">
+              <h2 className="display text-[clamp(34px,3.6vw,52px)] leading-[1.04]">{glanzPro.statement}</h2>
+              <p className="mt-6 text-[18px] leading-relaxed text-body">{glanzPro.body}</p>
+              <dl className="mt-8 grid gap-3 sm:grid-cols-2">
                 {glanzPro.features?.map((f) => (
-                  <div key={f._key} className="border-t border-line py-5">
+                  <div key={f._key} className="rounded-sm bg-mist p-6">
                     <dt className="text-[18px] font-medium">{f.title}</dt>
-                    <dd className="mt-2 text-[15px] leading-relaxed text-body">{f.body}</dd>
+                    <dd className="mt-2 text-[18px] leading-relaxed text-body">{f.body}</dd>
                   </div>
                 ))}
               </dl>
+              <p className="mt-6 text-[15px] font-medium text-muted">{glanzPro.heading}</p>
             </div>
           </div>
         </Section>
@@ -141,16 +199,16 @@ export default async function HomePage() {
       {/* Studios */}
       <Section tone="mist">
         <div className="flex items-end justify-between gap-6">
-          <h2 className="display text-[clamp(40px,4.6vw,64px)]">{home.studiosHeading}</h2>
+          <h2 className="display text-[clamp(36px,4.8vw,68px)]">{home.studiosHeading}</h2>
           {home.studiosLink?.href && (
             <TextLink href={home.studiosLink.href} className="mb-2">
               {home.studiosLink.label}
             </TextLink>
           )}
         </div>
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {locations.map((l) => (
-            <StudioCard key={l._id} l={l} />
+            <StudioCard key={l._id} l={l} whatsappLabel={settings.stickyBar?.whatsappLabel ?? 'WhatsApp'} />
           ))}
         </div>
       </Section>

@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   images: {
     formats: ['image/avif', 'image/webp'],
+    qualities: [75, 90],
     minimumCacheTTL: 60 * 60 * 24 * 30,
     remotePatterns: [
       {protocol: 'https', hostname: 'cdn.sanity.io', pathname: '/images/6qzta0cg/**'},
@@ -29,9 +30,15 @@ const nextConfig: NextConfig = {
       {key: 'X-Frame-Options', value: 'SAMEORIGIN'},
       {key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()'},
     ]
-    // Keep previews out of search results.
-    if (process.env.VERCEL_ENV && process.env.VERCEL_ENV !== 'production') headers.push({key: 'X-Robots-Tag', value: 'noindex, nofollow'})
-    return [{source: '/:path*', headers}]
+    return [
+      {source: '/:path*', headers},
+      // Only the real domain may be indexed. vercel.app URLs and previews never compete with it.
+      {
+        source: '/:path*',
+        missing: [{type: 'host', value: '(www\\.)?autoglowcare\\.in'}],
+        headers: [{key: 'X-Robots-Tag', value: 'noindex, nofollow'}],
+      },
+    ]
   },
 }
 

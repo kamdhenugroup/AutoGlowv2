@@ -18,16 +18,16 @@ export function TableOfContents({items, label}: {items: {id: string; text: strin
   if (!items.length) return null
   return (
     <nav aria-label={label}>
-      <h2 className="text-[14px] font-medium text-muted">{label}</h2>
-      <ul className="mt-4 space-y-2.5 border-l border-line">
+      <h2 className="text-[15px] font-medium text-muted">{label}</h2>
+      <ul className="mt-4 space-y-2.5">
         {items.map((i) => (
           <li key={i.id}>
             <a
               href={`#${i.id}`}
               className={cn(
-                '-ml-px block border-l py-0.5 text-[14px] leading-snug transition-colors',
-                i.level === 3 ? 'pl-7' : 'pl-4',
-                active === i.id ? 'border-ink text-ink' : 'border-transparent text-muted hover:text-ink',
+                'block py-0.5 text-[15px] leading-snug transition-colors',
+                i.level === 3 && 'pl-4',
+                active === i.id ? 'font-medium text-ink' : 'text-muted hover:text-ink',
               )}
             >
               {i.text}
@@ -41,10 +41,11 @@ export function TableOfContents({items, label}: {items: {id: string; text: strin
 
 export function ShareArticle({title, url, label}: {title: string; url: string; label: string}) {
   const [copied, setCopied] = useState(false)
-  const btn = 'grid h-11 w-11 place-items-center rounded-full border border-line-strong text-ink hover:border-ink'
+  const btn =
+    'grid h-11 w-11 place-items-center rounded-full bg-mist text-ink transition-[background-color,transform] hover:bg-[#e4e7eb] active:scale-95'
   return (
     <div>
-      <h2 className="text-[14px] font-medium text-muted">{label}</h2>
+      <h2 className="text-[15px] font-medium text-muted">{label}</h2>
       <div className="mt-4 flex gap-2">
         <a
           className={btn}

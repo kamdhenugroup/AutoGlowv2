@@ -18,7 +18,7 @@ export default async function ArticlesPage() {
   return (
     <>
       <section className="wrap pt-[clamp(56px,8vw,112px)] pb-12">
-        <h1 className="display max-w-[900px] text-[clamp(48px,7vw,104px)]">{page?.heading}</h1>
+        <h1 className="display max-w-[900px] text-[clamp(46px,7.6vw,112px)]">{page?.heading}</h1>
         <p className="mt-6 max-w-[600px] text-[18px] leading-relaxed text-body">{page?.intro}</p>
       </section>
       <section className="wrap pb-[clamp(72px,10vw,144px)]">

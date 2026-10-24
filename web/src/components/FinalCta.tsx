@@ -8,7 +8,7 @@ export async function FinalCta() {
     <section className="bg-ink text-paper">
       <div className="wrap flex flex-col gap-10 py-[clamp(80px,10vw,144px)] lg:flex-row lg:items-end lg:justify-between">
         <div className="max-w-[860px]">
-          <h2 className="display text-[clamp(42px,5.6vw,80px)]">{c.heading}</h2>
+          <h2 className="display text-[clamp(36px,4.8vw,68px)]">{c.heading}</h2>
           <p className="mt-6 max-w-[520px] text-[18px] leading-relaxed text-[#c9d0db]">{c.body}</p>
         </div>
         <div className="flex flex-wrap gap-3">

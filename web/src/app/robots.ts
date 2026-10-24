@@ -1,12 +1,14 @@
 import type {MetadataRoute} from 'next'
+import {headers} from 'next/headers'
 import {SITE_URL} from '@/lib/seo'
 
 /**
- * Production keeps the previous rules. Every other deployment (Vercel previews, staging)
- * is blocked from indexing, so the preview never competes with the live site.
+ * autoglowcare.in keeps the previous rules. Any other host (vercel.app, previews, staging)
+ * is blocked from indexing, so it never competes with the live site.
  */
-export default function robots(): MetadataRoute.Robots {
-  if (process.env.VERCEL_ENV && process.env.VERCEL_ENV !== 'production') {
+export default async function robots(): Promise<MetadataRoute.Robots> {
+  const host = ((await headers()).get('host') ?? '').replace(/^www\./, '')
+  if (host !== 'autoglowcare.in' && !host.startsWith('localhost')) {
     return {rules: {userAgent: '*', disallow: '/'}}
   }
   return {

@@ -12,698 +12,699 @@
  * ---------------------------------------------------------------------------------
  */
 
-export declare const internalGroqTypeReferenceTo: unique symbol;
+export declare const internalGroqTypeReferenceTo: unique symbol
 
 // Source: schema.json
 export type BrandkitPage = {
-  _id: string;
-  _type: "brandkitPage";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  eyebrow?: string;
-  heading?: string;
-  intro?: string;
+  _id: string
+  _type: 'brandkitPage'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  eyebrow?: string
+  heading?: string
+  intro?: string
   principles?: Array<
     {
-      _key: string;
+      _key: string
     } & Feature
-  >;
-  logoEyebrow?: string;
-  logoHeading?: string;
-  logoBody?: string;
-  logoMinWidth?: string;
-  paletteHeading?: string;
+  >
+  logoEyebrow?: string
+  logoHeading?: string
+  logoBody?: string
+  logoMinWidth?: string
+  paletteHeading?: string
   palette?: Array<{
-    name?: string;
-    hex?: string;
-    _type: "swatch";
-    _key: string;
-  }>;
+    name?: string
+    hex?: string
+    _type: 'swatch'
+    _key: string
+  }>
   typography?: Array<{
-    eyebrow?: string;
-    name?: string;
-    usage?: string;
-    sample?: string;
-    _type: "typeSpecimen";
-    _key: string;
-  }>;
-  voiceHeading?: string;
+    eyebrow?: string
+    name?: string
+    usage?: string
+    sample?: string
+    _type: 'typeSpecimen'
+    _key: string
+  }>
+  voiceHeading?: string
   voice?: Array<{
-    title?: string;
-    body?: string;
-    doExample?: string;
-    dontExample?: string;
-    _type: "voiceRule";
-    _key: string;
-  }>;
-  seo?: Seo;
-};
+    title?: string
+    body?: string
+    doExample?: string
+    dontExample?: string
+    _type: 'voiceRule'
+    _key: string
+  }>
+  seo?: Seo
+}
 
 export type PrivacyPage = {
-  _id: string;
-  _type: "privacyPage";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  heading?: string;
-  body?: RichText;
-  backLink?: Link;
-  seo?: Seo;
-};
+  _id: string
+  _type: 'privacyPage'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  heading?: string
+  body?: RichText
+  backLink?: Link
+  seo?: Seo
+}
 
 export type Link = {
-  _type: "link";
-  label?: string;
-  href?: string;
-};
+  _type: 'link'
+  label?: string
+  href?: string
+}
 
 export type RichText = Array<
   | {
       children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
-      listItem?: "bullet" | "number";
+        marks?: Array<string>
+        text?: string
+        _type: 'span'
+        _key: string
+      }>
+      style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'blockquote'
+      listItem?: 'bullet' | 'number'
       markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
+        href?: string
+        _type: 'link'
+        _key: string
+      }>
+      level?: number
+      _type: 'block'
+      _key: string
     }
   | ({
-      _key: string;
+      _key: string
     } & ImageWithAlt)
->;
+>
 
 export type LandingPage = {
-  _id: string;
-  _type: "landingPage";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  heading?: string;
-  headingHighlight?: string;
-  intro?: string;
+  _id: string
+  _type: 'landingPage'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  heading?: string
+  headingHighlight?: string
+  intro?: string
   stats?: Array<
     {
-      _key: string;
+      _key: string
     } & Stat
-  >;
+  >
   features?: Array<
     {
-      _key: string;
+      _key: string
     } & Feature
-  >;
-  formEyebrow?: string;
-  formHeading?: string;
-  formIntro?: string;
-  formLabels?: Array<string>;
-  locationOptionSuffix?: string;
-  carPlaceholder?: string;
-  namePlaceholder?: string;
-  phonePrefix?: string;
-  phonePlaceholder?: string;
-  submitLabel?: string;
-  errorRequired?: string;
-  errorPhone?: string;
-  successHeading?: string;
-  successBody?: string;
-  successButton?: string;
-  leadSource?: string;
-  whatsappMessage?: string;
-  galleryEyebrow?: string;
-  galleryHeading?: string;
-  galleryIntro?: string;
-  galleryEmbeds?: Array<string>;
-  copyright?: string;
+  >
+  formEyebrow?: string
+  formHeading?: string
+  formIntro?: string
+  formLabels?: Array<string>
+  locationOptionSuffix?: string
+  carPlaceholder?: string
+  namePlaceholder?: string
+  phonePrefix?: string
+  phonePlaceholder?: string
+  submitLabel?: string
+  errorRequired?: string
+  errorPhone?: string
+  successHeading?: string
+  successBody?: string
+  successButton?: string
+  leadSource?: string
+  whatsappMessage?: string
+  galleryEyebrow?: string
+  galleryHeading?: string
+  galleryIntro?: string
+  galleryEmbeds?: Array<string>
+  copyright?: string
   footerLinks?: Array<
     {
-      _key: string;
+      _key: string
     } & Link
-  >;
-  seo?: Seo;
-};
+  >
+  seo?: Seo
+}
 
 export type WhatsappPage = {
-  _id: string;
-  _type: "whatsappPage";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  eyebrow?: string;
-  heading?: string;
-  intro?: string;
-  studioLabel?: string;
-  chatLabel?: string;
-  backLink?: Link;
-  seo?: Seo;
-};
+  _id: string
+  _type: 'whatsappPage'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  eyebrow?: string
+  heading?: string
+  intro?: string
+  studioLabel?: string
+  chatLabel?: string
+  backLink?: Link
+  seo?: Seo
+}
 
 export type BookInspectionPage = {
-  _id: string;
-  _type: "bookInspectionPage";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  heading?: string;
-  intro?: string;
-  callLabel?: string;
+  _id: string
+  _type: 'bookInspectionPage'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  heading?: string
+  intro?: string
+  callLabel?: string
   callLines?: Array<
     {
-      _key: string;
+      _key: string
     } & Link
-  >;
-  whatsappLabel?: string;
-  whatsappLink?: Link;
-  formHeading?: string;
-  formIntro?: string;
+  >
+  whatsappLabel?: string
+  whatsappLink?: Link
+  formHeading?: string
+  formIntro?: string
   fields?: {
-    name?: string;
-    phone?: string;
-    phonePlaceholder?: string;
-    city?: string;
-    cityPlaceholder?: string;
-    service?: string;
-    servicePlaceholder?: string;
-    date?: string;
-    message?: string;
-    submit?: string;
-    submitting?: string;
-    success?: string;
-  };
-  studiosHeading?: string;
-  hoursHeading?: string;
-  hoursDays?: string;
-  seo?: Seo;
-};
+    name?: string
+    phone?: string
+    phonePlaceholder?: string
+    city?: string
+    cityPlaceholder?: string
+    service?: string
+    servicePlaceholder?: string
+    date?: string
+    message?: string
+    submit?: string
+    submitting?: string
+    success?: string
+  }
+  studiosHeading?: string
+  hoursHeading?: string
+  hoursDays?: string
+  seo?: Seo
+}
 
 export type ArticlesPage = {
-  _id: string;
-  _type: "articlesPage";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  heading?: string;
-  intro?: string;
-  allLabel?: string;
-  readMoreLabel?: string;
-  backLabel?: string;
-  shareLabel?: string;
-  authorLabel?: string;
-  tocLabel?: string;
-  searchPlaceholder?: string;
-  noResultsHeading?: string;
-  noResultsBody?: string;
-  seo?: Seo;
-};
+  _id: string
+  _type: 'articlesPage'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  heading?: string
+  intro?: string
+  allLabel?: string
+  readMoreLabel?: string
+  backLabel?: string
+  shareLabel?: string
+  authorLabel?: string
+  tocLabel?: string
+  searchPlaceholder?: string
+  noResultsHeading?: string
+  noResultsBody?: string
+  seo?: Seo
+}
 
 export type LocationsPage = {
-  _id: string;
-  _type: "locationsPage";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  heading?: string;
-  intro?: string;
-  addressLabel?: string;
-  hoursLabel?: string;
-  contactLabel?: string;
-  whatsappLabel?: string;
-  directionsLabel?: string;
-  seo?: Seo;
-};
+  _id: string
+  _type: 'locationsPage'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  heading?: string
+  intro?: string
+  addressLabel?: string
+  hoursLabel?: string
+  contactLabel?: string
+  whatsappLabel?: string
+  directionsLabel?: string
+  seo?: Seo
+}
 
 export type BrandsPage = {
-  _id: string;
-  _type: "brandsPage";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  heading?: string;
-  intro?: string;
-  body?: Array<string>;
-  seo?: Seo;
-};
+  _id: string
+  _type: 'brandsPage'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  heading?: string
+  intro?: string
+  body?: Array<string>
+  seo?: Seo
+}
 
 export type AboutPage = {
-  _id: string;
-  _type: "aboutPage";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  heading?: string;
-  intro?: string;
-  legacyEyebrow?: string;
-  legacyHeading?: string;
-  legacyBody?: Array<string>;
-  quote?: string;
+  _id: string
+  _type: 'aboutPage'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  heading?: string
+  intro?: string
+  legacyEyebrow?: string
+  legacyHeading?: string
+  legacyBody?: Array<string>
+  quote?: string
   pillars?: Array<
     {
-      _key: string;
+      _key: string
     } & Feature
-  >;
-  image?: ImageWithAlt;
-  seo?: Seo;
-};
+  >
+  image?: ImageWithAlt
+  seo?: Seo
+}
 
 export type SanityImageAssetReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-};
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+}
 
 export type ImageWithAlt = {
-  _type: "imageWithAlt";
-  asset?: SanityImageAssetReference;
-  media?: unknown;
-  hotspot?: SanityImageHotspot;
-  crop?: SanityImageCrop;
-  alt?: string;
-};
+  _type: 'imageWithAlt'
+  asset?: SanityImageAssetReference
+  media?: unknown
+  hotspot?: SanityImageHotspot
+  crop?: SanityImageCrop
+  alt?: string
+}
 
 export type ServicesPage = {
-  _id: string;
-  _type: "servicesPage";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  heading?: string;
-  intro?: string;
-  warrantyLabel?: string;
-  exploreLabel?: string;
-  glanzProBadge?: string;
+  _id: string
+  _type: 'servicesPage'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  heading?: string
+  intro?: string
+  warrantyLabel?: string
+  exploreLabel?: string
+  glanzProBadge?: string
   detail?: {
-    breadcrumbHome?: string;
-    breadcrumbServices?: string;
-    poweredByLabel?: string;
-    protocolLabel?: string;
-    faqHeading?: string;
-    ctaHeading?: string;
-    ctaBody?: string;
-    ctaButtonPrefix?: string;
-    shortsHeading?: string;
-  };
-  seo?: Seo;
-};
+    breadcrumbHome?: string
+    breadcrumbServices?: string
+    poweredByLabel?: string
+    protocolLabel?: string
+    faqHeading?: string
+    ctaHeading?: string
+    ctaBody?: string
+    ctaButtonPrefix?: string
+    shortsHeading?: string
+  }
+  seo?: Seo
+}
 
 export type HomePage = {
-  _id: string;
-  _type: "homePage";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
+  _id: string
+  _type: 'homePage'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
   hero?: {
-    headingLines?: Array<string>;
-    subheading?: string;
-    primary?: Link;
-    secondary?: Link;
-    image?: ImageWithAlt;
-  };
+    headingLines?: Array<string>
+    subheading?: string
+    primary?: Link
+    secondary?: Link
+    image?: ImageWithAlt
+    mobileImage?: ImageWithAlt
+  }
   standard?: {
-    eyebrow?: string;
-    statement?: string;
-    tagline?: string;
-    link?: Link;
-  };
-  brandsHeading?: string;
-  servicesHeading?: string;
-  servicesLink?: Link;
+    eyebrow?: string
+    statement?: string
+    tagline?: string
+    link?: Link
+  }
+  brandsHeading?: string
+  servicesHeading?: string
+  servicesLink?: Link
   glanzPro?: {
-    label?: string;
-    heading?: string;
-    statement?: string;
-    body?: string;
+    label?: string
+    heading?: string
+    statement?: string
+    body?: string
     features?: Array<
       {
-        _key: string;
+        _key: string
       } & Feature
-    >;
-    image?: ImageWithAlt;
-  };
+    >
+    image?: ImageWithAlt
+  }
   stats?: Array<
     {
-      _key: string;
+      _key: string
     } & Stat
-  >;
-  studiosHeading?: string;
-  studiosLink?: Link;
-  seo?: Seo;
-};
+  >
+  studiosHeading?: string
+  studiosLink?: Link
+  seo?: Seo
+}
 
 export type Seo = {
-  _type: "seo";
-  title?: string;
-  description?: string;
-  canonical?: boolean;
-  twitter?: boolean;
-  noindex?: boolean;
-};
+  _type: 'seo'
+  title?: string
+  description?: string
+  canonical?: boolean
+  twitter?: boolean
+  noindex?: boolean
+}
 
 export type SiteSettings = {
-  _id: string;
-  _type: "siteSettings";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  siteName?: string;
-  siteUrl?: string;
-  logoUrl?: string;
-  logo?: ImageWithAlt;
-  email?: string;
-  primaryPhone?: string;
-  parentOrganization?: string;
-  sameAs?: Array<string>;
-  businessHoursOpens?: string;
-  businessHoursCloses?: string;
-  businessHoursDays?: string;
+  _id: string
+  _type: 'siteSettings'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  siteName?: string
+  siteUrl?: string
+  logoUrl?: string
+  logo?: ImageWithAlt
+  email?: string
+  primaryPhone?: string
+  parentOrganization?: string
+  sameAs?: Array<string>
+  businessHoursOpens?: string
+  businessHoursCloses?: string
+  businessHoursDays?: string
   mainNav?: Array<
     {
-      _key: string;
+      _key: string
     } & Link
-  >;
-  headerCta?: Link;
+  >
+  headerCta?: Link
   finalCta?: {
-    heading?: string;
-    body?: string;
-    primary?: Link;
-    secondary?: Link;
-  };
+    heading?: string
+    body?: string
+    primary?: Link
+    secondary?: Link
+  }
   stickyBar?: {
-    label?: string;
-    status?: string;
-    callLabel?: string;
-    whatsappLabel?: string;
-  };
+    label?: string
+    status?: string
+    callLabel?: string
+    whatsappLabel?: string
+  }
   askAi?: {
-    heading?: string;
-    body?: string;
-    prompt?: string;
+    heading?: string
+    body?: string
+    prompt?: string
     providers?: Array<{
-      name?: string;
-      urlPrefix?: string;
-      _type: "provider";
-      _key: string;
-    }>;
-  };
+      name?: string
+      urlPrefix?: string
+      _type: 'provider'
+      _key: string
+    }>
+  }
   contactPrompt?: {
-    heading?: string;
-    body?: string;
+    heading?: string
+    body?: string
     links?: Array<
       {
-        _key: string;
+        _key: string
       } & Link
-    >;
-  };
+    >
+  }
   newsletter?: {
-    heading?: string;
-    body?: string;
-    placeholder?: string;
-    buttonLabel?: string;
-    note?: string;
-  };
+    heading?: string
+    body?: string
+    placeholder?: string
+    buttonLabel?: string
+    note?: string
+  }
   footerColumns?: Array<{
-    heading?: string;
+    heading?: string
     links?: Array<
       {
-        _key: string;
+        _key: string
       } & Link
-    >;
-    _type: "footerColumn";
-    _key: string;
-  }>;
+    >
+    _type: 'footerColumn'
+    _key: string
+  }>
   legalLinks?: Array<
     {
-      _key: string;
+      _key: string
     } & Link
-  >;
-  manageCookiesLabel?: string;
-  copyright?: string;
-  companyLine?: string;
-  creditText?: string;
-  creditLink?: Link;
-  statusBadgeUrl?: string;
+  >
+  manageCookiesLabel?: string
+  copyright?: string
+  companyLine?: string
+  creditText?: string
+  creditLink?: Link
+  statusBadgeUrl?: string
   cookieConsent?: {
-    heading?: string;
-    body?: string;
-    learnMore?: string;
-    accept?: string;
-    manage?: string;
-    prefsHeading?: string;
-    prefsBody?: string;
+    heading?: string
+    body?: string
+    learnMore?: string
+    accept?: string
+    manage?: string
+    prefsHeading?: string
+    prefsBody?: string
     categories?: Array<
       {
-        _key: string;
+        _key: string
       } & Feature
-    >;
-    save?: string;
-    back?: string;
-  };
+    >
+    save?: string
+    back?: string
+  }
   notFound?: {
-    heading?: string;
-    body?: string;
-    link?: Link;
-  };
+    heading?: string
+    body?: string
+    link?: Link
+  }
   formMessages?: {
-    newsletterSuccess?: string;
-    genericError?: string;
-  };
-  defaultTitle?: string;
-  defaultDescription?: string;
-  defaultOgImageUrl?: string;
-  defaultOgImageAlt?: string;
-  locale?: string;
-};
+    newsletterSuccess?: string
+    genericError?: string
+  }
+  defaultTitle?: string
+  defaultDescription?: string
+  defaultOgImageUrl?: string
+  defaultOgImageAlt?: string
+  locale?: string
+}
 
 export type Brand = {
-  _id: string;
-  _type: "brand";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  slug?: Slug;
-  orderRank?: number;
-  icon?: string;
+  _id: string
+  _type: 'brand'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  name?: string
+  slug?: Slug
+  orderRank?: number
+  icon?: string
   logo?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-};
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+}
 
 export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
-};
+  _type: 'sanity.imageCrop'
+  top?: number
+  bottom?: number
+  left?: number
+  right?: number
+}
 
 export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
-};
+  _type: 'sanity.imageHotspot'
+  x?: number
+  y?: number
+  height?: number
+  width?: number
+}
 
 export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
-};
+  _type: 'slug'
+  current?: string
+  source?: string
+}
 
 export type Location = {
-  _id: string;
-  _type: "location";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  city?: string;
-  country?: string;
-  orderRank?: number;
-  address?: string;
-  shortAddress?: string;
-  hours?: string;
-  phone?: string;
-  whatsapp?: string;
-  mapUrl?: string;
-  embedUrl?: string;
-};
+  _id: string
+  _type: 'location'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  city?: string
+  country?: string
+  orderRank?: number
+  address?: string
+  shortAddress?: string
+  hours?: string
+  phone?: string
+  whatsapp?: string
+  mapUrl?: string
+  embedUrl?: string
+}
 
 export type Article = {
-  _id: string;
-  _type: "article";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  slug?: Slug;
-  description?: string;
-  coverImage?: ImageWithAlt;
-  legacyCoverImageUrl?: string;
-  body?: RichText;
-  date?: string;
-  author?: string;
-  category?: string;
-  tags?: Array<string>;
-  featured?: boolean;
-  readingTime?: string;
-};
+  _id: string
+  _type: 'article'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  slug?: Slug
+  description?: string
+  coverImage?: ImageWithAlt
+  legacyCoverImageUrl?: string
+  body?: RichText
+  date?: string
+  author?: string
+  category?: string
+  tags?: Array<string>
+  featured?: boolean
+  readingTime?: string
+}
 
 export type Service = {
-  _id: string;
-  _type: "service";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  slug?: Slug;
-  orderRank?: number;
-  oneLiner?: string;
-  isGlanzPro?: boolean;
-  warranty?: string;
-  body?: Array<string>;
+  _id: string
+  _type: 'service'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  slug?: Slug
+  orderRank?: number
+  oneLiner?: string
+  isGlanzPro?: boolean
+  warranty?: string
+  body?: Array<string>
   faqs?: Array<
     {
-      _key: string;
+      _key: string
     } & Faq
-  >;
-  image?: ImageWithAlt;
-  legacyImageUrl?: string;
-  shortsUrls?: Array<string>;
-  videoUrl?: string;
-  seoTitle?: string;
-  description?: string;
-  ogImageUrl?: string;
-};
+  >
+  image?: ImageWithAlt
+  legacyImageUrl?: string
+  shortsUrls?: Array<string>
+  videoUrl?: string
+  seoTitle?: string
+  description?: string
+  ogImageUrl?: string
+}
 
 export type Stat = {
-  _type: "stat";
-  value?: string;
-  suffix?: string;
-  label?: string;
-};
+  _type: 'stat'
+  value?: string
+  suffix?: string
+  label?: string
+}
 
 export type Feature = {
-  _type: "feature";
-  title?: string;
-  body?: string;
-};
+  _type: 'feature'
+  title?: string
+  body?: string
+}
 
 export type Faq = {
-  _type: "faq";
-  question?: string;
-  answer?: string;
-};
+  _type: 'faq'
+  question?: string
+  answer?: string
+}
 
 export type SanityImagePaletteSwatch = {
-  _type: "sanity.imagePaletteSwatch";
-  background?: string;
-  foreground?: string;
-  population?: number;
-  title?: string;
-};
+  _type: 'sanity.imagePaletteSwatch'
+  background?: string
+  foreground?: string
+  population?: number
+  title?: string
+}
 
 export type SanityImagePalette = {
-  _type: "sanity.imagePalette";
-  darkMuted?: SanityImagePaletteSwatch;
-  lightVibrant?: SanityImagePaletteSwatch;
-  darkVibrant?: SanityImagePaletteSwatch;
-  vibrant?: SanityImagePaletteSwatch;
-  dominant?: SanityImagePaletteSwatch;
-  lightMuted?: SanityImagePaletteSwatch;
-  muted?: SanityImagePaletteSwatch;
-};
+  _type: 'sanity.imagePalette'
+  darkMuted?: SanityImagePaletteSwatch
+  lightVibrant?: SanityImagePaletteSwatch
+  darkVibrant?: SanityImagePaletteSwatch
+  vibrant?: SanityImagePaletteSwatch
+  dominant?: SanityImagePaletteSwatch
+  lightMuted?: SanityImagePaletteSwatch
+  muted?: SanityImagePaletteSwatch
+}
 
 export type SanityImageDimensions = {
-  _type: "sanity.imageDimensions";
-  height?: number;
-  width?: number;
-  aspectRatio?: number;
-};
+  _type: 'sanity.imageDimensions'
+  height?: number
+  width?: number
+  aspectRatio?: number
+}
 
 export type SanityImageMetadata = {
-  _type: "sanity.imageMetadata";
-  location?: Geopoint;
-  dimensions?: SanityImageDimensions;
-  palette?: SanityImagePalette;
-  lqip?: string;
-  blurHash?: string;
-  thumbHash?: string;
-  hasAlpha?: boolean;
-  isOpaque?: boolean;
-};
+  _type: 'sanity.imageMetadata'
+  location?: Geopoint
+  dimensions?: SanityImageDimensions
+  palette?: SanityImagePalette
+  lqip?: string
+  blurHash?: string
+  thumbHash?: string
+  hasAlpha?: boolean
+  isOpaque?: boolean
+}
 
 export type SanityFileAsset = {
-  _id: string;
-  _type: "sanity.fileAsset";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  originalFilename?: string;
-  label?: string;
-  title?: string;
-  description?: string;
-  altText?: string;
-  sha1hash?: string;
-  extension?: string;
-  mimeType?: string;
-  size?: number;
-  assetId?: string;
-  uploadId?: string;
-  path?: string;
-  url?: string;
-  source?: SanityAssetSourceData;
-};
+  _id: string
+  _type: 'sanity.fileAsset'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  originalFilename?: string
+  label?: string
+  title?: string
+  description?: string
+  altText?: string
+  sha1hash?: string
+  extension?: string
+  mimeType?: string
+  size?: number
+  assetId?: string
+  uploadId?: string
+  path?: string
+  url?: string
+  source?: SanityAssetSourceData
+}
 
 export type SanityAssetSourceData = {
-  _type: "sanity.assetSourceData";
-  name?: string;
-  id?: string;
-  url?: string;
-};
+  _type: 'sanity.assetSourceData'
+  name?: string
+  id?: string
+  url?: string
+}
 
 export type SanityImageAsset = {
-  _id: string;
-  _type: "sanity.imageAsset";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  originalFilename?: string;
-  label?: string;
-  title?: string;
-  description?: string;
-  altText?: string;
-  sha1hash?: string;
-  extension?: string;
-  mimeType?: string;
-  size?: number;
-  assetId?: string;
-  uploadId?: string;
-  path?: string;
-  url?: string;
-  metadata?: SanityImageMetadata;
-  source?: SanityAssetSourceData;
-};
+  _id: string
+  _type: 'sanity.imageAsset'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  originalFilename?: string
+  label?: string
+  title?: string
+  description?: string
+  altText?: string
+  sha1hash?: string
+  extension?: string
+  mimeType?: string
+  size?: number
+  assetId?: string
+  uploadId?: string
+  path?: string
+  url?: string
+  metadata?: SanityImageMetadata
+  source?: SanityAssetSourceData
+}
 
 export type Geopoint = {
-  _type: "geopoint";
-  lat?: number;
-  lng?: number;
-  alt?: number;
-};
+  _type: 'geopoint'
+  lat?: number
+  lng?: number
+  alt?: number
+}
 
 export type AllSanitySchemaTypes =
   | BrandkitPage
@@ -740,642 +741,643 @@ export type AllSanitySchemaTypes =
   | SanityFileAsset
   | SanityAssetSourceData
   | SanityImageAsset
-  | Geopoint;
+  | Geopoint
 
 // Source: ../web/src/sanity/queries.ts
 // Variable: SETTINGS_QUERY
 // Query: *[_type == "siteSettings" && _id == "siteSettings"][0]{  siteName, siteUrl, logoUrl, logo, email, primaryPhone, parentOrganization, sameAs,  businessHoursOpens, businessHoursCloses, businessHoursDays,  mainNav[]{_key, label, href}, headerCta{label, href},  finalCta{heading, body, primary{label, href}, secondary{label, href}},  stickyBar, askAi{heading, body, prompt, providers[]{_key, name, urlPrefix}},  contactPrompt{heading, body, links[]{_key, label, href}},  newsletter, footerColumns[]{_key, heading, links[]{_key, label, href}},  legalLinks[]{_key, label, href}, manageCookiesLabel, copyright, companyLine,  creditText, creditLink{label, href}, statusBadgeUrl,  cookieConsent{heading, body, learnMore, accept, prefsHeading, prefsBody, categories[]{_key, title, body}, save, back},  notFound{heading, body, link{label, href}}, formMessages,  defaultTitle, defaultDescription, defaultOgImageUrl, defaultOgImageAlt, locale}
 export type SETTINGS_QUERY_RESULT = {
-  siteName: string | null;
-  siteUrl: string | null;
-  logoUrl: string | null;
-  logo: ImageWithAlt | null;
-  email: string | null;
-  primaryPhone: string | null;
-  parentOrganization: string | null;
-  sameAs: Array<string> | null;
-  businessHoursOpens: string | null;
-  businessHoursCloses: string | null;
-  businessHoursDays: string | null;
+  siteName: string | null
+  siteUrl: string | null
+  logoUrl: string | null
+  logo: ImageWithAlt | null
+  email: string | null
+  primaryPhone: string | null
+  parentOrganization: string | null
+  sameAs: Array<string> | null
+  businessHoursOpens: string | null
+  businessHoursCloses: string | null
+  businessHoursDays: string | null
   mainNav: Array<{
-    _key: string;
-    label: string | null;
-    href: string | null;
-  }> | null;
+    _key: string
+    label: string | null
+    href: string | null
+  }> | null
   headerCta: {
-    label: string | null;
-    href: string | null;
-  } | null;
+    label: string | null
+    href: string | null
+  } | null
   finalCta: {
-    heading: string | null;
-    body: string | null;
+    heading: string | null
+    body: string | null
     primary: {
-      label: string | null;
-      href: string | null;
-    } | null;
+      label: string | null
+      href: string | null
+    } | null
     secondary: {
-      label: string | null;
-      href: string | null;
-    } | null;
-  } | null;
+      label: string | null
+      href: string | null
+    } | null
+  } | null
   stickyBar: {
-    label?: string;
-    status?: string;
-    callLabel?: string;
-    whatsappLabel?: string;
-  } | null;
+    label?: string
+    status?: string
+    callLabel?: string
+    whatsappLabel?: string
+  } | null
   askAi: {
-    heading: string | null;
-    body: string | null;
-    prompt: string | null;
+    heading: string | null
+    body: string | null
+    prompt: string | null
     providers: Array<{
-      _key: string;
-      name: string | null;
-      urlPrefix: string | null;
-    }> | null;
-  } | null;
+      _key: string
+      name: string | null
+      urlPrefix: string | null
+    }> | null
+  } | null
   contactPrompt: {
-    heading: string | null;
-    body: string | null;
+    heading: string | null
+    body: string | null
     links: Array<{
-      _key: string;
-      label: string | null;
-      href: string | null;
-    }> | null;
-  } | null;
+      _key: string
+      label: string | null
+      href: string | null
+    }> | null
+  } | null
   newsletter: {
-    heading?: string;
-    body?: string;
-    placeholder?: string;
-    buttonLabel?: string;
-    note?: string;
-  } | null;
+    heading?: string
+    body?: string
+    placeholder?: string
+    buttonLabel?: string
+    note?: string
+  } | null
   footerColumns: Array<{
-    _key: string;
-    heading: string | null;
+    _key: string
+    heading: string | null
     links: Array<{
-      _key: string;
-      label: string | null;
-      href: string | null;
-    }> | null;
-  }> | null;
+      _key: string
+      label: string | null
+      href: string | null
+    }> | null
+  }> | null
   legalLinks: Array<{
-    _key: string;
-    label: string | null;
-    href: string | null;
-  }> | null;
-  manageCookiesLabel: string | null;
-  copyright: string | null;
-  companyLine: string | null;
-  creditText: string | null;
+    _key: string
+    label: string | null
+    href: string | null
+  }> | null
+  manageCookiesLabel: string | null
+  copyright: string | null
+  companyLine: string | null
+  creditText: string | null
   creditLink: {
-    label: string | null;
-    href: string | null;
-  } | null;
-  statusBadgeUrl: string | null;
+    label: string | null
+    href: string | null
+  } | null
+  statusBadgeUrl: string | null
   cookieConsent: {
-    heading: string | null;
-    body: string | null;
-    learnMore: string | null;
-    accept: string | null;
-    prefsHeading: string | null;
-    prefsBody: string | null;
+    heading: string | null
+    body: string | null
+    learnMore: string | null
+    accept: string | null
+    prefsHeading: string | null
+    prefsBody: string | null
     categories: Array<{
-      _key: string;
-      title: string | null;
-      body: string | null;
-    }> | null;
-    save: string | null;
-    back: string | null;
-  } | null;
+      _key: string
+      title: string | null
+      body: string | null
+    }> | null
+    save: string | null
+    back: string | null
+  } | null
   notFound: {
-    heading: string | null;
-    body: string | null;
+    heading: string | null
+    body: string | null
     link: {
-      label: string | null;
-      href: string | null;
-    } | null;
-  } | null;
+      label: string | null
+      href: string | null
+    } | null
+  } | null
   formMessages: {
-    newsletterSuccess?: string;
-    genericError?: string;
-  } | null;
-  defaultTitle: string | null;
-  defaultDescription: string | null;
-  defaultOgImageUrl: string | null;
-  defaultOgImageAlt: string | null;
-  locale: string | null;
-} | null;
+    newsletterSuccess?: string
+    genericError?: string
+  } | null
+  defaultTitle: string | null
+  defaultDescription: string | null
+  defaultOgImageUrl: string | null
+  defaultOgImageAlt: string | null
+  locale: string | null
+} | null
 
 // Source: ../web/src/sanity/queries.ts
 // Variable: SERVICES_QUERY
 // Query: *[_type == "service" && defined(slug.current)] | order(orderRank asc){_id, title, "slug": slug.current, oneLiner, isGlanzPro, warranty, image, legacyImageUrl}
 export type SERVICES_QUERY_RESULT = Array<{
-  _id: string;
-  title: string | null;
-  slug: string | null;
-  oneLiner: string | null;
-  isGlanzPro: boolean | null;
-  warranty: string | null;
-  image: ImageWithAlt | null;
-  legacyImageUrl: string | null;
-}>;
+  _id: string
+  title: string | null
+  slug: string | null
+  oneLiner: string | null
+  isGlanzPro: boolean | null
+  warranty: string | null
+  image: ImageWithAlt | null
+  legacyImageUrl: string | null
+}>
 
 // Source: ../web/src/sanity/queries.ts
 // Variable: SERVICE_SLUGS_QUERY
 // Query: *[_type == "service" && defined(slug.current)].slug.current
-export type SERVICE_SLUGS_QUERY_RESULT = Array<string | null>;
+export type SERVICE_SLUGS_QUERY_RESULT = Array<string | null>
 
 // Source: ../web/src/sanity/queries.ts
 // Variable: SERVICE_QUERY
 // Query: *[_type == "service" && slug.current == $slug][0]{  _id, title, "slug": slug.current, oneLiner, isGlanzPro, warranty, image, legacyImageUrl, description, seoTitle, ogImageUrl, body, faqs[]{_key, question, answer}, shortsUrls, videoUrl}
 export type SERVICE_QUERY_RESULT = {
-  _id: string;
-  title: string | null;
-  slug: string | null;
-  oneLiner: string | null;
-  isGlanzPro: boolean | null;
-  warranty: string | null;
-  image: ImageWithAlt | null;
-  legacyImageUrl: string | null;
-  description: string | null;
-  seoTitle: string | null;
-  ogImageUrl: string | null;
-  body: Array<string> | null;
+  _id: string
+  title: string | null
+  slug: string | null
+  oneLiner: string | null
+  isGlanzPro: boolean | null
+  warranty: string | null
+  image: ImageWithAlt | null
+  legacyImageUrl: string | null
+  description: string | null
+  seoTitle: string | null
+  ogImageUrl: string | null
+  body: Array<string> | null
   faqs: Array<{
-    _key: string;
-    question: string | null;
-    answer: string | null;
-  }> | null;
-  shortsUrls: Array<string> | null;
-  videoUrl: string | null;
-} | null;
+    _key: string
+    question: string | null
+    answer: string | null
+  }> | null
+  shortsUrls: Array<string> | null
+  videoUrl: string | null
+} | null
 
 // Source: ../web/src/sanity/queries.ts
 // Variable: LOCATIONS_QUERY
 // Query: *[_type == "location"] | order(orderRank asc){  _id, title, city, country, address, shortAddress, hours, phone, whatsapp, mapUrl, embedUrl}
 export type LOCATIONS_QUERY_RESULT = Array<{
-  _id: string;
-  title: string | null;
-  city: string | null;
-  country: string | null;
-  address: string | null;
-  shortAddress: string | null;
-  hours: string | null;
-  phone: string | null;
-  whatsapp: string | null;
-  mapUrl: string | null;
-  embedUrl: string | null;
-}>;
+  _id: string
+  title: string | null
+  city: string | null
+  country: string | null
+  address: string | null
+  shortAddress: string | null
+  hours: string | null
+  phone: string | null
+  whatsapp: string | null
+  mapUrl: string | null
+  embedUrl: string | null
+}>
 
 // Source: ../web/src/sanity/queries.ts
 // Variable: BRANDS_QUERY
 // Query: *[_type == "brand"] | order(orderRank asc){_id, name, "slug": slug.current, logo}
 export type BRANDS_QUERY_RESULT = Array<{
-  _id: string;
-  name: string | null;
-  slug: string | null;
+  _id: string
+  name: string | null
+  slug: string | null
   logo: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  } | null;
-}>;
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  } | null
+}>
 
 // Source: ../web/src/sanity/queries.ts
 // Variable: ARTICLES_QUERY
 // Query: *[_type == "article" && defined(slug.current)] | order(date desc, slug.current asc){_id, title, "slug": slug.current, description, date, category, author, readingTime, coverImage, legacyCoverImageUrl}
 export type ARTICLES_QUERY_RESULT = Array<{
-  _id: string;
-  title: string | null;
-  slug: string | null;
-  description: string | null;
-  date: string | null;
-  category: string | null;
-  author: string | null;
-  readingTime: string | null;
-  coverImage: ImageWithAlt | null;
-  legacyCoverImageUrl: string | null;
-}>;
+  _id: string
+  title: string | null
+  slug: string | null
+  description: string | null
+  date: string | null
+  category: string | null
+  author: string | null
+  readingTime: string | null
+  coverImage: ImageWithAlt | null
+  legacyCoverImageUrl: string | null
+}>
 
 // Source: ../web/src/sanity/queries.ts
 // Variable: ARTICLE_SLUGS_QUERY
 // Query: *[_type == "article" && defined(slug.current)]{"slug": slug.current, date}
 export type ARTICLE_SLUGS_QUERY_RESULT = Array<{
-  slug: string | null;
-  date: string | null;
-}>;
+  slug: string | null
+  date: string | null
+}>
 
 // Source: ../web/src/sanity/queries.ts
 // Variable: ARTICLE_QUERY
 // Query: *[_type == "article" && slug.current == $slug][0]{_id, title, "slug": slug.current, description, date, category, author, readingTime, coverImage, legacyCoverImageUrl, tags, body}
 export type ARTICLE_QUERY_RESULT = {
-  _id: string;
-  title: string | null;
-  slug: string | null;
-  description: string | null;
-  date: string | null;
-  category: string | null;
-  author: string | null;
-  readingTime: string | null;
-  coverImage: ImageWithAlt | null;
-  legacyCoverImageUrl: string | null;
-  tags: Array<string> | null;
-  body: RichText | null;
-} | null;
+  _id: string
+  title: string | null
+  slug: string | null
+  description: string | null
+  date: string | null
+  category: string | null
+  author: string | null
+  readingTime: string | null
+  coverImage: ImageWithAlt | null
+  legacyCoverImageUrl: string | null
+  tags: Array<string> | null
+  body: RichText | null
+} | null
 
 // Source: ../web/src/sanity/queries.ts
 // Variable: HOME_QUERY
-// Query: *[_type == "homePage" && _id == "homePage"][0]{  hero{headingLines, subheading, primary{label, href}, secondary{label, href}, image},  standard{eyebrow, statement, tagline, link{label, href}},  brandsHeading, servicesHeading, servicesLink{label, href},  glanzPro{label, heading, statement, body, features[]{_key, title, body}, image},  stats[]{_key, value, suffix, label}, studiosHeading, studiosLink{label, href}, seo{title, description, canonical, twitter, noindex}}
+// Query: *[_type == "homePage" && _id == "homePage"][0]{  hero{headingLines, subheading, primary{label, href}, secondary{label, href}, image, mobileImage},  standard{eyebrow, statement, tagline, link{label, href}},  brandsHeading, servicesHeading, servicesLink{label, href},  glanzPro{label, heading, statement, body, features[]{_key, title, body}, image},  stats[]{_key, value, suffix, label}, studiosHeading, studiosLink{label, href}, seo{title, description, canonical, twitter, noindex}}
 export type HOME_QUERY_RESULT = {
   hero: {
-    headingLines: Array<string> | null;
-    subheading: string | null;
+    headingLines: Array<string> | null
+    subheading: string | null
     primary: {
-      label: string | null;
-      href: string | null;
-    } | null;
+      label: string | null
+      href: string | null
+    } | null
     secondary: {
-      label: string | null;
-      href: string | null;
-    } | null;
-    image: ImageWithAlt | null;
-  } | null;
+      label: string | null
+      href: string | null
+    } | null
+    image: ImageWithAlt | null
+    mobileImage: ImageWithAlt | null
+  } | null
   standard: {
-    eyebrow: string | null;
-    statement: string | null;
-    tagline: string | null;
+    eyebrow: string | null
+    statement: string | null
+    tagline: string | null
     link: {
-      label: string | null;
-      href: string | null;
-    } | null;
-  } | null;
-  brandsHeading: string | null;
-  servicesHeading: string | null;
+      label: string | null
+      href: string | null
+    } | null
+  } | null
+  brandsHeading: string | null
+  servicesHeading: string | null
   servicesLink: {
-    label: string | null;
-    href: string | null;
-  } | null;
+    label: string | null
+    href: string | null
+  } | null
   glanzPro: {
-    label: string | null;
-    heading: string | null;
-    statement: string | null;
-    body: string | null;
+    label: string | null
+    heading: string | null
+    statement: string | null
+    body: string | null
     features: Array<{
-      _key: string;
-      title: string | null;
-      body: string | null;
-    }> | null;
-    image: ImageWithAlt | null;
-  } | null;
+      _key: string
+      title: string | null
+      body: string | null
+    }> | null
+    image: ImageWithAlt | null
+  } | null
   stats: Array<{
-    _key: string;
-    value: string | null;
-    suffix: string | null;
-    label: string | null;
-  }> | null;
-  studiosHeading: string | null;
+    _key: string
+    value: string | null
+    suffix: string | null
+    label: string | null
+  }> | null
+  studiosHeading: string | null
   studiosLink: {
-    label: string | null;
-    href: string | null;
-  } | null;
+    label: string | null
+    href: string | null
+  } | null
   seo: {
-    title: string | null;
-    description: string | null;
-    canonical: boolean | null;
-    twitter: boolean | null;
-    noindex: boolean | null;
-  } | null;
-} | null;
+    title: string | null
+    description: string | null
+    canonical: boolean | null
+    twitter: boolean | null
+    noindex: boolean | null
+  } | null
+} | null
 
 // Source: ../web/src/sanity/queries.ts
 // Variable: SERVICES_PAGE_QUERY
 // Query: *[_type == "servicesPage" && _id == "servicesPage"][0]{heading, intro, warrantyLabel, exploreLabel, glanzProBadge, detail, seo{title, description, canonical, twitter, noindex}}
 export type SERVICES_PAGE_QUERY_RESULT = {
-  heading: string | null;
-  intro: string | null;
-  warrantyLabel: string | null;
-  exploreLabel: string | null;
-  glanzProBadge: string | null;
+  heading: string | null
+  intro: string | null
+  warrantyLabel: string | null
+  exploreLabel: string | null
+  glanzProBadge: string | null
   detail: {
-    breadcrumbHome?: string;
-    breadcrumbServices?: string;
-    poweredByLabel?: string;
-    protocolLabel?: string;
-    faqHeading?: string;
-    ctaHeading?: string;
-    ctaBody?: string;
-    ctaButtonPrefix?: string;
-    shortsHeading?: string;
-  } | null;
+    breadcrumbHome?: string
+    breadcrumbServices?: string
+    poweredByLabel?: string
+    protocolLabel?: string
+    faqHeading?: string
+    ctaHeading?: string
+    ctaBody?: string
+    ctaButtonPrefix?: string
+    shortsHeading?: string
+  } | null
   seo: {
-    title: string | null;
-    description: string | null;
-    canonical: boolean | null;
-    twitter: boolean | null;
-    noindex: boolean | null;
-  } | null;
-} | null;
+    title: string | null
+    description: string | null
+    canonical: boolean | null
+    twitter: boolean | null
+    noindex: boolean | null
+  } | null
+} | null
 
 // Source: ../web/src/sanity/queries.ts
 // Variable: ABOUT_QUERY
 // Query: *[_type == "aboutPage" && _id == "aboutPage"][0]{heading, intro, legacyEyebrow, legacyHeading, legacyBody, quote, pillars[]{_key, title, body}, image, seo{title, description, canonical, twitter, noindex}}
 export type ABOUT_QUERY_RESULT = {
-  heading: string | null;
-  intro: string | null;
-  legacyEyebrow: string | null;
-  legacyHeading: string | null;
-  legacyBody: Array<string> | null;
-  quote: string | null;
+  heading: string | null
+  intro: string | null
+  legacyEyebrow: string | null
+  legacyHeading: string | null
+  legacyBody: Array<string> | null
+  quote: string | null
   pillars: Array<{
-    _key: string;
-    title: string | null;
-    body: string | null;
-  }> | null;
-  image: ImageWithAlt | null;
+    _key: string
+    title: string | null
+    body: string | null
+  }> | null
+  image: ImageWithAlt | null
   seo: {
-    title: string | null;
-    description: string | null;
-    canonical: boolean | null;
-    twitter: boolean | null;
-    noindex: boolean | null;
-  } | null;
-} | null;
+    title: string | null
+    description: string | null
+    canonical: boolean | null
+    twitter: boolean | null
+    noindex: boolean | null
+  } | null
+} | null
 
 // Source: ../web/src/sanity/queries.ts
 // Variable: BRANDS_PAGE_QUERY
 // Query: *[_type == "brandsPage" && _id == "brandsPage"][0]{heading, intro, body, seo{title, description, canonical, twitter, noindex}}
 export type BRANDS_PAGE_QUERY_RESULT = {
-  heading: string | null;
-  intro: string | null;
-  body: Array<string> | null;
+  heading: string | null
+  intro: string | null
+  body: Array<string> | null
   seo: {
-    title: string | null;
-    description: string | null;
-    canonical: boolean | null;
-    twitter: boolean | null;
-    noindex: boolean | null;
-  } | null;
-} | null;
+    title: string | null
+    description: string | null
+    canonical: boolean | null
+    twitter: boolean | null
+    noindex: boolean | null
+  } | null
+} | null
 
 // Source: ../web/src/sanity/queries.ts
 // Variable: LOCATIONS_PAGE_QUERY
 // Query: *[_type == "locationsPage" && _id == "locationsPage"][0]{heading, intro, addressLabel, hoursLabel, contactLabel, whatsappLabel, directionsLabel, seo{title, description, canonical, twitter, noindex}}
 export type LOCATIONS_PAGE_QUERY_RESULT = {
-  heading: string | null;
-  intro: string | null;
-  addressLabel: string | null;
-  hoursLabel: string | null;
-  contactLabel: string | null;
-  whatsappLabel: string | null;
-  directionsLabel: string | null;
+  heading: string | null
+  intro: string | null
+  addressLabel: string | null
+  hoursLabel: string | null
+  contactLabel: string | null
+  whatsappLabel: string | null
+  directionsLabel: string | null
   seo: {
-    title: string | null;
-    description: string | null;
-    canonical: boolean | null;
-    twitter: boolean | null;
-    noindex: boolean | null;
-  } | null;
-} | null;
+    title: string | null
+    description: string | null
+    canonical: boolean | null
+    twitter: boolean | null
+    noindex: boolean | null
+  } | null
+} | null
 
 // Source: ../web/src/sanity/queries.ts
 // Variable: ARTICLES_PAGE_QUERY
 // Query: *[_type == "articlesPage" && _id == "articlesPage"][0]{heading, intro, allLabel, readMoreLabel, backLabel, shareLabel, authorLabel, tocLabel, searchPlaceholder, noResultsHeading, noResultsBody, seo{title, description, canonical, twitter, noindex}}
 export type ARTICLES_PAGE_QUERY_RESULT = {
-  heading: string | null;
-  intro: string | null;
-  allLabel: string | null;
-  readMoreLabel: string | null;
-  backLabel: string | null;
-  shareLabel: string | null;
-  authorLabel: string | null;
-  tocLabel: string | null;
-  searchPlaceholder: string | null;
-  noResultsHeading: string | null;
-  noResultsBody: string | null;
+  heading: string | null
+  intro: string | null
+  allLabel: string | null
+  readMoreLabel: string | null
+  backLabel: string | null
+  shareLabel: string | null
+  authorLabel: string | null
+  tocLabel: string | null
+  searchPlaceholder: string | null
+  noResultsHeading: string | null
+  noResultsBody: string | null
   seo: {
-    title: string | null;
-    description: string | null;
-    canonical: boolean | null;
-    twitter: boolean | null;
-    noindex: boolean | null;
-  } | null;
-} | null;
+    title: string | null
+    description: string | null
+    canonical: boolean | null
+    twitter: boolean | null
+    noindex: boolean | null
+  } | null
+} | null
 
 // Source: ../web/src/sanity/queries.ts
 // Variable: BOOK_QUERY
 // Query: *[_type == "bookInspectionPage" && _id == "bookInspectionPage"][0]{heading, intro, callLabel, callLines[]{_key, label, href}, whatsappLabel, whatsappLink{label, href}, formHeading, formIntro, fields, studiosHeading, hoursHeading, hoursDays, seo{title, description, canonical, twitter, noindex}}
 export type BOOK_QUERY_RESULT = {
-  heading: string | null;
-  intro: string | null;
-  callLabel: string | null;
+  heading: string | null
+  intro: string | null
+  callLabel: string | null
   callLines: Array<{
-    _key: string;
-    label: string | null;
-    href: string | null;
-  }> | null;
-  whatsappLabel: string | null;
+    _key: string
+    label: string | null
+    href: string | null
+  }> | null
+  whatsappLabel: string | null
   whatsappLink: {
-    label: string | null;
-    href: string | null;
-  } | null;
-  formHeading: string | null;
-  formIntro: string | null;
+    label: string | null
+    href: string | null
+  } | null
+  formHeading: string | null
+  formIntro: string | null
   fields: {
-    name?: string;
-    phone?: string;
-    phonePlaceholder?: string;
-    city?: string;
-    cityPlaceholder?: string;
-    service?: string;
-    servicePlaceholder?: string;
-    date?: string;
-    message?: string;
-    submit?: string;
-    submitting?: string;
-    success?: string;
-  } | null;
-  studiosHeading: string | null;
-  hoursHeading: string | null;
-  hoursDays: string | null;
+    name?: string
+    phone?: string
+    phonePlaceholder?: string
+    city?: string
+    cityPlaceholder?: string
+    service?: string
+    servicePlaceholder?: string
+    date?: string
+    message?: string
+    submit?: string
+    submitting?: string
+    success?: string
+  } | null
+  studiosHeading: string | null
+  hoursHeading: string | null
+  hoursDays: string | null
   seo: {
-    title: string | null;
-    description: string | null;
-    canonical: boolean | null;
-    twitter: boolean | null;
-    noindex: boolean | null;
-  } | null;
-} | null;
+    title: string | null
+    description: string | null
+    canonical: boolean | null
+    twitter: boolean | null
+    noindex: boolean | null
+  } | null
+} | null
 
 // Source: ../web/src/sanity/queries.ts
 // Variable: WHATSAPP_QUERY
 // Query: *[_type == "whatsappPage" && _id == "whatsappPage"][0]{eyebrow, heading, intro, studioLabel, chatLabel, backLink{label, href}, seo{title, description, canonical, twitter, noindex}}
 export type WHATSAPP_QUERY_RESULT = {
-  eyebrow: string | null;
-  heading: string | null;
-  intro: string | null;
-  studioLabel: string | null;
-  chatLabel: string | null;
+  eyebrow: string | null
+  heading: string | null
+  intro: string | null
+  studioLabel: string | null
+  chatLabel: string | null
   backLink: {
-    label: string | null;
-    href: string | null;
-  } | null;
+    label: string | null
+    href: string | null
+  } | null
   seo: {
-    title: string | null;
-    description: string | null;
-    canonical: boolean | null;
-    twitter: boolean | null;
-    noindex: boolean | null;
-  } | null;
-} | null;
+    title: string | null
+    description: string | null
+    canonical: boolean | null
+    twitter: boolean | null
+    noindex: boolean | null
+  } | null
+} | null
 
 // Source: ../web/src/sanity/queries.ts
 // Variable: LANDING_QUERY
 // Query: *[_type == "landingPage" && _id == "landingPage"][0]{  heading, headingHighlight, intro, stats[]{_key, value, suffix, label}, features[]{_key, title, body},  formEyebrow, formHeading, formIntro, formLabels, locationOptionSuffix, carPlaceholder, namePlaceholder,  phonePrefix, phonePlaceholder, submitLabel, errorRequired, errorPhone, successHeading, successBody, successButton,  leadSource, whatsappMessage, galleryEyebrow, galleryHeading, galleryIntro, galleryEmbeds, copyright,  footerLinks[]{_key, label, href}, seo{title, description, canonical, twitter, noindex}}
 export type LANDING_QUERY_RESULT = {
-  heading: string | null;
-  headingHighlight: string | null;
-  intro: string | null;
+  heading: string | null
+  headingHighlight: string | null
+  intro: string | null
   stats: Array<{
-    _key: string;
-    value: string | null;
-    suffix: string | null;
-    label: string | null;
-  }> | null;
+    _key: string
+    value: string | null
+    suffix: string | null
+    label: string | null
+  }> | null
   features: Array<{
-    _key: string;
-    title: string | null;
-    body: string | null;
-  }> | null;
-  formEyebrow: string | null;
-  formHeading: string | null;
-  formIntro: string | null;
-  formLabels: Array<string> | null;
-  locationOptionSuffix: string | null;
-  carPlaceholder: string | null;
-  namePlaceholder: string | null;
-  phonePrefix: string | null;
-  phonePlaceholder: string | null;
-  submitLabel: string | null;
-  errorRequired: string | null;
-  errorPhone: string | null;
-  successHeading: string | null;
-  successBody: string | null;
-  successButton: string | null;
-  leadSource: string | null;
-  whatsappMessage: string | null;
-  galleryEyebrow: string | null;
-  galleryHeading: string | null;
-  galleryIntro: string | null;
-  galleryEmbeds: Array<string> | null;
-  copyright: string | null;
+    _key: string
+    title: string | null
+    body: string | null
+  }> | null
+  formEyebrow: string | null
+  formHeading: string | null
+  formIntro: string | null
+  formLabels: Array<string> | null
+  locationOptionSuffix: string | null
+  carPlaceholder: string | null
+  namePlaceholder: string | null
+  phonePrefix: string | null
+  phonePlaceholder: string | null
+  submitLabel: string | null
+  errorRequired: string | null
+  errorPhone: string | null
+  successHeading: string | null
+  successBody: string | null
+  successButton: string | null
+  leadSource: string | null
+  whatsappMessage: string | null
+  galleryEyebrow: string | null
+  galleryHeading: string | null
+  galleryIntro: string | null
+  galleryEmbeds: Array<string> | null
+  copyright: string | null
   footerLinks: Array<{
-    _key: string;
-    label: string | null;
-    href: string | null;
-  }> | null;
+    _key: string
+    label: string | null
+    href: string | null
+  }> | null
   seo: {
-    title: string | null;
-    description: string | null;
-    canonical: boolean | null;
-    twitter: boolean | null;
-    noindex: boolean | null;
-  } | null;
-} | null;
+    title: string | null
+    description: string | null
+    canonical: boolean | null
+    twitter: boolean | null
+    noindex: boolean | null
+  } | null
+} | null
 
 // Source: ../web/src/sanity/queries.ts
 // Variable: PRIVACY_QUERY
 // Query: *[_type == "privacyPage" && _id == "privacyPage"][0]{heading, body, backLink{label, href}, seo{title, description, canonical, twitter, noindex}}
 export type PRIVACY_QUERY_RESULT = {
-  heading: string | null;
-  body: RichText | null;
+  heading: string | null
+  body: RichText | null
   backLink: {
-    label: string | null;
-    href: string | null;
-  } | null;
+    label: string | null
+    href: string | null
+  } | null
   seo: {
-    title: string | null;
-    description: string | null;
-    canonical: boolean | null;
-    twitter: boolean | null;
-    noindex: boolean | null;
-  } | null;
-} | null;
+    title: string | null
+    description: string | null
+    canonical: boolean | null
+    twitter: boolean | null
+    noindex: boolean | null
+  } | null
+} | null
 
 // Source: ../web/src/sanity/queries.ts
 // Variable: BRANDKIT_QUERY
 // Query: *[_type == "brandkitPage" && _id == "brandkitPage"][0]{  eyebrow, heading, intro, principles[]{_key, title, body}, logoEyebrow, logoHeading, logoBody, logoMinWidth,  paletteHeading, palette[]{_key, name, hex}, typography[]{_key, eyebrow, name, usage, sample},  voiceHeading, voice[]{_key, title, body, doExample, dontExample}, seo{title, description, canonical, twitter, noindex}}
 export type BRANDKIT_QUERY_RESULT = {
-  eyebrow: string | null;
-  heading: string | null;
-  intro: string | null;
+  eyebrow: string | null
+  heading: string | null
+  intro: string | null
   principles: Array<{
-    _key: string;
-    title: string | null;
-    body: string | null;
-  }> | null;
-  logoEyebrow: string | null;
-  logoHeading: string | null;
-  logoBody: string | null;
-  logoMinWidth: string | null;
-  paletteHeading: string | null;
+    _key: string
+    title: string | null
+    body: string | null
+  }> | null
+  logoEyebrow: string | null
+  logoHeading: string | null
+  logoBody: string | null
+  logoMinWidth: string | null
+  paletteHeading: string | null
   palette: Array<{
-    _key: string;
-    name: string | null;
-    hex: string | null;
-  }> | null;
+    _key: string
+    name: string | null
+    hex: string | null
+  }> | null
   typography: Array<{
-    _key: string;
-    eyebrow: string | null;
-    name: string | null;
-    usage: string | null;
-    sample: string | null;
-  }> | null;
-  voiceHeading: string | null;
+    _key: string
+    eyebrow: string | null
+    name: string | null
+    usage: string | null
+    sample: string | null
+  }> | null
+  voiceHeading: string | null
   voice: Array<{
-    _key: string;
-    title: string | null;
-    body: string | null;
-    doExample: string | null;
-    dontExample: string | null;
-  }> | null;
+    _key: string
+    title: string | null
+    body: string | null
+    doExample: string | null
+    dontExample: string | null
+  }> | null
   seo: {
-    title: string | null;
-    description: string | null;
-    canonical: boolean | null;
-    twitter: boolean | null;
-    noindex: boolean | null;
-  } | null;
-} | null;
+    title: string | null
+    description: string | null
+    canonical: boolean | null
+    twitter: boolean | null
+    noindex: boolean | null
+  } | null
+} | null
 
 // Query TypeMap
 declare global {
   interface SanityQueries {
-    '*[_type == "siteSettings" && _id == "siteSettings"][0]{\n  siteName, siteUrl, logoUrl, logo, email, primaryPhone, parentOrganization, sameAs,\n  businessHoursOpens, businessHoursCloses, businessHoursDays,\n  mainNav[]{_key, label, href}, headerCta{label, href},\n  finalCta{heading, body, primary{label, href}, secondary{label, href}},\n  stickyBar, askAi{heading, body, prompt, providers[]{_key, name, urlPrefix}},\n  contactPrompt{heading, body, links[]{_key, label, href}},\n  newsletter, footerColumns[]{_key, heading, links[]{_key, label, href}},\n  legalLinks[]{_key, label, href}, manageCookiesLabel, copyright, companyLine,\n  creditText, creditLink{label, href}, statusBadgeUrl,\n  cookieConsent{heading, body, learnMore, accept, prefsHeading, prefsBody, categories[]{_key, title, body}, save, back},\n  notFound{heading, body, link{label, href}}, formMessages,\n  defaultTitle, defaultDescription, defaultOgImageUrl, defaultOgImageAlt, locale\n}': SETTINGS_QUERY_RESULT;
-    '*[_type == "service" && defined(slug.current)] | order(orderRank asc){_id, title, "slug": slug.current, oneLiner, isGlanzPro, warranty, image, legacyImageUrl}': SERVICES_QUERY_RESULT;
-    '*[_type == "service" && defined(slug.current)].slug.current': SERVICE_SLUGS_QUERY_RESULT;
-    '*[_type == "service" && slug.current == $slug][0]{\n  _id, title, "slug": slug.current, oneLiner, isGlanzPro, warranty, image, legacyImageUrl, description, seoTitle, ogImageUrl, body, faqs[]{_key, question, answer}, shortsUrls, videoUrl\n}': SERVICE_QUERY_RESULT;
-    '*[_type == "location"] | order(orderRank asc){\n  _id, title, city, country, address, shortAddress, hours, phone, whatsapp, mapUrl, embedUrl\n}': LOCATIONS_QUERY_RESULT;
-    '*[_type == "brand"] | order(orderRank asc){_id, name, "slug": slug.current, logo}': BRANDS_QUERY_RESULT;
-    '*[_type == "article" && defined(slug.current)] | order(date desc, slug.current asc){_id, title, "slug": slug.current, description, date, category, author, readingTime, coverImage, legacyCoverImageUrl}': ARTICLES_QUERY_RESULT;
-    '*[_type == "article" && defined(slug.current)]{"slug": slug.current, date}': ARTICLE_SLUGS_QUERY_RESULT;
-    '*[_type == "article" && slug.current == $slug][0]{_id, title, "slug": slug.current, description, date, category, author, readingTime, coverImage, legacyCoverImageUrl, tags, body}': ARTICLE_QUERY_RESULT;
-    '*[_type == "homePage" && _id == "homePage"][0]{\n  hero{headingLines, subheading, primary{label, href}, secondary{label, href}, image},\n  standard{eyebrow, statement, tagline, link{label, href}},\n  brandsHeading, servicesHeading, servicesLink{label, href},\n  glanzPro{label, heading, statement, body, features[]{_key, title, body}, image},\n  stats[]{_key, value, suffix, label}, studiosHeading, studiosLink{label, href}, seo{title, description, canonical, twitter, noindex}\n}': HOME_QUERY_RESULT;
-    '*[_type == "servicesPage" && _id == "servicesPage"][0]{heading, intro, warrantyLabel, exploreLabel, glanzProBadge, detail, seo{title, description, canonical, twitter, noindex}}': SERVICES_PAGE_QUERY_RESULT;
-    '*[_type == "aboutPage" && _id == "aboutPage"][0]{heading, intro, legacyEyebrow, legacyHeading, legacyBody, quote, pillars[]{_key, title, body}, image, seo{title, description, canonical, twitter, noindex}}': ABOUT_QUERY_RESULT;
-    '*[_type == "brandsPage" && _id == "brandsPage"][0]{heading, intro, body, seo{title, description, canonical, twitter, noindex}}': BRANDS_PAGE_QUERY_RESULT;
-    '*[_type == "locationsPage" && _id == "locationsPage"][0]{heading, intro, addressLabel, hoursLabel, contactLabel, whatsappLabel, directionsLabel, seo{title, description, canonical, twitter, noindex}}': LOCATIONS_PAGE_QUERY_RESULT;
-    '*[_type == "articlesPage" && _id == "articlesPage"][0]{heading, intro, allLabel, readMoreLabel, backLabel, shareLabel, authorLabel, tocLabel, searchPlaceholder, noResultsHeading, noResultsBody, seo{title, description, canonical, twitter, noindex}}': ARTICLES_PAGE_QUERY_RESULT;
-    '*[_type == "bookInspectionPage" && _id == "bookInspectionPage"][0]{heading, intro, callLabel, callLines[]{_key, label, href}, whatsappLabel, whatsappLink{label, href}, formHeading, formIntro, fields, studiosHeading, hoursHeading, hoursDays, seo{title, description, canonical, twitter, noindex}}': BOOK_QUERY_RESULT;
-    '*[_type == "whatsappPage" && _id == "whatsappPage"][0]{eyebrow, heading, intro, studioLabel, chatLabel, backLink{label, href}, seo{title, description, canonical, twitter, noindex}}': WHATSAPP_QUERY_RESULT;
-    '*[_type == "landingPage" && _id == "landingPage"][0]{\n  heading, headingHighlight, intro, stats[]{_key, value, suffix, label}, features[]{_key, title, body},\n  formEyebrow, formHeading, formIntro, formLabels, locationOptionSuffix, carPlaceholder, namePlaceholder,\n  phonePrefix, phonePlaceholder, submitLabel, errorRequired, errorPhone, successHeading, successBody, successButton,\n  leadSource, whatsappMessage, galleryEyebrow, galleryHeading, galleryIntro, galleryEmbeds, copyright,\n  footerLinks[]{_key, label, href}, seo{title, description, canonical, twitter, noindex}\n}': LANDING_QUERY_RESULT;
-    '*[_type == "privacyPage" && _id == "privacyPage"][0]{heading, body, backLink{label, href}, seo{title, description, canonical, twitter, noindex}}': PRIVACY_QUERY_RESULT;
-    '*[_type == "brandkitPage" && _id == "brandkitPage"][0]{\n  eyebrow, heading, intro, principles[]{_key, title, body}, logoEyebrow, logoHeading, logoBody, logoMinWidth,\n  paletteHeading, palette[]{_key, name, hex}, typography[]{_key, eyebrow, name, usage, sample},\n  voiceHeading, voice[]{_key, title, body, doExample, dontExample}, seo{title, description, canonical, twitter, noindex}\n}': BRANDKIT_QUERY_RESULT;
+    '*[_type == "siteSettings" && _id == "siteSettings"][0]{\n  siteName, siteUrl, logoUrl, logo, email, primaryPhone, parentOrganization, sameAs,\n  businessHoursOpens, businessHoursCloses, businessHoursDays,\n  mainNav[]{_key, label, href}, headerCta{label, href},\n  finalCta{heading, body, primary{label, href}, secondary{label, href}},\n  stickyBar, askAi{heading, body, prompt, providers[]{_key, name, urlPrefix}},\n  contactPrompt{heading, body, links[]{_key, label, href}},\n  newsletter, footerColumns[]{_key, heading, links[]{_key, label, href}},\n  legalLinks[]{_key, label, href}, manageCookiesLabel, copyright, companyLine,\n  creditText, creditLink{label, href}, statusBadgeUrl,\n  cookieConsent{heading, body, learnMore, accept, prefsHeading, prefsBody, categories[]{_key, title, body}, save, back},\n  notFound{heading, body, link{label, href}}, formMessages,\n  defaultTitle, defaultDescription, defaultOgImageUrl, defaultOgImageAlt, locale\n}': SETTINGS_QUERY_RESULT
+    '*[_type == "service" && defined(slug.current)] | order(orderRank asc){_id, title, "slug": slug.current, oneLiner, isGlanzPro, warranty, image, legacyImageUrl}': SERVICES_QUERY_RESULT
+    '*[_type == "service" && defined(slug.current)].slug.current': SERVICE_SLUGS_QUERY_RESULT
+    '*[_type == "service" && slug.current == $slug][0]{\n  _id, title, "slug": slug.current, oneLiner, isGlanzPro, warranty, image, legacyImageUrl, description, seoTitle, ogImageUrl, body, faqs[]{_key, question, answer}, shortsUrls, videoUrl\n}': SERVICE_QUERY_RESULT
+    '*[_type == "location"] | order(orderRank asc){\n  _id, title, city, country, address, shortAddress, hours, phone, whatsapp, mapUrl, embedUrl\n}': LOCATIONS_QUERY_RESULT
+    '*[_type == "brand"] | order(orderRank asc){_id, name, "slug": slug.current, logo}': BRANDS_QUERY_RESULT
+    '*[_type == "article" && defined(slug.current)] | order(date desc, slug.current asc){_id, title, "slug": slug.current, description, date, category, author, readingTime, coverImage, legacyCoverImageUrl}': ARTICLES_QUERY_RESULT
+    '*[_type == "article" && defined(slug.current)]{"slug": slug.current, date}': ARTICLE_SLUGS_QUERY_RESULT
+    '*[_type == "article" && slug.current == $slug][0]{_id, title, "slug": slug.current, description, date, category, author, readingTime, coverImage, legacyCoverImageUrl, tags, body}': ARTICLE_QUERY_RESULT
+    '*[_type == "homePage" && _id == "homePage"][0]{\n  hero{headingLines, subheading, primary{label, href}, secondary{label, href}, image, mobileImage},\n  standard{eyebrow, statement, tagline, link{label, href}},\n  brandsHeading, servicesHeading, servicesLink{label, href},\n  glanzPro{label, heading, statement, body, features[]{_key, title, body}, image},\n  stats[]{_key, value, suffix, label}, studiosHeading, studiosLink{label, href}, seo{title, description, canonical, twitter, noindex}\n}': HOME_QUERY_RESULT
+    '*[_type == "servicesPage" && _id == "servicesPage"][0]{heading, intro, warrantyLabel, exploreLabel, glanzProBadge, detail, seo{title, description, canonical, twitter, noindex}}': SERVICES_PAGE_QUERY_RESULT
+    '*[_type == "aboutPage" && _id == "aboutPage"][0]{heading, intro, legacyEyebrow, legacyHeading, legacyBody, quote, pillars[]{_key, title, body}, image, seo{title, description, canonical, twitter, noindex}}': ABOUT_QUERY_RESULT
+    '*[_type == "brandsPage" && _id == "brandsPage"][0]{heading, intro, body, seo{title, description, canonical, twitter, noindex}}': BRANDS_PAGE_QUERY_RESULT
+    '*[_type == "locationsPage" && _id == "locationsPage"][0]{heading, intro, addressLabel, hoursLabel, contactLabel, whatsappLabel, directionsLabel, seo{title, description, canonical, twitter, noindex}}': LOCATIONS_PAGE_QUERY_RESULT
+    '*[_type == "articlesPage" && _id == "articlesPage"][0]{heading, intro, allLabel, readMoreLabel, backLabel, shareLabel, authorLabel, tocLabel, searchPlaceholder, noResultsHeading, noResultsBody, seo{title, description, canonical, twitter, noindex}}': ARTICLES_PAGE_QUERY_RESULT
+    '*[_type == "bookInspectionPage" && _id == "bookInspectionPage"][0]{heading, intro, callLabel, callLines[]{_key, label, href}, whatsappLabel, whatsappLink{label, href}, formHeading, formIntro, fields, studiosHeading, hoursHeading, hoursDays, seo{title, description, canonical, twitter, noindex}}': BOOK_QUERY_RESULT
+    '*[_type == "whatsappPage" && _id == "whatsappPage"][0]{eyebrow, heading, intro, studioLabel, chatLabel, backLink{label, href}, seo{title, description, canonical, twitter, noindex}}': WHATSAPP_QUERY_RESULT
+    '*[_type == "landingPage" && _id == "landingPage"][0]{\n  heading, headingHighlight, intro, stats[]{_key, value, suffix, label}, features[]{_key, title, body},\n  formEyebrow, formHeading, formIntro, formLabels, locationOptionSuffix, carPlaceholder, namePlaceholder,\n  phonePrefix, phonePlaceholder, submitLabel, errorRequired, errorPhone, successHeading, successBody, successButton,\n  leadSource, whatsappMessage, galleryEyebrow, galleryHeading, galleryIntro, galleryEmbeds, copyright,\n  footerLinks[]{_key, label, href}, seo{title, description, canonical, twitter, noindex}\n}': LANDING_QUERY_RESULT
+    '*[_type == "privacyPage" && _id == "privacyPage"][0]{heading, body, backLink{label, href}, seo{title, description, canonical, twitter, noindex}}': PRIVACY_QUERY_RESULT
+    '*[_type == "brandkitPage" && _id == "brandkitPage"][0]{\n  eyebrow, heading, intro, principles[]{_key, title, body}, logoEyebrow, logoHeading, logoBody, logoMinWidth,\n  paletteHeading, palette[]{_key, name, hex}, typography[]{_key, eyebrow, name, usage, sample},\n  voiceHeading, voice[]{_key, title, body, doExample, dontExample}, seo{title, description, canonical, twitter, noindex}\n}': BRANDKIT_QUERY_RESULT
   }
 }
 // Lets @sanity/client releases that predate the global registry read it too
-declare module "@sanity/client" {
+declare module '@sanity/client' {
   interface SanityQueries extends globalThis.SanityQueries {}
 }

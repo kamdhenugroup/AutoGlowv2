@@ -20,8 +20,8 @@ type Labels = {
 } | null
 
 const field =
-  'mt-2 h-[52px] w-full rounded-sm border border-line-strong bg-paper px-4 text-[16px] text-ink placeholder:text-muted focus:border-ink focus:outline-none'
-const label = 'block text-[14px] font-medium'
+  'mt-2 h-[52px] w-full rounded-sm border border-line-strong bg-paper px-4 text-[18px] text-ink placeholder:text-muted focus:border-ink focus:outline-none'
+const label = 'block text-[15px] font-medium'
 
 function Chevron() {
   return (

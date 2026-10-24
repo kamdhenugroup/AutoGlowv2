@@ -16,7 +16,7 @@ export default async function PrivacyPage() {
   return (
     <section className="wrap py-[clamp(56px,8vw,112px)]">
       <div className="mx-auto max-w-[760px]">
-        <h1 className="display text-[clamp(40px,5vw,72px)]">{p?.heading}</h1>
+        <h1 className="display text-[clamp(36px,4.8vw,68px)]">{p?.heading}</h1>
         <div className="mt-12">
           <RichText value={(p?.body ?? []) as Parameters<typeof RichText>[0]['value']} variant="legal" />
         </div>
