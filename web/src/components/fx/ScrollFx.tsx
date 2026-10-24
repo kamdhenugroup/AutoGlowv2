@@ -109,7 +109,7 @@ export function ScrollFx() {
         for (const im of r.imgs) {
           // -1 at the left edge of the screen, +1 at the right: the photo trails the frame.
           const k = clamp((im.center + tx - vw / 2) / (vw / 2), -1.5, 1.5)
-          im.el.style.transform = `translate3d(${k * -6}%,0,0) scale(1.18)`
+          im.el.style.transform = `translate3d(${k * -3}%,0,0) scale(1.08)`
         }
       }
       for (const p of paras) {
@@ -141,7 +141,7 @@ export function ScrollFx() {
       if (lean !== lastLean) for (const s of skews) s.el.style.transform = s.axis === 'x' ? `skewX(${-lean}deg)` : `skewY(${lean * 0.4}deg)`
       lastLean = lean
       for (const m of marquees) {
-        if (!m.visible || !m.width) continue
+        if (!m.visible || !m.width || m.track.dataset.paused) continue
         const dir = vel < -0.2 ? -1 : 1
         m.x -= (50 + Math.abs(vel) * 90) * dir * dt
         if (m.x <= -m.width) m.x += m.width

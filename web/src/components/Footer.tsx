@@ -4,6 +4,7 @@ import {NewsletterForm} from './NewsletterForm'
 import {ManageCookiesButton} from './CookieConsent'
 import {SmartLink, buttonClass} from './ui'
 import {AsciiWordmark} from './fx/AsciiWordmark'
+import {InstagramIcon, Mail, YouTubeIcon} from './icons'
 
 export function Footer({s}: {s: Settings}) {
   const ask = s.askAi
@@ -81,9 +82,10 @@ export function Footer({s}: {s: Settings}) {
                       <SmartLink
                         href={l.href ?? '/'}
                         data-scramble
-                        className="text-[15px] text-ink hover:underline hover:underline-offset-4"
+                        className="inline-flex items-center gap-2.5 text-[15px] text-ink hover:underline hover:underline-offset-4"
                       >
                         {l.label}
+                        <SocialIcon href={l.href ?? ''} />
                       </SmartLink>
                     </li>
                   ))}
@@ -130,7 +132,7 @@ export function Footer({s}: {s: Settings}) {
           <p className="mt-6 text-[15px] text-muted">
             {s.creditText}{' '}
             {s.creditLink?.href && (
-              <SmartLink href={s.creditLink.href} className="text-ink hover:underline">
+              <SmartLink href={s.creditLink.href} className="text-ink underline underline-offset-4 hover:decoration-2">
                 {s.creditLink.label}
               </SmartLink>
             )}
@@ -142,4 +144,11 @@ export function Footer({s}: {s: Settings}) {
       </div>
     </footer>
   )
+}
+
+function SocialIcon({href}: {href: string}) {
+  if (/instagram\.com/.test(href)) return <InstagramIcon size={15} className="order-first" />
+  if (/youtube\.com|youtu\.be/.test(href)) return <YouTubeIcon size={16} className="order-first" />
+  if (href.startsWith('mailto:')) return <Mail size={15} aria-hidden="true" className="order-first" />
+  return null
 }
