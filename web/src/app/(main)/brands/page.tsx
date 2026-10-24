@@ -26,7 +26,7 @@ export default async function BrandsPage() {
             <li key={b._id} className="flex items-center gap-4 rounded-sm bg-mist px-6 py-8">
               {b.logo?.asset && (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={urlFor(b.logo).width(160).url()} alt="" className="h-7 w-auto opacity-80 grayscale" loading="lazy" />
+                <img src={urlFor(b.logo).url()} alt="" width={48} height={48} className="h-10 w-auto" loading="lazy" />
               )}
               <span className="display text-[clamp(24px,2.6vw,34px)] tracking-[-0.02em]">{b.name}</span>
             </li>

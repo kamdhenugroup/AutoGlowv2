@@ -12,12 +12,14 @@
     "@sanity/image-url": "^2.1.1",
     "github-slugger": "^2.0.0",
     "lenis": "^1.3.26",
+    "lucide-react": "^1.61.0",
     "next": "16.4.2",
     "next-sanity": "^13.3.4",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "reading-time": "^1.5.0",
     "server-only": "^0.0.1",
+    "simple-icons": "^16.35.0",
     "sonner": "^2.0.8"
   },
   "devDependencies": {

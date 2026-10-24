@@ -3,6 +3,7 @@ import Link from 'next/link'
 import type {Location, ServiceCard} from '@/lib/data'
 import {imageSrc} from '@/sanity/image'
 import {cn} from './ui'
+import {Clock, MapPin, Phone, WhatsAppIcon} from './icons'
 
 export function ServiceCardItem({s, sizes, className, rail}: {s: ServiceCard; sizes: string; className?: string; rail?: boolean}) {
   const src = imageSrc(s.image, s.legacyImageUrl, 900)
@@ -10,13 +11,14 @@ export function ServiceCardItem({s, sizes, className, rail}: {s: ServiceCard; si
     <Link href={`/services/${s.slug}`} className={cn('group block', className)}>
       <div className="relative aspect-[4/5] overflow-hidden rounded-sm bg-mist">
         {/* In the pinned rail the photo drifts inside its frame as the row travels. */}
-        <div data-rail-img={rail || undefined} className={cn('absolute inset-0', rail && 'scale-[1.18] will-change-transform')}>
+        <div data-rail-img={rail || undefined} className={cn('absolute inset-0', rail && 'scale-[1.08] will-change-transform')}>
           {src && (
             <Image
               src={src}
               alt={s.image?.alt || s.title || ''}
               fill
               sizes={sizes}
+              quality={90}
               className="object-cover transition-transform duration-700 ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.04]"
             />
           )}
@@ -37,18 +39,29 @@ export function StudioCard({l, className}: {l: Location; className?: string}) {
           {l.city}, {l.country}
         </p>
       </div>
-      <p className="text-[18px] leading-relaxed text-body">{l.address}</p>
-      {l.hours && <p className="text-[18px]">{l.hours}</p>}
+      <p className="flex gap-3 text-[18px] leading-relaxed text-body">
+        <MapPin size={18} aria-hidden="true" className="mt-1.5 shrink-0 text-muted" />
+        {l.address}
+      </p>
+      {l.hours && (
+        <p className="flex items-center gap-3 text-[18px]">
+          <Clock size={18} aria-hidden="true" className="shrink-0 text-muted" />
+          {l.hours}
+        </p>
+      )}
       {(l.phone || l.whatsapp) && (
         <div className="mt-auto flex flex-wrap gap-x-5 gap-y-2 pt-2 text-[15px] font-medium">
           {l.phone && (
-            <a href={`tel:+91${l.phone}`} className="link-underline">
-              Call: {l.phone}
+            <a href={`tel:+91${l.phone}`} className="inline-flex items-center gap-2">
+              <Phone size={16} aria-hidden="true" />
+              <span className="link-underline">Call: {l.phone}</span>
             </a>
           )}
           {l.whatsapp && (
-            <a href={`https://wa.me/91${l.whatsapp}`} target="_blank" rel="noopener noreferrer" className="link-underline">
-              WA: {l.whatsapp}
+            <a href={`https://wa.me/91${l.whatsapp}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2">
+              <WhatsAppIcon size={16} />
+              <span className="link-underline">WA: {l.whatsapp}</span>
+              <span className="sr-only"> (opens in a new tab)</span>
             </a>
           )}
         </div>

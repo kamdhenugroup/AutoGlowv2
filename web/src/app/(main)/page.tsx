@@ -2,9 +2,10 @@ import Image from 'next/image'
 import type {Metadata} from 'next'
 import {sanityFetch} from '@/sanity/client'
 import {HOME_QUERY} from '@/sanity/queries'
-import {imageSrc} from '@/sanity/image'
+import {imageSrc, urlFor} from '@/sanity/image'
 import {getBrands, getLocations, getServices} from '@/lib/data'
 import {pageMetadata} from '@/lib/seo'
+import {MarqueePause} from '@/components/fx/MarqueePause'
 import {ServiceCardItem, Stats, StudioCard} from '@/components/blocks'
 import {Button, Section, TextLink} from '@/components/ui'
 
@@ -100,13 +101,14 @@ export default async function HomePage() {
       {/* Brands: a row that runs on its own and answers the scroll */}
       {brands.length > 0 && (
         <section className="overflow-hidden pb-[clamp(72px,10vw,144px)]" aria-labelledby="brands-heading">
-          <div className="wrap">
+          <div className="wrap flex items-center justify-between gap-6">
             <h2 id="brands-heading" className="text-[22px] font-medium">
               {home.brandsHeading}
             </h2>
+            <MarqueePause target="brands-marquee" />
           </div>
           <div className="mt-10 motion-reduce:wrap">
-            <div data-marquee className="flex w-max will-change-transform motion-reduce:w-auto">
+            <div id="brands-marquee" data-marquee className="flex w-max will-change-transform motion-reduce:w-auto">
               {[0, 1].map((copy) => (
                 <ul
                   key={copy}
@@ -114,7 +116,13 @@ export default async function HomePage() {
                   className={`display flex shrink-0 gap-x-[clamp(32px,4vw,64px)] pr-[clamp(32px,4vw,64px)] text-[clamp(36px,4.8vw,68px)] whitespace-nowrap text-ink motion-reduce:flex-wrap motion-reduce:gap-y-2 motion-reduce:whitespace-normal ${copy === 1 ? 'motion-reduce:hidden' : ''}`}
                 >
                   {brands.map((b) => (
-                    <li key={b._id}>{b.name}</li>
+                    <li key={b._id} className="flex items-center gap-[0.35em]">
+                      {b.logo?.asset && (
+                        // eslint-disable-next-line @next/next/no-img-element -- vector logo served as-is
+                        <img src={urlFor(b.logo).url()} alt="" width={64} height={64} loading="lazy" className="h-[0.9em] w-auto" />
+                      )}
+                      {b.name}
+                    </li>
                   ))}
                 </ul>
               ))}
@@ -143,7 +151,7 @@ export default async function HomePage() {
           >
             {services.map((s) => (
               <li key={s._id} className="w-[76vw] max-w-[400px] shrink-0 snap-start sm:w-[320px] lg:w-[min(30vw,420px)] lg:max-w-none">
-                <ServiceCardItem s={s} sizes="(min-width: 1024px) 420px, 76vw" rail />
+                <ServiceCardItem s={s} sizes="(min-width: 1024px) 880px, 160vw" rail />
               </li>
             ))}
           </ul>
