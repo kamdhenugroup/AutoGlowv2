@@ -20,6 +20,8 @@ const TARGETS = [
   .map((t) => `:is(main, footer) section ${t}`)
   .join(',')
 
+const SCROLL_FX = '[data-rail-track], [data-marquee], [data-skew], [data-parallax], [data-hero-copy]'
+
 /**
  * Each section's parts rise in as the section enters: heading, then text, then picture.
  * Content is visible without script, and visitors who prefer reduced motion get no travel.
@@ -36,6 +38,8 @@ export function Reveal() {
       // Animate the outermost match only, so a list and its items do not both move.
       if (picked.some((p) => p.contains(el))) return
       if (el.closest('[role="dialog"]')) return
+      // Scroll-driven elements own their transform; a reveal transition on them would make them lag.
+      if (el.matches(SCROLL_FX) || el.querySelector(SCROLL_FX) || el.closest(SCROLL_FX)) return
       picked.push(el)
     })
 
