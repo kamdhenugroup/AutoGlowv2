@@ -17,3 +17,13 @@ export function imageSrc(image: MaybeImage, legacyUrl?: string | null, width = 1
       .url()
   return legacyUrl || null
 }
+
+/**
+ * The uploaded file exactly as stored, with no transformation. Used for SVG logos: any image
+ * parameter makes the CDN rasterise them to a large PNG, which is slow to decode.
+ */
+export function originalUrl(image: MaybeImage): string | null {
+  const ref = image?.asset?._ref
+  const m = ref?.match(/^image-([a-f0-9]+)-(\d+x\d+)-(\w+)$/)
+  return m ? `https://cdn.sanity.io/images/${projectId}/${dataset}/${m[1]}-${m[2]}.${m[3]}` : null
+}

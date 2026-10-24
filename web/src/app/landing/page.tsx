@@ -5,6 +5,7 @@ import {getLocations, getServices} from '@/lib/data'
 import {pageMetadata} from '@/lib/seo'
 import {Stats} from '@/components/blocks'
 import {Eyebrow, SmartLink} from '@/components/ui'
+import {EmbedFacade} from '@/components/EmbedFacade'
 import {LandingForm} from './LandingForm'
 
 const getPage = () => sanityFetch({query: LANDING_QUERY, tags: ['landingPage']})
@@ -79,15 +80,8 @@ export default async function LandingPage() {
           <p className="mt-4 max-w-[560px] text-[18px] text-body">{p.galleryIntro}</p>
           <ul className="mt-10 grid grid-cols-2 gap-3 md:gap-5 lg:grid-cols-4">
             {p.galleryEmbeds?.map((src) => (
-              <li key={src} className="relative aspect-[9/16] overflow-hidden rounded-sm bg-paper">
-                <iframe
-                  src={src}
-                  title={p.galleryHeading ?? 'Video'}
-                  loading="lazy"
-                  allow="encrypted-media; picture-in-picture"
-                  allowFullScreen
-                  className="absolute inset-0 h-full w-full border-0"
-                />
+              <li key={src} className="empty:hidden">
+                <EmbedFacade src={src} title={p.galleryHeading ?? 'Video'} />
               </li>
             ))}
           </ul>

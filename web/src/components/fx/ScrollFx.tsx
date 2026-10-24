@@ -1,6 +1,6 @@
 'use client'
 
-import Lenis from 'lenis'
+import type Lenis from 'lenis'
 import {usePathname} from 'next/navigation'
 import {useEffect} from 'react'
 import {motionAllowed} from '@/lib/motion'
@@ -31,9 +31,20 @@ export function ScrollFx() {
   // Lenis lives for the whole session.
   useEffect(() => {
     if (!motionAllowed()) return
-    lenis = new Lenis({lerp: 0.075, wheelMultiplier: 1.05, anchors: {offset: -24}, autoRaf: true})
-    document.documentElement.classList.add('has-lenis')
+    // Start smooth scrolling once the page has settled, so it adds nothing to the first load.
+    const idle = window.requestIdleCallback ?? ((cb: () => void) => setTimeout(cb, 200))
+    let cancelled = false
+    const id = idle(async () => {
+      // Loaded on demand: smooth scrolling is not needed for the first paint.
+      const {default: LenisClass} = await import('lenis')
+      if (cancelled) return
+      lenis = new LenisClass({lerp: 0.075, wheelMultiplier: 1.05, anchors: {offset: -24}, autoRaf: true})
+      lenis.on('scroll', () => window.dispatchEvent(new Event('lenis-scroll')))
+      document.documentElement.classList.add('has-lenis')
+    })
     return () => {
+      cancelled = true
+      ;(window.cancelIdleCallback ?? clearTimeout)(id as number)
       lenis?.destroy()
       lenis = null
     }
@@ -43,7 +54,7 @@ export function ScrollFx() {
   useEffect(() => {
     if (!window.location.hash) lenis?.scrollTo(0, {immediate: true, force: true})
     if (!motionAllowed()) return
-    const desktop = window.matchMedia('(min-width: 1024px)')
+    const desktop = window.matchMedia('(min-width: 1024px) and (min-height: 700px)')
     let rails: Rail[] = []
     let paras: Para[] = []
     let skews: Skew[] = []
@@ -173,8 +184,9 @@ export function ScrollFx() {
     const ro = new ResizeObserver(remeasure)
     ro.observe(document.body)
     window.addEventListener('resize', remeasure)
-    if (lenis) lenis.on('scroll', onScroll)
-    else window.addEventListener('scroll', onScroll, {passive: true})
+    // Native scroll until Lenis starts, then Lenis's own (smoothed) position.
+    window.addEventListener('scroll', onScroll, {passive: true})
+    window.addEventListener('lenis-scroll', onScroll)
 
     return () => {
       cancelAnimationFrame(raf)
@@ -183,7 +195,7 @@ export function ScrollFx() {
       ro.disconnect()
       window.removeEventListener('resize', remeasure)
       window.removeEventListener('scroll', onScroll)
-      lenis?.off('scroll', onScroll)
+      window.removeEventListener('lenis-scroll', onScroll)
       rails.forEach((r) => (r.section.style.height = ''))
     }
   }, [pathname])

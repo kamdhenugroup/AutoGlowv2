@@ -1,7 +1,7 @@
 import type {Metadata} from 'next'
 import {sanityFetch} from '@/sanity/client'
 import {BRANDS_PAGE_QUERY} from '@/sanity/queries'
-import {urlFor} from '@/sanity/image'
+import {originalUrl} from '@/sanity/image'
 import {getBrands} from '@/lib/data'
 import {pageMetadata} from '@/lib/seo'
 
@@ -28,7 +28,7 @@ export default async function BrandsPage() {
               <span className="flex h-12 items-center md:h-16">
                 {b.logo?.asset && (
                   // eslint-disable-next-line @next/next/no-img-element -- vector logo served as-is
-                  <img src={urlFor(b.logo).url()} alt="" width={64} height={64} className="max-h-full w-auto max-w-[70%]" loading="lazy" />
+                  <img src={originalUrl(b.logo)!} alt="" width={64} height={64} className="max-h-full w-auto max-w-[70%]" loading="lazy" />
                 )}
               </span>
               <span className="text-[17px] leading-snug font-medium tracking-[-0.01em] md:text-[22px]">{b.name}</span>

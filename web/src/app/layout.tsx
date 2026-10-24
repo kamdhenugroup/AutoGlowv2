@@ -13,7 +13,7 @@ import {UiFx} from '@/components/fx/UiFx'
 import {ScrollFx} from '@/components/fx/ScrollFx'
 import './globals.css'
 
-const mona = Mona_Sans({subsets: ['latin'], axes: ['wdth'], variable: '--font-mona', display: 'swap'})
+const mona = Mona_Sans({subsets: ['latin'], variable: '--font-mona', display: 'swap'})
 
 export const viewport: Viewport = {width: 'device-width', initialScale: 1}
 
@@ -22,7 +22,9 @@ export async function generateMetadata(): Promise<Metadata> {
   const title = s.defaultTitle ?? undefined
   const description = s.defaultDescription ?? undefined
   const image = s.defaultOgImageUrl ?? undefined
-  const icon = s.logoUrl ?? undefined
+  // Same logo file as before, but asked from Cloudinary at icon size: the full 139 KB PNG cost
+  // the browser a slow decode on every page just to draw the tab icon.
+  const icon = s.logoUrl?.replace('/image/upload/', '/image/upload/c_limit,w_180/') ?? undefined
   return {
     metadataBase: new URL(s.siteUrl ?? 'https://autoglowcare.in'),
     title,
