@@ -22,7 +22,7 @@ export default async function ServicesPage() {
 
       <section className="wrap pb-[clamp(72px,10vw,144px)]">
         <ul className="space-y-2">
-          {services.map((s) => {
+          {services.map((s, i) => {
             const src = imageSrc(s.image, s.legacyImageUrl, 900)
             return (
               <li key={s._id} className="rounded-sm bg-mist transition-colors hover:bg-[#e9ebee]">
@@ -34,6 +34,7 @@ export default async function ServicesPage() {
                         alt={s.image?.alt || s.title || ''}
                         fill
                         sizes="(min-width: 768px) 25vw, 100vw"
+                        priority={i === 0}
                         className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                       />
                     )}

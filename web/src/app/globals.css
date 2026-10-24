@@ -1,5 +1,8 @@
 @import 'tailwindcss';
 
+/* Wide and tall enough to pin the services rail (components/fx/ScrollFx.tsx uses the same query). */
+@custom-variant pin (@media (min-width: 1024px) and (min-height: 700px));
+
 /* AutoGlow — Studio Light */
 @theme {
   --color-ink: #031533;
@@ -179,4 +182,11 @@ html.lenis body {
 .mobile-menu[data-open] .menu-item {
   opacity: 1;
   transform: none;
+}
+
+/* Below-the-fold sections skip style, layout and paint until they near the screen. */
+main section + section:not([data-rail]),
+footer > * {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
 }

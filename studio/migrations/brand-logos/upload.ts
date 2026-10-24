@@ -20,7 +20,10 @@ const dir = join(process.cwd(), 'migrations/brand-logos')
 async function main() {
   const brands: {_id: string; name: string; icon: string}[] = await client.fetch(`*[_type == "brand"]{_id, name, icon}`)
   const files = new Set(readdirSync(dir).filter((f) => f.endsWith('.svg')))
+  // Optional: ONLY=mercedes,jaguar re-uploads just those.
+  const only = process.env.ONLY?.split(',')
   for (const b of brands) {
+    if (only && !only.includes(b.icon)) continue
     const file = `${b.icon}.svg`
     if (!files.has(file)) {
       console.log('no logo for', b.name)

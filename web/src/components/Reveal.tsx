@@ -44,6 +44,12 @@ export function Reveal() {
     })
 
     const perSection = new Map<Element, number>()
+    // What is already on screen stays as it is: hiding it and fading it back would only delay the
+    // first meaningful paint. The entrance is for what the visitor scrolls to.
+    const fold = window.innerHeight
+    const below = picked.filter((el) => el.getBoundingClientRect().top > fold)
+    picked.length = 0
+    picked.push(...below)
     for (const el of picked) {
       const section = el.closest('section') ?? document.body
       const i = perSection.get(section) ?? 0

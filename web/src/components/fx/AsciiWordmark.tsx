@@ -115,10 +115,18 @@ export function AsciiWordmark({word}: {word: string}) {
       mouse.x = -1
     }
 
-    build()
-    const ro = new ResizeObserver(build)
+    // Nothing is measured or drawn until the footer first comes near the screen.
+    const ro = new ResizeObserver(() => {
+      if (lastW !== -1) build()
+    })
     ro.observe(canvas)
-    const io = new IntersectionObserver(([e]) => (visible = e.isIntersecting))
+    const io = new IntersectionObserver(
+      ([e]) => {
+        visible = e.isIntersecting
+        if (visible && lastW === -1) build()
+      },
+      {rootMargin: '200px'},
+    )
     io.observe(canvas)
     if (animate) {
       raf = requestAnimationFrame(loop)
