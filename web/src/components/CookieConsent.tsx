@@ -87,6 +87,7 @@ export function CookieConsent({c}: {c: Settings['cookieConsent']}) {
               <span className="font-medium text-paper">{c.heading}</span> {c.body}{' '}
               <Link href="/privacy" className="text-paper underline underline-offset-4">
                 {c.learnMore}
+                <span className="sr-only"> about cookies and privacy</span>
               </Link>
             </p>
             <button

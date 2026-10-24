@@ -2,10 +2,11 @@ import Image from 'next/image'
 import type {Metadata} from 'next'
 import {sanityFetch} from '@/sanity/client'
 import {HOME_QUERY} from '@/sanity/queries'
-import {imageSrc, urlFor} from '@/sanity/image'
-import {getBrands, getLocations, getServices} from '@/lib/data'
+import {imageSrc, originalUrl} from '@/sanity/image'
+import {getBrands, getLocations, getServices, getSettings} from '@/lib/data'
 import {pageMetadata} from '@/lib/seo'
 import {MarqueePause} from '@/components/fx/MarqueePause'
+import {RailArrows} from '@/components/fx/RailArrows'
 import {ServiceCardItem, Stats, StudioCard} from '@/components/blocks'
 import {Button, Section, TextLink} from '@/components/ui'
 
@@ -17,7 +18,13 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function HomePage() {
-  const [home, services, locations, brands] = await Promise.all([getHome(), getServices(), getLocations(), getBrands()])
+  const [home, services, locations, brands, settings] = await Promise.all([
+    getHome(),
+    getServices(),
+    getLocations(),
+    getBrands(),
+    getSettings(),
+  ])
   if (!home) return null
   const {hero, standard, glanzPro} = home
   const heroSrc = imageSrc(hero?.image, '/placeholder/darkroom.jpg', 2400)!
@@ -119,7 +126,7 @@ export default async function HomePage() {
                     <li key={b._id} className="flex items-center gap-[0.35em]">
                       {b.logo?.asset && (
                         // eslint-disable-next-line @next/next/no-img-element -- vector logo served as-is
-                        <img src={urlFor(b.logo).url()} alt="" width={64} height={64} loading="lazy" className="h-[0.9em] w-auto" />
+                        <img src={originalUrl(b.logo)!} alt="" width={64} height={64} loading="lazy" className="h-[0.9em] w-auto" />
                       )}
                       {b.name}
                     </li>
@@ -133,25 +140,28 @@ export default async function HomePage() {
 
       {/* Our Discipline: pinned on desktop, the row travels sideways as the page scrolls */}
       <section data-rail className="relative bg-mist" aria-labelledby="services-heading">
-        <div className="flex flex-col justify-center overflow-hidden py-[clamp(72px,10vw,144px)] lg:sticky lg:top-0 lg:h-svh lg:py-0">
+        <div className="flex flex-col justify-center-safe overflow-hidden py-[clamp(72px,10vw,144px)] pin:sticky pin:top-0 pin:h-svh pin:py-8">
           <div className="wrap flex items-end justify-between gap-6">
             <h2 id="services-heading" className="display text-[clamp(36px,4.8vw,68px)]">
               {home.servicesHeading}
             </h2>
-            {home.servicesLink?.href && (
-              <TextLink href={home.servicesLink.href} className="mb-2">
-                {home.servicesLink.label}
-              </TextLink>
-            )}
+            <div className="mb-2 flex items-center gap-6">
+              {home.servicesLink?.href && <TextLink href={home.servicesLink.href}>{home.servicesLink.label}</TextLink>}
+              <RailArrows target="services-rail" className="hidden gap-2 md:flex pin:hidden" />
+            </div>
           </div>
           <ul
             data-rail-track
+            id="services-rail"
             aria-label={home.servicesHeading ?? 'Services'}
-            className="no-scrollbar mt-10 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 [scroll-padding-inline:clamp(20px,5.5vw,80px)] [padding-inline:clamp(20px,5.5vw,80px)] md:gap-5 lg:mt-14 lg:snap-none lg:overflow-visible lg:will-change-transform"
+            className="no-scrollbar mt-10 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 [scroll-padding-inline:clamp(20px,5.5vw,80px)] [padding-inline:clamp(20px,5.5vw,80px)] md:gap-5 lg:mt-14 pin:snap-none pin:overflow-visible pin:will-change-transform"
           >
             {services.map((s) => (
-              <li key={s._id} className="w-[76vw] max-w-[400px] shrink-0 snap-start sm:w-[320px] lg:w-[min(30vw,420px)] lg:max-w-none">
-                <ServiceCardItem s={s} sizes="(min-width: 1024px) 880px, 160vw" rail />
+              <li
+                key={s._id}
+                className="w-[76vw] max-w-[400px] shrink-0 snap-start sm:w-[320px] lg:w-[min(30vw,420px)] pin:w-[min(30vw,420px,calc((100svh-360px)*0.8))] lg:max-w-none"
+              >
+                <ServiceCardItem s={s} sizes="(min-width: 1024px) 880px, 100vw" rail />
               </li>
             ))}
           </ul>
@@ -200,9 +210,9 @@ export default async function HomePage() {
             </TextLink>
           )}
         </div>
-        <div className="mt-14 grid gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {locations.map((l) => (
-            <StudioCard key={l._id} l={l} />
+            <StudioCard key={l._id} l={l} whatsappLabel={settings.stickyBar?.whatsappLabel ?? 'WhatsApp'} />
           ))}
         </div>
       </Section>

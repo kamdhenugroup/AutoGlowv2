@@ -11,7 +11,9 @@ export function youtubeId(url: string) {
 export function YouTubeShort({url, title}: {url: string; title: string}) {
   const id = youtubeId(url)
   const [play, setPlay] = useState(false)
-  if (!id) return null
+  const [gone, setGone] = useState(false)
+  // A removed or private video has no thumbnail at all: leave it out rather than show a black tile.
+  if (!id || gone) return null
   return (
     <div className="relative aspect-[9/16] overflow-hidden rounded-sm bg-ink">
       {play ? (
@@ -32,11 +34,15 @@ export function YouTubeShort({url, title}: {url: string; title: string}) {
             loading="lazy"
             onLoad={(e) => {
               const img = e.currentTarget
-              if (img.naturalWidth <= 120 && !img.src.includes('hqdefault')) img.src = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`
+              if (img.naturalWidth > 120) return
+              // YouTube answers a missing thumbnail with a small grey placeholder; try the other size, then give up.
+              if (!img.src.includes('hqdefault')) img.src = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`
+              else setGone(true)
             }}
             onError={(e) => {
               const img = e.currentTarget
               if (!img.src.includes('hqdefault')) img.src = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`
+              else setGone(true)
             }}
             className="absolute inset-0 h-full w-full object-cover opacity-90 transition-opacity group-hover:opacity-100"
           />

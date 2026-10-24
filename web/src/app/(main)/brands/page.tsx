@@ -1,7 +1,7 @@
 import type {Metadata} from 'next'
 import {sanityFetch} from '@/sanity/client'
 import {BRANDS_PAGE_QUERY} from '@/sanity/queries'
-import {urlFor} from '@/sanity/image'
+import {originalUrl} from '@/sanity/image'
 import {getBrands} from '@/lib/data'
 import {pageMetadata} from '@/lib/seo'
 
@@ -21,14 +21,17 @@ export default async function BrandsPage() {
       </section>
 
       <section className="wrap" aria-label="Brands">
-        <ul className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
+        <ul className="grid auto-rows-fr grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
           {brands.map((b) => (
-            <li key={b._id} className="flex items-center gap-4 rounded-sm bg-mist px-6 py-8">
-              {b.logo?.asset && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={urlFor(b.logo).url()} alt="" width={48} height={48} className="h-10 w-auto" loading="lazy" />
-              )}
-              <span className="display text-[clamp(24px,2.6vw,34px)] tracking-[-0.02em]">{b.name}</span>
+            <li key={b._id} className="flex flex-col justify-between gap-6 rounded-sm bg-mist p-5 sm:aspect-[5/3] md:p-8">
+              {/* Fixed-height logo box, so every name sits on the same line. */}
+              <span className="flex h-12 items-center md:h-16">
+                {b.logo?.asset && (
+                  // eslint-disable-next-line @next/next/no-img-element -- vector logo served as-is
+                  <img src={originalUrl(b.logo)!} alt="" width={64} height={64} className="max-h-full w-auto max-w-[70%]" loading="lazy" />
+                )}
+              </span>
+              <span className="text-[17px] leading-snug font-medium tracking-[-0.01em] md:text-[22px]">{b.name}</span>
             </li>
           ))}
         </ul>

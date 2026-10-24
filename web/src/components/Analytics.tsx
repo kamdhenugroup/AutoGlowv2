@@ -17,8 +17,15 @@ gtag('consent', 'default', {'analytics_storage': 'denied','ad_storage': 'denied'
 gtag('set', 'ads_data_redaction', true);`}
       </Script>
       {gtmId && (
+        // Tag Manager (GA4, Google Ads, Meta, Clarity) starts on the visitor's first scroll, tap,
+        // key press or mouse move, or after 6 seconds at the latest, so it never competes with the
+        // page's own first paint and first interaction.
         <Script id="gtm-base" strategy="afterInteractive">
-          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${gtmId}');`}
+          {`(function(w,d,i){var done=false,ev=['scroll','pointerdown','keydown','mousemove','touchstart'];
+function go(){if(done)return;done=true;ev.forEach(function(e){w.removeEventListener(e,go)});
+w.dataLayer=w.dataLayer||[];w.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+var j=d.createElement('script');j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i;d.head.appendChild(j);}
+ev.forEach(function(e){w.addEventListener(e,go,{once:true,passive:true})});setTimeout(go,6000);})(window,document,'${gtmId}');`}
         </Script>
       )}
     </>

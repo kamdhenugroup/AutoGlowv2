@@ -30,42 +30,47 @@ export function ServiceCardItem({s, sizes, className, rail}: {s: ServiceCard; si
   )
 }
 
-export function StudioCard({l, className}: {l: Location; className?: string}) {
+/**
+ * One studio. Cards share rows with their neighbours (CSS subgrid), so names, addresses, hours
+ * and contacts line up across the grid whatever their length.
+ */
+export function StudioCard({l, className, whatsappLabel}: {l: Location; className?: string; whatsappLabel?: string}) {
   return (
-    <article className={cn('flex flex-col gap-4', className)}>
+    <article className={cn('row-span-4 grid gap-5 rounded-sm bg-paper p-7 sm:grid-rows-subgrid xl:p-8', className)}>
       <div>
-        <h3 className="display text-[clamp(24px,2.6vw,34px)] tracking-[-0.02em]">{l.title}</h3>
-        <p className="mt-1 text-[15px] text-muted">
+        <h3 className="display text-[clamp(24px,2.2vw,30px)] leading-[1.08] tracking-[-0.02em]">{l.title}</h3>
+        <p className="mt-2 text-[15px] text-muted">
           {l.city}, {l.country}
         </p>
       </div>
-      <p className="flex gap-3 text-[18px] leading-relaxed text-body">
-        <MapPin size={18} aria-hidden="true" className="mt-1.5 shrink-0 text-muted" />
+      <p className="flex gap-3 text-[16px] leading-relaxed text-body">
+        <MapPin size={18} aria-hidden="true" className="mt-1 shrink-0 text-muted" />
         {l.address}
       </p>
-      {l.hours && (
-        <p className="flex items-center gap-3 text-[18px]">
-          <Clock size={18} aria-hidden="true" className="shrink-0 text-muted" />
-          {l.hours}
-        </p>
-      )}
-      {(l.phone || l.whatsapp) && (
-        <div className="mt-auto flex flex-wrap gap-x-5 gap-y-2 pt-2 text-[15px] font-medium">
-          {l.phone && (
-            <a href={`tel:+91${l.phone}`} className="inline-flex items-center gap-2">
-              <Phone size={16} aria-hidden="true" />
-              <span className="link-underline">Call: {l.phone}</span>
-            </a>
-          )}
-          {l.whatsapp && (
-            <a href={`https://wa.me/91${l.whatsapp}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2">
-              <WhatsAppIcon size={16} />
-              <span className="link-underline">WA: {l.whatsapp}</span>
-              <span className="sr-only"> (opens in a new tab)</span>
-            </a>
-          )}
-        </div>
-      )}
+      <p className="flex gap-3 text-[16px] leading-relaxed">
+        <Clock size={18} aria-hidden="true" className="mt-1 shrink-0 text-muted" />
+        {l.hours}
+      </p>
+      <div className="flex flex-col gap-2.5 self-end pt-5 text-[15px] font-medium shadow-[inset_0_1px_0_var(--color-mist)]">
+        {l.phone && (
+          <a href={`tel:+91${l.phone}`} className="inline-flex items-center gap-2.5">
+            <Phone size={16} aria-hidden="true" />
+            <span className="link-underline">Call: {l.phone}</span>
+          </a>
+        )}
+        {l.whatsapp ? (
+          <a href={`https://wa.me/91${l.whatsapp}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5">
+            <WhatsAppIcon size={16} />
+            <span className="link-underline">WA: {l.whatsapp}</span>
+            <span className="sr-only"> (opens in a new tab)</span>
+          </a>
+        ) : (
+          <Link href="/whatsapp" className="inline-flex items-center gap-2.5">
+            <WhatsAppIcon size={16} />
+            <span className="link-underline">{whatsappLabel}</span>
+          </Link>
+        )}
+      </div>
     </article>
   )
 }
