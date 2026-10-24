@@ -1,7 +1,7 @@
 'use client'
 
 import {useEffect, useRef} from 'react'
-import {motionAllowed} from '@/lib/gl'
+import {motionAllowed} from '@/lib/motion'
 
 const RAMP = ' .:-=+*#%@'
 
@@ -22,6 +22,9 @@ export function AsciiWordmark({word}: {word: string}) {
     let rows = 0
     let cell = 0
     let data: Uint8ClampedArray = new Uint8ClampedArray()
+    let cells: number[] = []
+    let px = 0
+    const atlas = document.createElement('canvas')
     let raf = 0
     let visible = false
     const mouse = {x: -1, y: -1}
@@ -53,40 +56,54 @@ export function AsciiWordmark({word}: {word: string}) {
       canvas.width = Math.round(cols * cell * dpr)
       canvas.height = Math.round(rows * cell * dpr)
       canvas.style.height = `${rows * cell}px`
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
-      ctx.font = `${Math.round(cell * 1.15)}px ui-monospace, SFMono-Regular, Menlo, monospace`
-      ctx.textAlign = 'center'
-      ctx.textBaseline = 'middle'
+      ctx.setTransform(1, 0, 0, 1, 0, 0)
+      // Cells inside the letters, found once; the loop only visits these.
+      cells = []
+      for (let y = 0; y < rows; y++)
+        for (let x = 0; x < cols; x++) {
+          const m = data[(y * cols + x) * 4] / 255
+          if (m >= 0.08) cells.push(x, y, m)
+        }
+      // Every glyph pre-drawn once into a strip; frames copy from it instead of setting text.
+      px = Math.round(cell * dpr)
+      atlas.width = px * RAMP.length
+      atlas.height = px
+      const a = atlas.getContext('2d')!
+      a.clearRect(0, 0, atlas.width, atlas.height)
+      a.fillStyle = '#031533'
+      a.font = `${Math.round(px * 1.15)}px ui-monospace, SFMono-Regular, Menlo, monospace`
+      a.textAlign = 'center'
+      a.textBaseline = 'middle'
+      for (let i = 0; i < RAMP.length; i++) a.fillText(RAMP[i], i * px + px / 2, px / 2)
       draw()
     }
 
     const draw = () => {
       const t = (performance.now() - t0) / 1000
-      ctx.clearRect(0, 0, cols * cell, rows * cell)
-      ctx.fillStyle = '#031533'
-      for (let y = 0; y < rows; y++) {
-        for (let x = 0; x < cols; x++) {
-          const m = data[(y * cols + x) * 4] / 255
-          if (m < 0.08) continue
-          let v = m
-          if (animate) {
-            // A diagonal light sweeping through, plus a stir around the pointer.
-            const sweep = Math.sin(x * 0.06 - y * 0.08 - t * 1.2) * 0.5 + 0.5
-            v = m * (0.55 + 0.45 * sweep)
-            if (mouse.x >= 0) {
-              const d = Math.hypot(x - mouse.x, (y - mouse.y) * 1.2)
-              v *= 1 - Math.exp(-(d * d) / 60) * 0.85
-            }
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      for (let i = 0; i < cells.length; i += 3) {
+        const x = cells[i]
+        const y = cells[i + 1]
+        let v = cells[i + 2]
+        if (animate) {
+          // A diagonal light sweeping through, plus a stir around the pointer.
+          v *= 0.55 + 0.45 * (Math.sin(x * 0.06 - y * 0.08 - t * 1.2) * 0.5 + 0.5)
+          if (mouse.x >= 0) {
+            const dx = x - mouse.x
+            const dy = (y - mouse.y) * 1.2
+            v *= 1 - Math.exp(-(dx * dx + dy * dy) / 60) * 0.85
           }
-          const g = RAMP[Math.min(RAMP.length - 1, Math.floor(v * RAMP.length))]
-          if (g !== ' ') ctx.fillText(g, x * cell + cell / 2, y * cell + cell / 2)
         }
+        const g = Math.min(RAMP.length - 1, Math.floor(v * RAMP.length))
+        if (g > 0) ctx.drawImage(atlas, g * px, 0, px, px, x * px, y * px, px, px)
       }
     }
 
+    let frame = 0
     const loop = () => {
       raf = requestAnimationFrame(loop)
-      if (visible) draw()
+      // 30 frames a second is plenty for a slow light, and halves the work.
+      if (visible && frame++ % 2 === 0) draw()
     }
 
     const move = (e: PointerEvent) => {

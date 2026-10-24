@@ -100,9 +100,7 @@ export default async function ServicePage({params}: Props) {
           <div className="lg:col-span-5 lg:pb-2">
             <p className="text-[18px] leading-relaxed text-body md:text-[22px]">{s.oneLiner}</p>
             <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-4">
-              {s.isGlanzPro && (
-                <span className="rounded-full bg-mist px-4 py-2 text-[15px] font-medium">{d?.poweredByLabel}</span>
-              )}
+              {s.isGlanzPro && <span className="rounded-full bg-mist px-4 py-2 text-[15px] font-medium">{d?.poweredByLabel}</span>}
               {s.warranty && (
                 <p className="text-[15px] text-muted">
                   {page?.warrantyLabel?.replace(/:$/, '')}
@@ -124,7 +122,9 @@ export default async function ServicePage({params}: Props) {
 
       {src && (
         <div className="relative h-[clamp(360px,50vw,720px)] w-full overflow-hidden bg-mist">
-          <Image src={src} alt={s.image?.alt || s.title || ''} fill priority sizes="100vw" className="object-cover" />
+          <div data-parallax="0.14" className="absolute inset-0 will-change-transform">
+            <Image src={src} alt={s.image?.alt || s.title || ''} fill priority sizes="100vw" className="object-cover" />
+          </div>
         </div>
       )}
 

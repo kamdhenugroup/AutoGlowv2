@@ -4,11 +4,11 @@ import type {Location, ServiceCard} from '@/lib/data'
 import {imageSrc} from '@/sanity/image'
 import {cn} from './ui'
 
-export function ServiceCardItem({s, sizes, className}: {s: ServiceCard; sizes: string; className?: string}) {
+export function ServiceCardItem({s, sizes, className, lean}: {s: ServiceCard; sizes: string; className?: string; lean?: boolean}) {
   const src = imageSrc(s.image, s.legacyImageUrl, 900)
   return (
     <Link href={`/services/${s.slug}`} className={cn('group block', className)}>
-      <div data-ascii className="relative aspect-[4/5] overflow-hidden rounded-sm bg-mist">
+      <div data-skew={lean ? 'x' : undefined} className="relative aspect-[4/5] overflow-hidden rounded-sm bg-mist will-change-transform">
         {src && (
           <Image
             src={src}

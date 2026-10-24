@@ -24,7 +24,9 @@ export default async function AboutPage() {
       </section>
 
       <div className="relative h-[clamp(320px,46vw,680px)] overflow-hidden bg-mist">
-        <Image src={img} alt={p.image?.alt ?? ''} fill priority sizes="100vw" className="object-cover" />
+        <div data-parallax="0.14" className="absolute inset-0 will-change-transform">
+          <Image src={img} alt={p.image?.alt ?? ''} fill priority sizes="100vw" className="object-cover" />
+        </div>
       </div>
 
       <Section>

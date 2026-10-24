@@ -78,7 +78,11 @@ export function Footer({s}: {s: Settings}) {
                 <ul className="mt-5 space-y-3">
                   {col.links?.map((l) => (
                     <li key={l._key}>
-                      <SmartLink href={l.href ?? '/'} data-scramble className="text-[15px] text-ink hover:underline hover:underline-offset-4">
+                      <SmartLink
+                        href={l.href ?? '/'}
+                        data-scramble
+                        className="text-[15px] text-ink hover:underline hover:underline-offset-4"
+                      >
                         {l.label}
                       </SmartLink>
                     </li>
