@@ -25,10 +25,7 @@ export function MobileActions({
           <ul className="mb-3 grid grid-cols-2 gap-2">
             {phones.map((p) => (
               <li key={p.phone}>
-                <a
-                  href={`tel:+91${p.phone}`}
-                  className="flex h-11 items-center justify-center rounded-sm bg-mist text-[15px] font-medium"
-                >
+                <a href={`tel:+91${p.phone}`} className="flex h-11 items-center justify-center rounded-sm bg-mist text-[15px] font-medium">
                   {p.city}
                 </a>
               </li>

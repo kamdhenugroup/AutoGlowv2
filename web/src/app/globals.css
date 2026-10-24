@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* AutoGlow — Studio Light */
 @theme {
@@ -114,20 +114,6 @@
   transform: none;
 }
 
-/* Sound toggle: four bars that breathe while sound is on. */
-@keyframes sound-bar {
-  0%,
-  100% {
-    transform: scaleY(0.3);
-  }
-  50% {
-    transform: scaleY(1);
-  }
-}
-.sound-bar {
-  animation: sound-bar 0.9s ease-in-out infinite;
-}
-
 /* Lenis */
 html.lenis,
 html.lenis body {
@@ -138,4 +124,32 @@ html.lenis body {
 }
 .lenis.lenis-smooth {
   scroll-behavior: auto !important;
+}
+
+/* Page change (app/template.tsx): an ink curtain lifts off while the new page rises in. */
+@keyframes curtain-up {
+  from {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(0);
+  }
+}
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 48px, 0);
+  }
+}
+.page-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  background: var(--color-ink);
+  transform-origin: 50% 0;
+  animation: curtain-up 0.75s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+.page-enter {
+  animation: page-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
 }

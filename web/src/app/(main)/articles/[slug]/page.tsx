@@ -79,7 +79,9 @@ export default async function ArticlePage({params}: Props) {
       {cover && (
         <div className="wrap mt-[clamp(40px,5vw,72px)]">
           <div className="relative h-[clamp(260px,42vw,620px)] overflow-hidden rounded-sm bg-mist">
-            <Image src={cover} alt={a.coverImage?.alt || a.title || ''} fill priority sizes="100vw" className="object-cover" />
+            <div data-parallax="0.1" className="absolute inset-0 will-change-transform">
+              <Image src={cover} alt={a.coverImage?.alt || a.title || ''} fill priority sizes="100vw" className="object-cover" />
+            </div>
           </div>
         </div>
       )}

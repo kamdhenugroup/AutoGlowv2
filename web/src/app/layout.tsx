@@ -10,9 +10,7 @@ import {Analytics} from '@/components/Analytics'
 import {MobileActions} from '@/components/MobileActions'
 import {Reveal} from '@/components/Reveal'
 import {UiFx} from '@/components/fx/UiFx'
-import {SmoothScroll} from '@/components/fx/SmoothScroll'
-import {PageTransition} from '@/components/fx/PageTransition'
-import {AsciiLens} from '@/components/fx/AsciiLens'
+import {ScrollFx} from '@/components/fx/ScrollFx'
 import './globals.css'
 
 const mona = Mona_Sans({subsets: ['latin'], axes: ['wdth'], variable: '--font-mona', display: 'swap'})
@@ -76,9 +74,7 @@ export default async function RootLayout({children}: {children: React.ReactNode}
         <CookieConsent c={s.cookieConsent} />
         <Reveal />
         <UiFx />
-        <SmoothScroll />
-        <PageTransition />
-        <AsciiLens />
+        <ScrollFx />
         <Toaster position="bottom-right" theme="light" />
       </body>
     </html>

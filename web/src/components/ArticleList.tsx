@@ -84,7 +84,7 @@ export function ArticleList({
             return (
               <li key={a._id} className={cn(lead && 'md:col-span-2 lg:col-span-3')}>
                 <article className={cn('group relative flex h-full flex-col', lead && 'lg:grid lg:grid-cols-12 lg:items-end lg:gap-12')}>
-                  <div data-ascii className={cn('relative aspect-[16/10] overflow-hidden rounded-sm bg-mist', lead && 'lg:col-span-7')}>
+                  <div className={cn('relative aspect-[16/10] overflow-hidden rounded-sm bg-mist', lead && 'lg:col-span-7')}>
                     {a.cover && (
                       <Image
                         src={a.cover}
@@ -100,7 +100,9 @@ export function ArticleList({
                     <h2
                       className={cn(
                         'mt-5',
-                        lead ? 'display text-[clamp(24px,2.6vw,34px)] leading-[1.12] tracking-[-0.025em]' : 'text-[22px] leading-snug font-medium',
+                        lead
+                          ? 'display text-[clamp(24px,2.6vw,34px)] leading-[1.12] tracking-[-0.025em]'
+                          : 'text-[22px] leading-snug font-medium',
                       )}
                     >
                       <Link href={`/articles/${a.slug}`} className="after:absolute after:inset-0" aria-label={`Read article ${a.title}`}>

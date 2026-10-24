@@ -5,7 +5,6 @@ import {usePathname} from 'next/navigation'
 import {useEffect, useState} from 'react'
 import {Logo} from './Logo'
 import {buttonClass, cn} from './ui'
-import {SoundToggle} from './fx/SoundToggle'
 
 type NavLink = {_key: string; label: string | null; href: string | null}
 
@@ -56,8 +55,7 @@ export function Header({nav, cta}: {nav: NavLink[]; cta: {label: string | null; 
             })}
           </ul>
         </nav>
-        <div className="flex items-center gap-1 sm:gap-3">
-          <SoundToggle tone={onImage ? 'paper' : 'ink'} />
+        <div className="flex items-center gap-3">
           {cta?.href && (
             <Link href={cta.href} className={buttonClass(onImage ? 'onImage' : 'primary', 'h-11 px-5 max-sm:hidden')}>
               {cta.label}

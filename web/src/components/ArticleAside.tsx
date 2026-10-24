@@ -41,7 +41,8 @@ export function TableOfContents({items, label}: {items: {id: string; text: strin
 
 export function ShareArticle({title, url, label}: {title: string; url: string; label: string}) {
   const [copied, setCopied] = useState(false)
-  const btn = 'grid h-11 w-11 place-items-center rounded-full bg-mist text-ink transition-[background-color,transform] hover:bg-[#e4e7eb] active:scale-95'
+  const btn =
+    'grid h-11 w-11 place-items-center rounded-full bg-mist text-ink transition-[background-color,transform] hover:bg-[#e4e7eb] active:scale-95'
   return (
     <div>
       <h2 className="text-[15px] font-medium text-muted">{label}</h2>

@@ -27,7 +27,7 @@ export default async function ServicesPage() {
             return (
               <li key={s._id} className="rounded-sm bg-mist transition-colors hover:bg-[#e9ebee]">
                 <Link href={`/services/${s.slug}`} className="group grid items-center gap-6 p-4 md:grid-cols-12 md:gap-8 md:p-5">
-                  <div data-ascii className="relative aspect-[4/3] overflow-hidden rounded-sm bg-mist md:col-span-3">
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-sm bg-mist md:col-span-3">
                     {src && (
                       <Image
                         src={src}
@@ -42,7 +42,9 @@ export default async function ServicesPage() {
                     <h2 className="display text-[clamp(24px,2.6vw,34px)] tracking-[-0.025em]">{s.title}</h2>
                     <p className="mt-3 max-w-[520px] text-[18px] leading-relaxed text-body">{s.oneLiner}</p>
                     {s.isGlanzPro && (
-                      <span className="mt-4 inline-block rounded-full bg-paper px-3 py-1 text-[15px] font-medium">{page?.glanzProBadge}</span>
+                      <span className="mt-4 inline-block rounded-full bg-paper px-3 py-1 text-[15px] font-medium">
+                        {page?.glanzProBadge}
+                      </span>
                     )}
                   </div>
                   <div className="flex flex-col gap-4 md:col-span-3 md:items-end md:text-right">
