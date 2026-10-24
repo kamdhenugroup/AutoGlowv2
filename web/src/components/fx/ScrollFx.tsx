@@ -21,7 +21,7 @@ const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v))
  * - [data-rail]: a pinned section whose row of cards travels sideways as you scroll down
  * - [data-parallax]: pictures drift inside their frames
  * - [data-skew]: elements lean with scroll speed and settle when it stops
- * - [data-marquee]: a row that runs on its own and speeds up / reverses with the scroll
+ * - [data-marquee]: a row that runs on its own at a constant speed
  * - the home hero photo pushes back and its copy lifts away
  * Every effect is a transform computed from cached geometry: nothing reads layout while scrolling.
  */
@@ -142,8 +142,8 @@ export function ScrollFx() {
       lastLean = lean
       for (const m of marquees) {
         if (!m.visible || !m.width || m.track.dataset.paused) continue
-        const dir = vel < -0.2 ? -1 : 1
-        m.x -= (50 + Math.abs(vel) * 90) * dir * dt
+        // Constant speed, whatever the scroll does.
+        m.x -= 50 * dt
         if (m.x <= -m.width) m.x += m.width
         if (m.x > 0) m.x -= m.width
         m.track.style.transform = `translate3d(${m.x}px,0,0)`

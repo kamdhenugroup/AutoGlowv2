@@ -204,7 +204,7 @@ export default async function ServicePage({params}: Props) {
           <h2 className="display text-[clamp(24px,2.6vw,34px)]">{d?.shortsHeading}</h2>
           <ul className="mt-10 grid grid-cols-2 gap-3 md:gap-5 lg:grid-cols-4">
             {s.shortsUrls.map((u, i) => (
-              <li key={u}>
+              <li key={u} className="empty:hidden">
                 <YouTubeShort url={u} title={`${s.title} ${i + 1}`} />
               </li>
             ))}

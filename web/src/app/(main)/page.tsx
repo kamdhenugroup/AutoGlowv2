@@ -3,7 +3,7 @@ import type {Metadata} from 'next'
 import {sanityFetch} from '@/sanity/client'
 import {HOME_QUERY} from '@/sanity/queries'
 import {imageSrc, urlFor} from '@/sanity/image'
-import {getBrands, getLocations, getServices} from '@/lib/data'
+import {getBrands, getLocations, getServices, getSettings} from '@/lib/data'
 import {pageMetadata} from '@/lib/seo'
 import {MarqueePause} from '@/components/fx/MarqueePause'
 import {ServiceCardItem, Stats, StudioCard} from '@/components/blocks'
@@ -17,7 +17,13 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function HomePage() {
-  const [home, services, locations, brands] = await Promise.all([getHome(), getServices(), getLocations(), getBrands()])
+  const [home, services, locations, brands, settings] = await Promise.all([
+    getHome(),
+    getServices(),
+    getLocations(),
+    getBrands(),
+    getSettings(),
+  ])
   if (!home) return null
   const {hero, standard, glanzPro} = home
   const heroSrc = imageSrc(hero?.image, '/placeholder/darkroom.jpg', 2400)!
@@ -200,9 +206,9 @@ export default async function HomePage() {
             </TextLink>
           )}
         </div>
-        <div className="mt-14 grid gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {locations.map((l) => (
-            <StudioCard key={l._id} l={l} />
+            <StudioCard key={l._id} l={l} whatsappLabel={settings.stickyBar?.whatsappLabel ?? 'WhatsApp'} />
           ))}
         </div>
       </Section>
