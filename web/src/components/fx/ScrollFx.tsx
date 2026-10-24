@@ -8,7 +8,7 @@ import {motionAllowed} from '@/lib/motion'
 let lenis: Lenis | null = null
 export const getLenis = () => lenis
 
-type Rail = {section: HTMLElement; track: HTMLElement; top: number; distance: number}
+type Rail = {section: HTMLElement; track: HTMLElement; top: number; distance: number; imgs: {el: HTMLElement; center: number}[]}
 type Para = {el: HTMLElement; top: number; height: number; speed: number}
 type Skew = {el: HTMLElement; axis: 'x' | 'y'}
 type Marquee = {track: HTMLElement; x: number; width: number; visible: boolean}
@@ -71,7 +71,12 @@ export function ScrollFx() {
         const distance = Math.max(0, track.scrollWidth - track.clientWidth)
         section.style.height = `${distance + vh}px`
         const top = section.getBoundingClientRect().top + y
-        return [{section, track, top, distance}]
+        const left = track.getBoundingClientRect().left
+        const imgs = [...track.querySelectorAll<HTMLElement>('[data-rail-img]')].map((el) => {
+          const r = el.parentElement!.getBoundingClientRect()
+          return {el, center: r.left - left + r.width / 2}
+        })
+        return [{section, track, top, distance, imgs}]
       })
       paras = [...document.querySelectorAll<HTMLElement>('[data-parallax]')].map((el) => {
         const frame = el.parentElement!.getBoundingClientRect()
@@ -98,7 +103,14 @@ export function ScrollFx() {
       const y = scrollY
       for (const r of rails) {
         const p = clamp((y - r.top) / Math.max(1, r.distance), 0, 1)
-        r.track.style.transform = `translate3d(${-p * r.distance}px,0,0)`
+        const tx = -p * r.distance
+        r.track.style.transform = `translate3d(${tx}px,0,0)`
+        const vw = window.innerWidth
+        for (const im of r.imgs) {
+          // -1 at the left edge of the screen, +1 at the right: the photo trails the frame.
+          const k = clamp((im.center + tx - vw / 2) / (vw / 2), -1.5, 1.5)
+          im.el.style.transform = `translate3d(${k * -6}%,0,0) scale(1.18)`
+        }
       }
       for (const p of paras) {
         if (y + vh < p.top || y > p.top + p.height) continue
@@ -125,7 +137,7 @@ export function ScrollFx() {
       const target = lenis?.velocity ?? 0
       vel += (target - vel) * 0.12
       if (Math.abs(vel) < 0.01) vel = 0
-      const lean = Math.round(clamp(vel * 0.18, -4, 4) * 100) / 100
+      const lean = Math.round(clamp(vel * 0.12, -3, 3) * 100) / 100
       if (lean !== lastLean) for (const s of skews) s.el.style.transform = s.axis === 'x' ? `skewX(${-lean}deg)` : `skewY(${lean * 0.4}deg)`
       lastLean = lean
       for (const m of marquees) {

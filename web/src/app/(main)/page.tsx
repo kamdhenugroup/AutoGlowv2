@@ -143,7 +143,7 @@ export default async function HomePage() {
           >
             {services.map((s) => (
               <li key={s._id} className="w-[76vw] max-w-[400px] shrink-0 snap-start sm:w-[320px] lg:w-[min(30vw,420px)] lg:max-w-none">
-                <ServiceCardItem s={s} sizes="(min-width: 1024px) 420px, 76vw" lean />
+                <ServiceCardItem s={s} sizes="(min-width: 1024px) 420px, 76vw" rail />
               </li>
             ))}
           </ul>

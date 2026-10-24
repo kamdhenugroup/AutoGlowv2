@@ -4,20 +4,23 @@ import type {Location, ServiceCard} from '@/lib/data'
 import {imageSrc} from '@/sanity/image'
 import {cn} from './ui'
 
-export function ServiceCardItem({s, sizes, className, lean}: {s: ServiceCard; sizes: string; className?: string; lean?: boolean}) {
+export function ServiceCardItem({s, sizes, className, rail}: {s: ServiceCard; sizes: string; className?: string; rail?: boolean}) {
   const src = imageSrc(s.image, s.legacyImageUrl, 900)
   return (
     <Link href={`/services/${s.slug}`} className={cn('group block', className)}>
-      <div data-skew={lean ? 'x' : undefined} className="relative aspect-[4/5] overflow-hidden rounded-sm bg-mist will-change-transform">
-        {src && (
-          <Image
-            src={src}
-            alt={s.image?.alt || s.title || ''}
-            fill
-            sizes={sizes}
-            className="object-cover transition-transform duration-700 ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.03]"
-          />
-        )}
+      <div className="relative aspect-[4/5] overflow-hidden rounded-sm bg-mist">
+        {/* In the pinned rail the photo drifts inside its frame as the row travels. */}
+        <div data-rail-img={rail || undefined} className={cn('absolute inset-0', rail && 'scale-[1.18] will-change-transform')}>
+          {src && (
+            <Image
+              src={src}
+              alt={s.image?.alt || s.title || ''}
+              fill
+              sizes={sizes}
+              className="object-cover transition-transform duration-700 ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.04]"
+            />
+          )}
+        </div>
       </div>
       <h3 className="mt-5 text-[22px] font-medium">{s.title}</h3>
       <p className="mt-2 text-[18px] leading-relaxed text-body">{s.oneLiner}</p>
