@@ -569,6 +569,7 @@ export type Location = {
   hours?: string
   phone?: string
   whatsapp?: string
+  website?: string
   mapUrl?: string
   embedUrl?: string
 }
@@ -945,7 +946,7 @@ export type SERVICE_QUERY_RESULT = {
 
 // Source: ../web/src/sanity/queries.ts
 // Variable: LOCATIONS_QUERY
-// Query: *[_type == "location"] | order(orderRank asc){  _id, title, city, country, address, shortAddress, hours, phone, whatsapp, mapUrl, embedUrl}
+// Query: *[_type == "location"] | order(orderRank asc){  _id, title, city, country, address, shortAddress, hours, phone, whatsapp, website, mapUrl, embedUrl}
 export type LOCATIONS_QUERY_RESULT = Array<{
   _id: string
   title: string | null
@@ -956,6 +957,7 @@ export type LOCATIONS_QUERY_RESULT = Array<{
   hours: string | null
   phone: string | null
   whatsapp: string | null
+  website: string | null
   mapUrl: string | null
   embedUrl: string | null
 }>
@@ -1435,7 +1437,7 @@ declare global {
     '*[_type == "service" && defined(slug.current)] | order(orderRank asc){_id, title, "slug": slug.current, oneLiner, isGlanzPro, warranty, image, legacyImageUrl}': SERVICES_QUERY_RESULT
     '*[_type == "service" && defined(slug.current)].slug.current': SERVICE_SLUGS_QUERY_RESULT
     '*[_type == "service" && slug.current == $slug][0]{\n  _id, title, "slug": slug.current, oneLiner, isGlanzPro, warranty, image, legacyImageUrl, description, seoTitle, ogImageUrl, body, faqs[]{_key, question, answer}, shortsUrls, videoUrl\n}': SERVICE_QUERY_RESULT
-    '*[_type == "location"] | order(orderRank asc){\n  _id, title, city, country, address, shortAddress, hours, phone, whatsapp, mapUrl, embedUrl\n}': LOCATIONS_QUERY_RESULT
+    '*[_type == "location"] | order(orderRank asc){\n  _id, title, city, country, address, shortAddress, hours, phone, whatsapp, website, mapUrl, embedUrl\n}': LOCATIONS_QUERY_RESULT
     '*[_type == "brand"] | order(orderRank asc){_id, name, "slug": slug.current, logo}': BRANDS_QUERY_RESULT
     '*[_type == "article" && defined(slug.current)] | order(date desc, slug.current asc){_id, title, "slug": slug.current, description, date, category, author, readingTime, coverImage, legacyCoverImageUrl}': ARTICLES_QUERY_RESULT
     '*[_type == "article" && defined(slug.current)]{"slug": slug.current, date}': ARTICLE_SLUGS_QUERY_RESULT

@@ -36,5 +36,6 @@ Key facts:
 ## Optional
 
 - [Full knowledge base](https://autoglowcare.in/llms-full.txt): Complete company knowledge for AI assistants, including philosophy, processes, recommendations, and FAQ
+- [AutoGlow UAE](https://autoglow.ae/): AutoGlow's website for its Dubai and Abu Dhabi studios
 - [Kamdhenu Cars India](https://www.kamdhenucars.com/): Sister brand, certified pre-owned and luxury used cars in Ahmedabad, Kochi, Dubai and Abu Dhabi
 - [Kamdhenu Cars UAE](https://kamdhenucars.ae/): Sister brand, pre-owned vehicles in Dubai and Abu Dhabi
