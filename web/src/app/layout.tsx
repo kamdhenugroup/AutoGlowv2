@@ -1,9 +1,9 @@
 import type {Metadata, Viewport} from 'next'
 import {Mona_Sans} from 'next/font/google'
-import {Toaster} from 'sonner'
 import {getLocations, getSettings} from '@/lib/data'
 import {jsonLd, social} from '@/lib/seo'
 import {Header} from '@/components/Header'
+import {LazyToaster} from '@/components/Toast'
 import {Footer} from '@/components/Footer'
 import {CookieConsent} from '@/components/CookieConsent'
 import {Analytics} from '@/components/Analytics'
@@ -63,7 +63,7 @@ export default async function RootLayout({children}: {children: React.ReactNode}
         <Reveal />
         <UiFx />
         <ScrollFx />
-        <Toaster position="bottom-right" theme="light" />
+        <LazyToaster />
       </body>
     </html>
   )

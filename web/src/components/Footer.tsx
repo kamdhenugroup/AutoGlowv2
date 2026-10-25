@@ -117,17 +117,6 @@ export function Footer({s}: {s: Settings}) {
                 {s.stickyBar.status && <span className="text-ink">{s.stickyBar.status}</span>}
               </span>
             )}
-            {s.statusBadgeUrl && (
-              <iframe
-                src={s.statusBadgeUrl}
-                width={250}
-                height={30}
-                title="System Status"
-                loading="lazy"
-                className="border-0"
-                style={{colorScheme: 'normal'}}
-              />
-            )}
           </div>
         </div>
         {s.creditText && (

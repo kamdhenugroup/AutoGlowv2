@@ -100,8 +100,12 @@
     transform: scale(1);
   }
 }
-.animate-settle {
-  animation: settle 2.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+/* Larger screens only: on a phone the moving photo would keep the first screen changing while
+   it loads, which delays when it reads as complete (Speed Index). */
+@media (min-width: 768px) {
+  .animate-settle {
+    animation: settle 2.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
 }
 
 /* Section entrances (components/Reveal.tsx). Without script nothing is hidden. */

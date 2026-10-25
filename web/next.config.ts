@@ -3,9 +3,9 @@ import type {NextConfig} from 'next'
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
-  // CSS stays a separate (cached) file: inlining it also copied it twice into the page's RSC
-  // payload, adding about 120 KB to every HTML response.
-  experimental: {inlineCss: false},
+  // CSS inlined into the HTML: as a separate file it was render-blocking and cost about 560 ms of
+  // mobile LCP in PageSpeed Insights, more than the larger HTML costs.
+  experimental: {inlineCss: true},
   // The share-image route reads its font and logo from disk when it regenerates.
   outputFileTracingIncludes: {'/og/[[...slug]]': ['./src/app/og/assets/**']},
   images: {
