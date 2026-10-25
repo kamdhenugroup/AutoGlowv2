@@ -89,10 +89,14 @@ export function ScrollFx() {
         })
         return [{section, track, top, distance, imgs}]
       })
-      paras = [...document.querySelectorAll<HTMLElement>('[data-parallax]')].map((el) => {
-        const frame = el.parentElement!.getBoundingClientRect()
-        return {el, top: frame.top + y, height: frame.height, speed: Number(el.dataset.parallax) || 0.12}
-      })
+      // Parallax pictures and marquees are measured when they near the screen (see `near`), so
+      // offscreen sections are not laid out while the page starts.
+      paras = [...document.querySelectorAll<HTMLElement>('[data-parallax]')].map((el) => ({
+        el,
+        top: 0,
+        height: 0,
+        speed: Number(el.dataset.parallax) || 0.12,
+      }))
       skews = [...document.querySelectorAll<HTMLElement>('[data-skew]')].map((el) => ({
         el,
         axis: el.dataset.skew === 'x' ? 'x' : 'y',
@@ -100,8 +104,8 @@ export function ScrollFx() {
       marquees = [...document.querySelectorAll<HTMLElement>('[data-marquee]')].map((track) => ({
         track,
         x: 0,
-        width: track.scrollWidth / 2,
-        visible: true,
+        width: 0,
+        visible: false,
       }))
       const hero = document.querySelector<HTMLElement>('[data-hero]')
       heroMedia = hero?.querySelector('[data-hero-media]') ?? null
@@ -124,6 +128,7 @@ export function ScrollFx() {
         }
       }
       for (const p of paras) {
+        if (!p.height) continue
         if (y + vh < p.top || y > p.top + p.height) continue
         const progress = (y + vh - p.top) / (vh + p.height) - 0.5
         p.el.style.transform = `translate3d(0,${progress * p.speed * p.height * -1}px,0) scale(${1 + p.speed * 1.2})`
@@ -168,18 +173,40 @@ export function ScrollFx() {
 
     measure()
     raf = requestAnimationFrame(tick)
-    const io = new IntersectionObserver((entries) => {
-      for (const e of entries) {
-        const m = marquees.find((x) => x.track === e.target)
-        if (m) m.visible = e.isIntersecting
-      }
-    })
-    marquees.forEach((m) => io.observe(m.track))
+    // Measure a marquee or parallax frame as it nears the screen, from the observer's own geometry.
+    const near = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          const m = marquees.find((x) => x.track === e.target)
+          if (m) {
+            m.visible = e.isIntersecting
+            if (e.isIntersecting && !m.width) m.width = m.track.scrollWidth / 2
+            continue
+          }
+          const p = paras.find((x) => x.el.parentElement === e.target)
+          if (p && e.isIntersecting) {
+            p.top = e.boundingClientRect.top + window.scrollY
+            p.height = e.boundingClientRect.height
+            apply()
+          }
+        }
+      },
+      {rootMargin: '25% 0px'},
+    )
+    const observeNear = () => {
+      near.disconnect()
+      marquees.forEach((m) => near.observe(m.track))
+      paras.forEach((p) => p.el.parentElement && near.observe(p.el.parentElement))
+    }
+    observeNear()
 
     let pending = 0
     const remeasure = () => {
       cancelAnimationFrame(pending)
-      pending = requestAnimationFrame(measure)
+      pending = requestAnimationFrame(() => {
+        measure()
+        observeNear()
+      })
     }
     const ro = new ResizeObserver(remeasure)
     ro.observe(document.body)
@@ -191,7 +218,7 @@ export function ScrollFx() {
     return () => {
       cancelAnimationFrame(raf)
       cancelAnimationFrame(pending)
-      io.disconnect()
+      near.disconnect()
       ro.disconnect()
       window.removeEventListener('resize', remeasure)
       window.removeEventListener('scroll', onScroll)

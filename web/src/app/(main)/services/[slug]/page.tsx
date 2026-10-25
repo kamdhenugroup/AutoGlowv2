@@ -6,7 +6,7 @@ import {sanityFetch} from '@/sanity/client'
 import {SERVICE_QUERY, SERVICE_SLUGS_QUERY} from '@/sanity/queries'
 import {imageSrc} from '@/sanity/image'
 import {getServicesPage, getSettings} from '@/lib/data'
-import {SITE_URL, jsonLd} from '@/lib/seo'
+import {SITE_URL, jsonLd, social} from '@/lib/seo'
 import {Button} from '@/components/ui'
 import {YouTubeShort} from '@/components/YouTubeShort'
 
@@ -30,8 +30,7 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
     title,
     description,
     alternates: {canonical: `/services/${s.slug}`},
-    openGraph: {title, description, url: `${SITE_URL}/services/${s.slug}`, images: s.ogImageUrl ? [{url: s.ogImageUrl}] : undefined},
-    twitter: {title, description},
+    ...(await social({path: `/services/${s.slug}`, title, description})),
   }
 }
 

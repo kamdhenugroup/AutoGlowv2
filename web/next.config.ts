@@ -3,8 +3,11 @@ import type {NextConfig} from 'next'
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
-  // Tailwind's CSS is small (about 10 KB gzipped); inlining it removes the render-blocking request.
-  experimental: {inlineCss: true},
+  // CSS stays a separate (cached) file: inlining it also copied it twice into the page's RSC
+  // payload, adding about 120 KB to every HTML response.
+  experimental: {inlineCss: false},
+  // The share-image route reads its font and logo from disk when it regenerates.
+  outputFileTracingIncludes: {'/og/[[...slug]]': ['./src/app/og/assets/**']},
   images: {
     formats: ['image/avif', 'image/webp'],
     qualities: [75, 90],
