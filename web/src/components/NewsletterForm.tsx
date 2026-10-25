@@ -1,7 +1,7 @@
 'use client'
 
 import {useState, useTransition} from 'react'
-import {toast} from 'sonner'
+import {notify} from '@/components/Toast'
 import {submitNewsletter} from '@/app/actions'
 
 export function NewsletterForm({
@@ -27,10 +27,10 @@ export function NewsletterForm({
         start(async () => {
           const r = await submitNewsletter(fd)
           if (r.success) {
-            toast.success(success)
+            notify('success', success)
             ;(document.getElementById('newsletter-form') as HTMLFormElement | null)?.reset()
             setMore(false)
-          } else toast.error(r.error || error)
+          } else notify('error', r.error || error)
         })
       }
       id="newsletter-form"

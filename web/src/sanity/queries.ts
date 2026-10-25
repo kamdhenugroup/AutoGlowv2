@@ -12,7 +12,7 @@ export const SETTINGS_QUERY = defineQuery(`*[_type == "siteSettings" && _id == "
   contactPrompt{heading, body, links[]{_key, label, href}},
   newsletter, footerColumns[]{_key, heading, links[]{_key, label, href}},
   legalLinks[]{_key, label, href}, manageCookiesLabel, copyright, companyLine,
-  creditText, creditLink{label, href}, statusBadgeUrl,
+  creditText, creditLink{label, href},
   cookieConsent{heading, body, learnMore, accept, prefsHeading, prefsBody, categories[]{_key, title, body}, save, back},
   notFound{heading, body, link{label, href}}, formMessages,
   defaultTitle, defaultDescription, defaultOgImageUrl, defaultOgImageAlt, locale

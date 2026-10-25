@@ -1,7 +1,7 @@
 'use client'
 
 import {useRef, useTransition} from 'react'
-import {toast} from 'sonner'
+import {notify} from '@/components/Toast'
 import {submitBooking} from '@/app/actions'
 
 type Labels = {
@@ -49,9 +49,9 @@ export function BookingForm({labels: l, cities, services, error}: {labels: Label
         start(async () => {
           const r = await submitBooking(fd)
           if (r.success) {
-            toast.success(l?.success ?? '')
+            notify('success', l?.success ?? '')
             ref.current?.reset()
-          } else toast.error(r.error || error)
+          } else notify('error', r.error || error)
         })
       }
     >

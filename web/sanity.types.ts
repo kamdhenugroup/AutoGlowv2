@@ -777,7 +777,7 @@ export type AllSanitySchemaTypes =
 
 // Source: ../web/src/sanity/queries.ts
 // Variable: SETTINGS_QUERY
-// Query: *[_type == "siteSettings" && _id == "siteSettings"][0]{  siteName, siteUrl, logoUrl, logo, email, primaryPhone, parentOrganization, sameAs,  businessHoursOpens, businessHoursCloses, businessHoursDays,  mainNav[]{_key, label, href}, headerCta{label, href},  finalCta{heading, body, primary{label, href}, secondary{label, href}},  stickyBar, askAi{heading, body, prompt, providers[]{_key, name, urlPrefix}},  contactPrompt{heading, body, links[]{_key, label, href}},  newsletter, footerColumns[]{_key, heading, links[]{_key, label, href}},  legalLinks[]{_key, label, href}, manageCookiesLabel, copyright, companyLine,  creditText, creditLink{label, href}, statusBadgeUrl,  cookieConsent{heading, body, learnMore, accept, prefsHeading, prefsBody, categories[]{_key, title, body}, save, back},  notFound{heading, body, link{label, href}}, formMessages,  defaultTitle, defaultDescription, defaultOgImageUrl, defaultOgImageAlt, locale}
+// Query: *[_type == "siteSettings" && _id == "siteSettings"][0]{  siteName, siteUrl, logoUrl, logo, email, primaryPhone, parentOrganization, sameAs,  businessHoursOpens, businessHoursCloses, businessHoursDays,  mainNav[]{_key, label, href}, headerCta{label, href},  finalCta{heading, body, primary{label, href}, secondary{label, href}},  stickyBar, askAi{heading, body, prompt, providers[]{_key, name, urlPrefix}},  contactPrompt{heading, body, links[]{_key, label, href}},  newsletter, footerColumns[]{_key, heading, links[]{_key, label, href}},  legalLinks[]{_key, label, href}, manageCookiesLabel, copyright, companyLine,  creditText, creditLink{label, href},  cookieConsent{heading, body, learnMore, accept, prefsHeading, prefsBody, categories[]{_key, title, body}, save, back},  notFound{heading, body, link{label, href}}, formMessages,  defaultTitle, defaultDescription, defaultOgImageUrl, defaultOgImageAlt, locale}
 export type SETTINGS_QUERY_RESULT = {
   siteName: string | null
   siteUrl: string | null
@@ -865,7 +865,6 @@ export type SETTINGS_QUERY_RESULT = {
     label: string | null
     href: string | null
   } | null
-  statusBadgeUrl: string | null
   cookieConsent: {
     heading: string | null
     body: string | null
@@ -1487,7 +1486,7 @@ export type OG_PAGES_QUERY_RESULT = {
 // Query TypeMap
 declare global {
   interface SanityQueries {
-    '*[_type == "siteSettings" && _id == "siteSettings"][0]{\n  siteName, siteUrl, logoUrl, logo, email, primaryPhone, parentOrganization, sameAs,\n  businessHoursOpens, businessHoursCloses, businessHoursDays,\n  mainNav[]{_key, label, href}, headerCta{label, href},\n  finalCta{heading, body, primary{label, href}, secondary{label, href}},\n  stickyBar, askAi{heading, body, prompt, providers[]{_key, name, urlPrefix}},\n  contactPrompt{heading, body, links[]{_key, label, href}},\n  newsletter, footerColumns[]{_key, heading, links[]{_key, label, href}},\n  legalLinks[]{_key, label, href}, manageCookiesLabel, copyright, companyLine,\n  creditText, creditLink{label, href}, statusBadgeUrl,\n  cookieConsent{heading, body, learnMore, accept, prefsHeading, prefsBody, categories[]{_key, title, body}, save, back},\n  notFound{heading, body, link{label, href}}, formMessages,\n  defaultTitle, defaultDescription, defaultOgImageUrl, defaultOgImageAlt, locale\n}': SETTINGS_QUERY_RESULT
+    '*[_type == "siteSettings" && _id == "siteSettings"][0]{\n  siteName, siteUrl, logoUrl, logo, email, primaryPhone, parentOrganization, sameAs,\n  businessHoursOpens, businessHoursCloses, businessHoursDays,\n  mainNav[]{_key, label, href}, headerCta{label, href},\n  finalCta{heading, body, primary{label, href}, secondary{label, href}},\n  stickyBar, askAi{heading, body, prompt, providers[]{_key, name, urlPrefix}},\n  contactPrompt{heading, body, links[]{_key, label, href}},\n  newsletter, footerColumns[]{_key, heading, links[]{_key, label, href}},\n  legalLinks[]{_key, label, href}, manageCookiesLabel, copyright, companyLine,\n  creditText, creditLink{label, href},\n  cookieConsent{heading, body, learnMore, accept, prefsHeading, prefsBody, categories[]{_key, title, body}, save, back},\n  notFound{heading, body, link{label, href}}, formMessages,\n  defaultTitle, defaultDescription, defaultOgImageUrl, defaultOgImageAlt, locale\n}': SETTINGS_QUERY_RESULT
     '*[_type == "service" && defined(slug.current)] | order(orderRank asc){_id, title, "slug": slug.current, oneLiner, isGlanzPro, warranty, image, legacyImageUrl}': SERVICES_QUERY_RESULT
     '*[_type == "service" && defined(slug.current)].slug.current': SERVICE_SLUGS_QUERY_RESULT
     '*[_type == "service" && slug.current == $slug][0]{\n  _id, title, "slug": slug.current, oneLiner, isGlanzPro, warranty, image, legacyImageUrl, description, seoTitle, ogImageUrl, body, faqs[]{_key, question, answer}, shortsUrls, videoUrl\n}': SERVICE_QUERY_RESULT
