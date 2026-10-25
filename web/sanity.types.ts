@@ -1430,6 +1430,60 @@ export type BRANDKIT_QUERY_RESULT = {
   } | null
 } | null
 
+// Source: ../web/src/sanity/queries.ts
+// Variable: OG_PAGES_QUERY
+// Query: {  "home": *[_type == "homePage" && _id == "homePage"][0]{hero{headingLines, image}, glanzPro{image}},  "services": *[_type == "service" && defined(slug.current)]{title, "slug": slug.current, isGlanzPro, image, legacyImageUrl},  "articles": *[_type == "article" && defined(slug.current)]{title, "slug": slug.current, category, coverImage, legacyCoverImageUrl},  "servicesPage": *[_type == "servicesPage" && _id == "servicesPage"][0]{heading},  "aboutPage": *[_type == "aboutPage" && _id == "aboutPage"][0]{heading, image},  "brandsPage": *[_type == "brandsPage" && _id == "brandsPage"][0]{heading},  "articlesPage": *[_type == "articlesPage" && _id == "articlesPage"][0]{heading},  "bookPage": *[_type == "bookInspectionPage" && _id == "bookInspectionPage"][0]{heading},  "whatsappPage": *[_type == "whatsappPage" && _id == "whatsappPage"][0]{heading},  "privacyPage": *[_type == "privacyPage" && _id == "privacyPage"][0]{heading},  "termsPage": *[_type == "termsPage" && _id == "termsPage"][0]{heading}}
+export type OG_PAGES_QUERY_RESULT = {
+  home: {
+    hero: {
+      headingLines: Array<string> | null
+      image: ImageWithAlt | null
+    } | null
+    glanzPro: {
+      image: ImageWithAlt | null
+    } | null
+  } | null
+  services: Array<{
+    title: string | null
+    slug: string | null
+    isGlanzPro: boolean | null
+    image: ImageWithAlt | null
+    legacyImageUrl: string | null
+  }>
+  articles: Array<{
+    title: string | null
+    slug: string | null
+    category: string | null
+    coverImage: ImageWithAlt | null
+    legacyCoverImageUrl: string | null
+  }>
+  servicesPage: {
+    heading: string | null
+  } | null
+  aboutPage: {
+    heading: string | null
+    image: ImageWithAlt | null
+  } | null
+  brandsPage: {
+    heading: string | null
+  } | null
+  articlesPage: {
+    heading: string | null
+  } | null
+  bookPage: {
+    heading: string | null
+  } | null
+  whatsappPage: {
+    heading: string | null
+  } | null
+  privacyPage: {
+    heading: string | null
+  } | null
+  termsPage: {
+    heading: string | null
+  } | null
+}
+
 // Query TypeMap
 declare global {
   interface SanityQueries {
@@ -1454,6 +1508,7 @@ declare global {
     '*[_type == "privacyPage" && _id == "privacyPage"][0]{heading, body, backLink{label, href}, seo{title, description, canonical, twitter, noindex}}': PRIVACY_QUERY_RESULT
     '*[_type == "termsPage" && _id == "termsPage"][0]{heading, updated, body, backLink{label, href}, seo{title, description, canonical, twitter, noindex}}': TERMS_QUERY_RESULT
     '*[_type == "brandkitPage" && _id == "brandkitPage"][0]{\n  eyebrow, heading, intro, principles[]{_key, title, body}, logoEyebrow, logoHeading, logoBody, logoMinWidth,\n  logos[]{_key, name, usage, tone, image{alt, asset->{_id, url, metadata{dimensions}}}},\n  paletteHeading, palette[]{_key, name, hex, usage}, typography[]{_key, eyebrow, name, usage, sample, style},\n  photoHeading, photoIntro, photography[]{_key, title, body},\n  voiceHeading, voice[]{_key, title, body, doExample, dontExample}, seo{title, description, canonical, twitter, noindex}\n}': BRANDKIT_QUERY_RESULT
+    '{\n  "home": *[_type == "homePage" && _id == "homePage"][0]{hero{headingLines, image}, glanzPro{image}},\n  "services": *[_type == "service" && defined(slug.current)]{title, "slug": slug.current, isGlanzPro, image, legacyImageUrl},\n  "articles": *[_type == "article" && defined(slug.current)]{title, "slug": slug.current, category, coverImage, legacyCoverImageUrl},\n  "servicesPage": *[_type == "servicesPage" && _id == "servicesPage"][0]{heading},\n  "aboutPage": *[_type == "aboutPage" && _id == "aboutPage"][0]{heading, image},\n  "brandsPage": *[_type == "brandsPage" && _id == "brandsPage"][0]{heading},\n  "articlesPage": *[_type == "articlesPage" && _id == "articlesPage"][0]{heading},\n  "bookPage": *[_type == "bookInspectionPage" && _id == "bookInspectionPage"][0]{heading},\n  "whatsappPage": *[_type == "whatsappPage" && _id == "whatsappPage"][0]{heading},\n  "privacyPage": *[_type == "privacyPage" && _id == "privacyPage"][0]{heading},\n  "termsPage": *[_type == "termsPage" && _id == "termsPage"][0]{heading}\n}': OG_PAGES_QUERY_RESULT
   }
 }
 // Lets @sanity/client releases that predate the global registry read it too

@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   // Tailwind's CSS is small (about 10 KB gzipped); inlining it removes the render-blocking request.
-  experimental: {inlineCss: true},
+  experimental: {inlineCss: false},
   images: {
     formats: ['image/avif', 'image/webp'],
     qualities: [75, 90],

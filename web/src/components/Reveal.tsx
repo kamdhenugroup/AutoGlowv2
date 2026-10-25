@@ -43,21 +43,11 @@ export function Reveal() {
       picked.push(el)
     })
 
-    const perSection = new Map<Element, number>()
     // What is already on screen stays as it is: hiding it and fading it back would only delay the
-    // first meaningful paint. The entrance is for what the visitor scrolls to.
-    const fold = window.innerHeight
-    const below = picked.filter((el) => el.getBoundingClientRect().top > fold)
-    picked.length = 0
-    picked.push(...below)
-    for (const el of picked) {
-      const section = el.closest('section') ?? document.body
-      const i = perSection.get(section) ?? 0
-      perSection.set(section, i + 1)
-      el.style.setProperty('--rv-d', `${Math.min(i, 5) * 80}ms`)
-      el.classList.add('rv')
-    }
-
+    // first meaningful paint. The entrance is for what the visitor scrolls to. Positions come from
+    // IntersectionObserver, never from reading layout, so offscreen sections (content-visibility)
+    // are not laid out early.
+    const perSection = new Map<Element, number>()
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
@@ -68,8 +58,24 @@ export function Reveal() {
       },
       {rootMargin: '0px 0px -8% 0px'},
     )
-    picked.forEach((el) => io.observe(el))
-    return () => io.disconnect()
+    const sort = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        sort.unobserve(e.target)
+        if (e.boundingClientRect.top < window.innerHeight) continue
+        const el = e.target as HTMLElement
+        const section = el.closest('section') ?? document.body
+        const i = perSection.get(section) ?? 0
+        perSection.set(section, i + 1)
+        el.style.setProperty('--rv-d', `${Math.min(i, 5) * 80}ms`)
+        el.classList.add('rv')
+        io.observe(el)
+      }
+    })
+    picked.forEach((el) => sort.observe(el))
+    return () => {
+      sort.disconnect()
+      io.disconnect()
+    }
   }, [pathname])
   return null
 }

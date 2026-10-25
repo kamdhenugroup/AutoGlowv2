@@ -2,7 +2,7 @@ import type {Metadata, Viewport} from 'next'
 import {Mona_Sans} from 'next/font/google'
 import {Toaster} from 'sonner'
 import {getLocations, getSettings} from '@/lib/data'
-import {jsonLd} from '@/lib/seo'
+import {jsonLd, social} from '@/lib/seo'
 import {Header} from '@/components/Header'
 import {Footer} from '@/components/Footer'
 import {CookieConsent} from '@/components/CookieConsent'
@@ -21,21 +21,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const s = await getSettings()
   const title = s.defaultTitle ?? undefined
   const description = s.defaultDescription ?? undefined
-  const image = s.defaultOgImageUrl ?? undefined
   return {
     metadataBase: new URL(s.siteUrl ?? 'https://autoglowcare.in'),
     title,
     description,
-    openGraph: {
-      title,
-      description,
-      url: s.siteUrl ?? undefined,
-      siteName: s.siteName ?? undefined,
-      images: image ? [{url: image, width: 1200, height: 630, alt: s.defaultOgImageAlt ?? undefined}] : undefined,
-      locale: s.locale ?? 'en_IN',
-      type: 'website',
-    },
-    twitter: {card: 'summary_large_image', title, description, images: image ? [image] : undefined},
+    ...(await social({path: '/', title, description})),
     // Tab and home-screen icons come from app/favicon.ico, app/icon.svg and app/apple-icon.png:
     // the steering-wheel mark from the logo, drawn as a vector so it stays sharp at every size.
   }

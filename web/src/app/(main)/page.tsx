@@ -1,4 +1,5 @@
-import Image from 'next/image'
+import Image, {getImageProps} from 'next/image'
+import {preload} from 'react-dom'
 import type {Metadata} from 'next'
 import {sanityFetch} from '@/sanity/client'
 import {HOME_QUERY} from '@/sanity/queries'
@@ -9,6 +10,32 @@ import {MarqueePause} from '@/components/fx/MarqueePause'
 import {RailArrows} from '@/components/fx/RailArrows'
 import {ServiceCardItem, Stats, StudioCard} from '@/components/blocks'
 import {Button, Section, TextLink} from '@/components/ui'
+
+/**
+ * The hero photo as one <picture>: phones download only the portrait photo and larger screens
+ * only the landscape one (two <Image>s would preload both). Both are preloaded with a media
+ * query, so the browser fetches the right one at the highest priority.
+ */
+function HeroPicture({desktop, mobile, alt, mobileAlt}: {desktop: string; mobile: string | null; alt: string; mobileAlt?: string}) {
+  const common = {fill: true, sizes: '100vw', priority: true, quality: 75} as const
+  const d = getImageProps({...common, src: desktop, alt}).props
+  const m = mobile ? getImageProps({...common, src: mobile, alt: mobileAlt ?? alt}).props : null
+  preload(d.src, {
+    as: 'image',
+    imageSrcSet: d.srcSet,
+    imageSizes: d.sizes,
+    fetchPriority: 'high',
+    ...(m ? {media: '(min-width: 768px)'} : {}),
+  })
+  if (m) preload(m.src, {as: 'image', imageSrcSet: m.srcSet, imageSizes: m.sizes, fetchPriority: 'high', media: '(max-width: 767px)'})
+  return (
+    <picture>
+      {m && <source media="(max-width: 767px)" srcSet={m.srcSet} sizes={m.sizes} />}
+      {/* eslint-disable-next-line jsx-a11y/alt-text -- alt comes from getImageProps */}
+      <img {...d} fetchPriority="high" className="animate-settle object-cover object-[60%_50%] max-md:object-center" />
+    </picture>
+  )
+}
 
 const getHome = () => sanityFetch({query: HOME_QUERY, tags: ['homePage']})
 
@@ -39,24 +66,12 @@ export default async function HomePage() {
         className="relative isolate flex min-h-[max(640px,100svh)] flex-col justify-end overflow-hidden bg-[#05070b] text-paper"
       >
         <div data-hero-media className="absolute inset-0 -z-10 origin-top will-change-transform">
-          <Image
-            src={heroSrc}
+          <HeroPicture
+            desktop={heroSrc}
+            mobile={heroMobileSrc}
             alt={hero?.image?.alt ?? ''}
-            fill
-            priority
-            sizes="100vw"
-            className={`animate-settle object-cover object-[60%_50%] ${heroMobileSrc ? 'max-md:hidden' : ''}`}
+            mobileAlt={hero?.mobileImage?.alt ?? undefined}
           />
-          {heroMobileSrc && (
-            <Image
-              src={heroMobileSrc}
-              alt={hero?.mobileImage?.alt ?? hero?.image?.alt ?? ''}
-              fill
-              priority
-              sizes="100vw"
-              className="animate-settle object-cover md:hidden"
-            />
-          )}
         </div>
         {/* Phones get a deeper scrim that starts higher: measured from the bottom so it stays behind the copy at any height. */}
         <div
@@ -91,7 +106,6 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
-
       {/* The AutoGlow Standard */}
       <Section>
         <div className="grid gap-8 lg:grid-cols-12">
@@ -108,7 +122,6 @@ export default async function HomePage() {
           </div>
         </div>
       </Section>
-
       {/* Brands: a row that runs on its own and answers the scroll */}
       {brands.length > 0 && (
         <section className="overflow-hidden pb-[clamp(72px,10vw,144px)]" aria-labelledby="brands-heading">
@@ -141,7 +154,6 @@ export default async function HomePage() {
           </div>
         </section>
       )}
-
       {/* Our Discipline: pinned on desktop, the row travels sideways as the page scrolls */}
       <section data-rail className="relative bg-mist" aria-labelledby="services-heading">
         <div className="flex flex-col justify-center-safe overflow-hidden py-[clamp(72px,10vw,144px)] pin:sticky pin:top-0 pin:h-svh pin:py-8">
@@ -171,7 +183,6 @@ export default async function HomePage() {
           </ul>
         </div>
       </section>
-
       {/* GlanzPro */}
       {glanzPro && (
         <Section>
@@ -203,7 +214,6 @@ export default async function HomePage() {
           </div>
         </Section>
       )}
-
       {/* Studios */}
       <Section tone="mist">
         <div className="flex items-end justify-between gap-6">

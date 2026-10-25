@@ -87,3 +87,18 @@ export const BRANDKIT_QUERY = defineQuery(`*[_type == "brandkitPage" && _id == "
   photoHeading, photoIntro, photography[]{_key, title, body},
   voiceHeading, voice[]{_key, title, body, doExample, dontExample}, ${SEO}
 }`)
+
+/** Everything the share-image route (app/og) needs, in one request. */
+export const OG_PAGES_QUERY = defineQuery(`{
+  "home": *[_type == "homePage" && _id == "homePage"][0]{hero{headingLines, image}, glanzPro{image}},
+  "services": *[_type == "service" && defined(slug.current)]{title, "slug": slug.current, isGlanzPro, image, legacyImageUrl},
+  "articles": *[_type == "article" && defined(slug.current)]{title, "slug": slug.current, category, coverImage, legacyCoverImageUrl},
+  "servicesPage": *[_type == "servicesPage" && _id == "servicesPage"][0]{heading},
+  "aboutPage": *[_type == "aboutPage" && _id == "aboutPage"][0]{heading, image},
+  "brandsPage": *[_type == "brandsPage" && _id == "brandsPage"][0]{heading},
+  "articlesPage": *[_type == "articlesPage" && _id == "articlesPage"][0]{heading},
+  "bookPage": *[_type == "bookInspectionPage" && _id == "bookInspectionPage"][0]{heading},
+  "whatsappPage": *[_type == "whatsappPage" && _id == "whatsappPage"][0]{heading},
+  "privacyPage": *[_type == "privacyPage" && _id == "privacyPage"][0]{heading},
+  "termsPage": *[_type == "termsPage" && _id == "termsPage"][0]{heading}
+}`)

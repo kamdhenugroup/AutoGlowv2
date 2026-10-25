@@ -6,7 +6,7 @@ import {sanityFetch} from '@/sanity/client'
 import {ARTICLE_QUERY, ARTICLE_SLUGS_QUERY, ARTICLES_PAGE_QUERY} from '@/sanity/queries'
 import {imageSrc} from '@/sanity/image'
 import {longDate} from '@/lib/format'
-import {SITE_URL} from '@/lib/seo'
+import {SITE_URL, social} from '@/lib/seo'
 import {RichText, headingIds} from '@/components/RichText'
 import {ShareArticle, TableOfContents} from '@/components/ArticleAside'
 
@@ -24,21 +24,17 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
   const {slug} = await params
   const a = await getArticle(slug)
   if (!a) return {}
-  const cover = imageSrc(a.coverImage, a.legacyCoverImageUrl, 1200)
-  const title = a.title ?? undefined
-  const description = a.description ?? undefined
   return {
     title: `${a.title} | AutoGlow Articles`,
-    description,
-    openGraph: {
-      title,
-      description,
+    description: a.description ?? undefined,
+    ...(await social({
+      path: `/articles/${slug}`,
+      title: a.title,
+      description: a.description,
       type: 'article',
-      publishedTime: a.date ?? undefined,
+      publishedTime: a.date,
       authors: a.author ? [a.author] : [],
-      images: cover ? [cover] : [],
-    },
-    twitter: {card: 'summary_large_image', title, description, images: cover ? [cover] : []},
+    })),
   }
 }
 
