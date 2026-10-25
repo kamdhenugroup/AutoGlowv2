@@ -2,7 +2,9 @@ import {createClient, type QueryParams} from 'next-sanity'
 import type {SanityQueries} from '@sanity/client'
 import {apiVersion, dataset, projectId} from './env'
 
-export const client = createClient({projectId, dataset, apiVersion, useCdn: true, perspective: 'published'})
+// No API CDN: Next caches every response and only asks Sanity again when the webhook fires, so
+// requests are few; the CDN's purge delay could make a refresh fetch the version just replaced.
+export const client = createClient({projectId, dataset, apiVersion, useCdn: false, perspective: 'published'})
 
 type Result<Q extends string> = Q extends keyof SanityQueries ? SanityQueries[Q] : unknown
 
