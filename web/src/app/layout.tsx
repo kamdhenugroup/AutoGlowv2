@@ -22,9 +22,6 @@ export async function generateMetadata(): Promise<Metadata> {
   const title = s.defaultTitle ?? undefined
   const description = s.defaultDescription ?? undefined
   const image = s.defaultOgImageUrl ?? undefined
-  // Same logo file as before, but asked from Cloudinary at icon size: the full 139 KB PNG cost
-  // the browser a slow decode on every page just to draw the tab icon.
-  const icon = s.logoUrl?.replace('/image/upload/', '/image/upload/c_limit,w_180/') ?? undefined
   return {
     metadataBase: new URL(s.siteUrl ?? 'https://autoglowcare.in'),
     title,
@@ -39,9 +36,8 @@ export async function generateMetadata(): Promise<Metadata> {
       type: 'website',
     },
     twitter: {card: 'summary_large_image', title, description, images: image ? [image] : undefined},
-    icons: icon
-      ? {icon: [{url: icon, type: 'image/png'}], shortcut: [icon], apple: [{url: icon, sizes: '180x180', type: 'image/png'}]}
-      : undefined,
+    // Tab and home-screen icons come from app/favicon.ico, app/icon.svg and app/apple-icon.png:
+    // the steering-wheel mark from the logo, drawn as a vector so it stays sharp at every size.
   }
 }
 

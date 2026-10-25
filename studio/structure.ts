@@ -13,6 +13,7 @@ const PAGES: [string, string][] = [
   ['whatsappPage', 'WhatsApp'],
   ['landingPage', 'Landing (Meta Ads)'],
   ['privacyPage', 'Privacy'],
+  ['termsPage', 'Terms'],
   ['brandkitPage', 'Brand Kit'],
 ]
 
