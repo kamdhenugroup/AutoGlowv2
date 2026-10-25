@@ -95,17 +95,19 @@ export function Footer({s}: {s: Settings}) {
           </div>
         </div>
 
-        <div className="mt-20 flex flex-col gap-6 text-[15px] text-muted lg:flex-row lg:items-center lg:justify-between">
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+        <div className="mt-20 flex flex-col gap-6 text-[15px] text-muted lg:flex-row lg:items-end lg:justify-between">
+          <div className="flex flex-col gap-3">
             <span>
               {s.copyright} {s.companyLine}
             </span>
-            {s.legalLinks?.map((l) => (
-              <SmartLink key={l._key} href={l.href ?? '/'} className="hover:text-ink">
-                {l.label}
-              </SmartLink>
-            ))}
-            <ManageCookiesButton label={s.manageCookiesLabel ?? ''} />
+            <nav aria-label="Legal" className="flex flex-wrap items-center gap-x-6 gap-y-2">
+              {s.legalLinks?.map((l) => (
+                <SmartLink key={l._key} href={l.href ?? '/'} className="hover:text-ink">
+                  {l.label}
+                </SmartLink>
+              ))}
+              <ManageCookiesButton label={s.manageCookiesLabel ?? ''} />
+            </nav>
           </div>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
             {s.stickyBar?.label && (

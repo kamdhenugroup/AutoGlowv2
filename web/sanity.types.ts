@@ -33,10 +33,19 @@ export type BrandkitPage = {
   logoHeading?: string
   logoBody?: string
   logoMinWidth?: string
+  logos?: Array<{
+    name?: string
+    usage?: string
+    image?: ImageWithAlt
+    tone?: 'white' | 'mist' | 'ink' | 'black'
+    _type: 'logoUse'
+    _key: string
+  }>
   paletteHeading?: string
   palette?: Array<{
     name?: string
     hex?: string
+    usage?: string
     _type: 'swatch'
     _key: string
   }>
@@ -45,9 +54,17 @@ export type BrandkitPage = {
     name?: string
     usage?: string
     sample?: string
+    style?: 'display' | 'body' | 'label'
     _type: 'typeSpecimen'
     _key: string
   }>
+  photoHeading?: string
+  photoIntro?: string
+  photography?: Array<
+    {
+      _key: string
+    } & Feature
+  >
   voiceHeading?: string
   voice?: Array<{
     title?: string
@@ -60,13 +77,30 @@ export type BrandkitPage = {
   seo?: Seo
 }
 
-export type PrivacyPage = {
+export type SanityImageAssetReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+}
+
+export type ImageWithAlt = {
+  _type: 'imageWithAlt'
+  asset?: SanityImageAssetReference
+  media?: unknown
+  hotspot?: SanityImageHotspot
+  crop?: SanityImageCrop
+  alt?: string
+}
+
+export type TermsPage = {
   _id: string
-  _type: 'privacyPage'
+  _type: 'termsPage'
   _createdAt: string
   _updatedAt: string
   _rev: string
   heading?: string
+  updated?: string
   body?: RichText
   backLink?: Link
   seo?: Seo
@@ -101,6 +135,18 @@ export type RichText = Array<
       _key: string
     } & ImageWithAlt)
 >
+
+export type PrivacyPage = {
+  _id: string
+  _type: 'privacyPage'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  heading?: string
+  body?: RichText
+  backLink?: Link
+  seo?: Seo
+}
 
 export type LandingPage = {
   _id: string
@@ -271,22 +317,6 @@ export type AboutPage = {
   >
   image?: ImageWithAlt
   seo?: Seo
-}
-
-export type SanityImageAssetReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-}
-
-export type ImageWithAlt = {
-  _type: 'imageWithAlt'
-  asset?: SanityImageAssetReference
-  media?: unknown
-  hotspot?: SanityImageHotspot
-  crop?: SanityImageCrop
-  alt?: string
 }
 
 export type ServicesPage = {
@@ -708,9 +738,12 @@ export type Geopoint = {
 
 export type AllSanitySchemaTypes =
   | BrandkitPage
-  | PrivacyPage
+  | SanityImageAssetReference
+  | ImageWithAlt
+  | TermsPage
   | Link
   | RichText
+  | PrivacyPage
   | LandingPage
   | WhatsappPage
   | BookInspectionPage
@@ -718,8 +751,6 @@ export type AllSanitySchemaTypes =
   | LocationsPage
   | BrandsPage
   | AboutPage
-  | SanityImageAssetReference
-  | ImageWithAlt
   | ServicesPage
   | HomePage
   | Seo
@@ -1307,8 +1338,28 @@ export type PRIVACY_QUERY_RESULT = {
 } | null
 
 // Source: ../web/src/sanity/queries.ts
+// Variable: TERMS_QUERY
+// Query: *[_type == "termsPage" && _id == "termsPage"][0]{heading, updated, body, backLink{label, href}, seo{title, description, canonical, twitter, noindex}}
+export type TERMS_QUERY_RESULT = {
+  heading: string | null
+  updated: string | null
+  body: RichText | null
+  backLink: {
+    label: string | null
+    href: string | null
+  } | null
+  seo: {
+    title: string | null
+    description: string | null
+    canonical: boolean | null
+    twitter: boolean | null
+    noindex: boolean | null
+  } | null
+} | null
+
+// Source: ../web/src/sanity/queries.ts
 // Variable: BRANDKIT_QUERY
-// Query: *[_type == "brandkitPage" && _id == "brandkitPage"][0]{  eyebrow, heading, intro, principles[]{_key, title, body}, logoEyebrow, logoHeading, logoBody, logoMinWidth,  paletteHeading, palette[]{_key, name, hex}, typography[]{_key, eyebrow, name, usage, sample},  voiceHeading, voice[]{_key, title, body, doExample, dontExample}, seo{title, description, canonical, twitter, noindex}}
+// Query: *[_type == "brandkitPage" && _id == "brandkitPage"][0]{  eyebrow, heading, intro, principles[]{_key, title, body}, logoEyebrow, logoHeading, logoBody, logoMinWidth,  logos[]{_key, name, usage, tone, image{alt, asset->{_id, url, metadata{dimensions}}}},  paletteHeading, palette[]{_key, name, hex, usage}, typography[]{_key, eyebrow, name, usage, sample, style},  photoHeading, photoIntro, photography[]{_key, title, body},  voiceHeading, voice[]{_key, title, body, doExample, dontExample}, seo{title, description, canonical, twitter, noindex}}
 export type BRANDKIT_QUERY_RESULT = {
   eyebrow: string | null
   heading: string | null
@@ -1322,11 +1373,28 @@ export type BRANDKIT_QUERY_RESULT = {
   logoHeading: string | null
   logoBody: string | null
   logoMinWidth: string | null
+  logos: Array<{
+    _key: string
+    name: string | null
+    usage: string | null
+    tone: 'black' | 'ink' | 'mist' | 'white' | null
+    image: {
+      alt: string | null
+      asset: {
+        _id: string
+        url: string | null
+        metadata: {
+          dimensions: SanityImageDimensions | null
+        } | null
+      } | null
+    } | null
+  }> | null
   paletteHeading: string | null
   palette: Array<{
     _key: string
     name: string | null
     hex: string | null
+    usage: string | null
   }> | null
   typography: Array<{
     _key: string
@@ -1334,6 +1402,14 @@ export type BRANDKIT_QUERY_RESULT = {
     name: string | null
     usage: string | null
     sample: string | null
+    style: 'body' | 'display' | 'label' | null
+  }> | null
+  photoHeading: string | null
+  photoIntro: string | null
+  photography: Array<{
+    _key: string
+    title: string | null
+    body: string | null
   }> | null
   voiceHeading: string | null
   voice: Array<{
@@ -1374,7 +1450,8 @@ declare global {
     '*[_type == "whatsappPage" && _id == "whatsappPage"][0]{eyebrow, heading, intro, studioLabel, chatLabel, backLink{label, href}, seo{title, description, canonical, twitter, noindex}}': WHATSAPP_QUERY_RESULT
     '*[_type == "landingPage" && _id == "landingPage"][0]{\n  heading, headingHighlight, intro, stats[]{_key, value, suffix, label}, features[]{_key, title, body},\n  formEyebrow, formHeading, formIntro, formLabels, locationOptionSuffix, carPlaceholder, namePlaceholder,\n  phonePrefix, phonePlaceholder, submitLabel, errorRequired, errorPhone, successHeading, successBody, successButton,\n  leadSource, whatsappMessage, galleryEyebrow, galleryHeading, galleryIntro, galleryEmbeds, copyright,\n  footerLinks[]{_key, label, href}, seo{title, description, canonical, twitter, noindex}\n}': LANDING_QUERY_RESULT
     '*[_type == "privacyPage" && _id == "privacyPage"][0]{heading, body, backLink{label, href}, seo{title, description, canonical, twitter, noindex}}': PRIVACY_QUERY_RESULT
-    '*[_type == "brandkitPage" && _id == "brandkitPage"][0]{\n  eyebrow, heading, intro, principles[]{_key, title, body}, logoEyebrow, logoHeading, logoBody, logoMinWidth,\n  paletteHeading, palette[]{_key, name, hex}, typography[]{_key, eyebrow, name, usage, sample},\n  voiceHeading, voice[]{_key, title, body, doExample, dontExample}, seo{title, description, canonical, twitter, noindex}\n}': BRANDKIT_QUERY_RESULT
+    '*[_type == "termsPage" && _id == "termsPage"][0]{heading, updated, body, backLink{label, href}, seo{title, description, canonical, twitter, noindex}}': TERMS_QUERY_RESULT
+    '*[_type == "brandkitPage" && _id == "brandkitPage"][0]{\n  eyebrow, heading, intro, principles[]{_key, title, body}, logoEyebrow, logoHeading, logoBody, logoMinWidth,\n  logos[]{_key, name, usage, tone, image{alt, asset->{_id, url, metadata{dimensions}}}},\n  paletteHeading, palette[]{_key, name, hex, usage}, typography[]{_key, eyebrow, name, usage, sample, style},\n  photoHeading, photoIntro, photography[]{_key, title, body},\n  voiceHeading, voice[]{_key, title, body, doExample, dontExample}, seo{title, description, canonical, twitter, noindex}\n}': BRANDKIT_QUERY_RESULT
   }
 }
 // Lets @sanity/client releases that predate the global registry read it too

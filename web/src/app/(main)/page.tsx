@@ -58,12 +58,16 @@ export default async function HomePage() {
             />
           )}
         </div>
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,rgba(3,21,51,0.6)_0%,rgba(3,21,51,0)_20%,rgba(3,21,51,0)_40%,rgba(3,21,51,0.55)_64%,rgba(3,21,51,0.88)_100%)]" aria-hidden="true" />
+        {/* Phones get a deeper scrim that starts higher: measured from the bottom so it stays behind the copy at any height. */}
+        <div
+          className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgba(3,21,51,0.96)_0px,rgba(3,21,51,0.9)_340px,rgba(3,21,51,0.74)_480px,rgba(3,21,51,0)_660px),linear-gradient(to_bottom,rgba(3,21,51,0.55)_0px,rgba(3,21,51,0)_140px)] md:bg-[linear-gradient(to_bottom,rgba(3,21,51,0.6)_0%,rgba(3,21,51,0)_20%,rgba(3,21,51,0)_40%,rgba(3,21,51,0.55)_64%,rgba(3,21,51,0.88)_100%)]"
+          aria-hidden="true"
+        />
         <div
           data-hero-copy
           className="wrap flex flex-col gap-10 pb-[124px] md:pb-[clamp(40px,7vw,96px)] lg:flex-row lg:items-end lg:justify-between"
         >
-          <h1 className="display text-[clamp(46px,7.6vw,112px)]">
+          <h1 className="display text-[clamp(46px,7.6vw,112px)] [text-shadow:0_2px_24px_rgba(3,21,51,0.45)]">
             {hero?.headingLines?.map((line, i) => (
               <span key={i} className="block">
                 {line}
@@ -72,14 +76,14 @@ export default async function HomePage() {
           </h1>
           <div className="max-w-[400px] lg:pb-3">
             <p className="text-[18px] leading-relaxed text-[#dce0e6]">{hero?.subheading}</p>
-            <div className="mt-7 flex flex-wrap gap-3">
+            <div className="mt-7 grid grid-cols-2 gap-3 sm:flex sm:flex-wrap">
               {hero?.primary?.href && (
-                <Button href={hero.primary.href} variant="onImage">
+                <Button href={hero.primary.href} variant="onImage" className="max-sm:gap-2 max-sm:px-3 max-[379px]:[&_svg]:hidden">
                   {hero.primary.label}
                 </Button>
               )}
               {hero?.secondary?.href && (
-                <Button href={hero.secondary.href} variant="onImageGhost">
+                <Button href={hero.secondary.href} variant="onImageGhost" className="max-sm:gap-2 max-sm:px-3 max-[379px]:[&_svg]:hidden">
                   {hero.secondary.label}
                 </Button>
               )}

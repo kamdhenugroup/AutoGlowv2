@@ -1,0 +1,117 @@
+{
+ "_createdAt": "2026-10-23T08:19:04Z",
+ "_id": "brandkitPage",
+ "_rev": "nekXJvQAKQ2AFMPfpI0xpk",
+ "_type": "brandkitPage",
+ "_updatedAt": "2026-10-23T08:23:48Z",
+ "eyebrow": "Official Documentation",
+ "heading": "Brand Kit.",
+ "intro": "The AutoGlow brand identity. A collection of our visual and linguistic language, crafted to communicate luxury, precision, and protection.",
+ "logoBody": "The AutoGlow primary logo is bold, clean, and modern. It must always have proper contrast and enough breathing room (clear space) when placed on any background.",
+ "logoEyebrow": "Brand Logo",
+ "logoHeading": "The Primary Mark",
+ "logoMinWidth": "Minimum Width: 120px",
+ "palette": [
+  {
+   "_key": "9b3d06781f6e",
+   "_type": "swatch",
+   "hex": "#08080C",
+   "name": "Navy Deep"
+  },
+  {
+   "_key": "06c3dea1ce63",
+   "_type": "swatch",
+   "hex": "#0D0D14",
+   "name": "Navy"
+  },
+  {
+   "_key": "f104cc0f03a7",
+   "_type": "swatch",
+   "hex": "#E51924",
+   "name": "Signature Red"
+  },
+  {
+   "_key": "26c6468b0393",
+   "_type": "swatch",
+   "hex": "#FFFFFF",
+   "name": "Pure White"
+  },
+  {
+   "_key": "501d51e46a56",
+   "_type": "swatch",
+   "hex": "#8A8A93",
+   "name": "Tech Gray"
+  }
+ ],
+ "paletteHeading": "Color Palette",
+ "principles": [
+  {
+   "_key": "c6747866863d",
+   "_type": "feature",
+   "body": "Every action is calculated. We don't just clean; we restore and enhance at a microscopic level.",
+   "title": "Precision"
+  },
+  {
+   "_key": "0ab25175c44a",
+   "_type": "feature",
+   "body": "Our aesthetics and service mirror the high-end automotive masterpieces we protect.",
+   "title": "Luxury"
+  },
+  {
+   "_key": "dba8ab4bb607",
+   "_type": "feature",
+   "body": "We build for longevity. Our coatings and films are engineered to preserve perfection.",
+   "title": "Endurance"
+  }
+ ],
+ "seo": {
+  "_type": "seo",
+  "canonical": false,
+  "noindex": false,
+  "twitter": false
+ },
+ "typography": [
+  {
+   "_key": "ea2e0ec7a212",
+   "_type": "typeSpecimen",
+   "eyebrow": "Typography / Display",
+   "name": "Space Grotesk",
+   "sample": "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789",
+   "usage": "Used for primary headlines and massive visual impact. Communicates modern luxury and edge."
+  },
+  {
+   "_key": "667dd07b6c57",
+   "_type": "typeSpecimen",
+   "eyebrow": "Typography / Body & Details",
+   "name": "Inter Regular",
+   "sample": "We believe in protection that speaks for itself. The gloss should be deep, the surface flawless, and the application absolutely invisible.",
+   "usage": "Used for all body copy and descriptions for high legibility."
+  },
+  {
+   "_key": "e55cd4efa84d",
+   "_type": "typeSpecimen",
+   "name": "JetBrains Mono",
+   "sample": "[SYSTEM_ACTIVE] COORD: 19.0760 N, 72.8777 E",
+   "usage": "Used for technical details, coordinates, tags, and utilitarian UI text."
+  }
+ ],
+ "voice": [
+  {
+   "_key": "4dea0e7b91fa",
+   "_type": "voiceRule",
+   "body": "We know we provide the best service, but we let our work do the talking. We use definitive language—avoiding words like \"maybe\", \"trying to\", or \"hopefully\".",
+   "doExample": "Engineered for absolute protection.",
+   "dontExample": "We try our best to protect your car.",
+   "title": "Confident, Never Arrogant"
+  },
+  {
+   "_key": "69a2ace72073",
+   "_type": "voiceRule",
+   "body": "We respect automotive enthusiasm. We discuss microns, hydrophobic properties, and 9H hardness, but always tie it back to the real-world benefit for the owner.",
+   "doExample": "Our 9H ceramic matrix cross-links with the clear coat to prevent micro-marring.",
+   "dontExample": "It makes it shiny and hard.",
+   "title": "Technical, Yet Accessible"
+  }
+ ],
+ "voiceHeading": "Voice & Tone"
+}
