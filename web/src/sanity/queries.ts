@@ -29,7 +29,7 @@ export const SERVICE_QUERY = defineQuery(`*[_type == "service" && slug.current =
 }`)
 
 export const LOCATIONS_QUERY = defineQuery(`*[_type == "location"] | order(orderRank asc){
-  _id, title, city, country, address, shortAddress, hours, phone, whatsapp, mapUrl, embedUrl
+  _id, title, city, country, address, shortAddress, hours, phone, whatsapp, website, mapUrl, embedUrl
 }`)
 
 export const BRANDS_QUERY = defineQuery(`*[_type == "brand"] | order(orderRank asc){_id, name, "slug": slug.current, logo}`)

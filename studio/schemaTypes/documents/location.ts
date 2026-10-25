@@ -21,6 +21,11 @@ export const location = defineType({
     defineField({name: 'hours', type: 'string'}),
     defineField({name: 'phone', type: 'string', description: 'Digits only, without country code.'}),
     defineField({name: 'whatsapp', title: 'WhatsApp number', type: 'string', description: 'Digits only, without country code.'}),
+    defineField({
+      name: 'website',
+      type: 'url',
+      description: 'A separate website for this studio, if it has one (for example https://autoglow.ae for the UAE).',
+    }),
     defineField({name: 'mapUrl', title: 'Google Maps link', type: 'url'}),
     defineField({name: 'embedUrl', title: 'Google Maps embed URL', type: 'url'}),
   ],

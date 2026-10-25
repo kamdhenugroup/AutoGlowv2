@@ -3,7 +3,7 @@ import Link from 'next/link'
 import type {Location, ServiceCard} from '@/lib/data'
 import {imageSrc} from '@/sanity/image'
 import {cn} from './ui'
-import {Clock, MapPin, Phone, WhatsAppIcon} from './icons'
+import {Clock, Globe, MapPin, Phone, WhatsAppIcon} from './icons'
 
 export function ServiceCardItem({s, sizes, className, rail}: {s: ServiceCard; sizes: string; className?: string; rail?: boolean}) {
   const src = imageSrc(s.image, s.legacyImageUrl, 900)
@@ -56,6 +56,13 @@ export function StudioCard({l, className, whatsappLabel}: {l: Location; classNam
           <a href={`tel:+91${l.phone}`} className="inline-flex items-center gap-2.5">
             <Phone size={16} aria-hidden="true" />
             <span className="link-underline">Call: {l.phone}</span>
+          </a>
+        )}
+        {l.website && (
+          <a href={l.website} target="_blank" rel="noopener" className="inline-flex items-center gap-2.5">
+            <Globe size={16} aria-hidden="true" />
+            <span className="link-underline">{new URL(l.website).hostname.replace(/^www\./, '')}</span>
+            <span className="sr-only"> (opens in a new tab)</span>
           </a>
         )}
         {l.whatsapp ? (
