@@ -15,4 +15,4 @@ export const WhatsAppIcon = (p: P) => <Brand path={siWhatsapp.path} {...p} />
 export const InstagramIcon = (p: P) => <Brand path={siInstagram.path} {...p} />
 export const YouTubeIcon = (p: P) => <Brand path={siYoutube.path} {...p} />
 
-export {ArrowRight, ArrowUpRight, CalendarCheck, Clock, Mail, MapPin, Navigation, Phone, Plus, Search, ShieldCheck} from 'lucide-react'
+export {ArrowRight, ArrowUpRight, CalendarCheck, Clock, Globe, Mail, MapPin, Navigation, Phone, Plus, Search, ShieldCheck} from 'lucide-react'

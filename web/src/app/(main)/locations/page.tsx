@@ -3,7 +3,7 @@ import {sanityFetch} from '@/sanity/client'
 import {LOCATIONS_PAGE_QUERY} from '@/sanity/queries'
 import {getLocations, getSettings} from '@/lib/data'
 import {SITE_URL, jsonLd, pageMetadata} from '@/lib/seo'
-import {Clock, MapPin, Navigation, Phone, WhatsAppIcon} from '@/components/icons'
+import {Clock, Globe, MapPin, Navigation, Phone, WhatsAppIcon} from '@/components/icons'
 import {MapEmbed} from '@/components/MapEmbed'
 import {buttonClass} from '@/components/ui'
 
@@ -23,7 +23,7 @@ export default async function LocationsPage() {
     name: l.title,
     address: {'@type': 'PostalAddress', addressLocality: l.city, addressCountry: l.country, streetAddress: l.address},
     ...(l.phone ? {telephone: `+91${l.phone}`} : {}),
-    url: `${SITE_URL}/locations`,
+    url: l.website ?? `${SITE_URL}/locations`,
     hasMap: l.mapUrl,
     ...(l.phone
       ? {
@@ -90,6 +90,18 @@ export default async function LocationsPage() {
                     >
                       <WhatsAppIcon size={16} />
                       {p?.whatsappLabel}
+                      <span className="sr-only"> (opens in a new tab)</span>
+                    </a>
+                  )}
+                  {l.website && (
+                    <a
+                      href={l.website}
+                      target="_blank"
+                      rel="noopener"
+                      className={buttonClass(l.whatsapp ? 'quiet' : 'primary', 'h-11 px-5')}
+                    >
+                      <Globe size={16} aria-hidden="true" />
+                      {new URL(l.website).hostname.replace(/^www\./, '')}
                       <span className="sr-only"> (opens in a new tab)</span>
                     </a>
                   )}

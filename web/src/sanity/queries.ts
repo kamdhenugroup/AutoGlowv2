@@ -29,7 +29,7 @@ export const SERVICE_QUERY = defineQuery(`*[_type == "service" && slug.current =
 }`)
 
 export const LOCATIONS_QUERY = defineQuery(`*[_type == "location"] | order(orderRank asc){
-  _id, title, city, country, address, shortAddress, hours, phone, whatsapp, mapUrl, embedUrl
+  _id, title, city, country, address, shortAddress, hours, phone, whatsapp, website, mapUrl, embedUrl
 }`)
 
 export const BRANDS_QUERY = defineQuery(`*[_type == "brand"] | order(orderRank asc){_id, name, "slug": slug.current, logo}`)
@@ -79,8 +79,11 @@ export const LANDING_QUERY = defineQuery(`*[_type == "landingPage" && _id == "la
   footerLinks[]{_key, label, href}, ${SEO}
 }`)
 export const PRIVACY_QUERY = defineQuery(`*[_type == "privacyPage" && _id == "privacyPage"][0]{heading, body, backLink${LINK}, ${SEO}}`)
+export const TERMS_QUERY = defineQuery(`*[_type == "termsPage" && _id == "termsPage"][0]{heading, updated, body, backLink${LINK}, ${SEO}}`)
 export const BRANDKIT_QUERY = defineQuery(`*[_type == "brandkitPage" && _id == "brandkitPage"][0]{
   eyebrow, heading, intro, principles[]{_key, title, body}, logoEyebrow, logoHeading, logoBody, logoMinWidth,
-  paletteHeading, palette[]{_key, name, hex}, typography[]{_key, eyebrow, name, usage, sample},
+  logos[]{_key, name, usage, tone, image{alt, asset->{_id, url, metadata{dimensions}}}},
+  paletteHeading, palette[]{_key, name, hex, usage}, typography[]{_key, eyebrow, name, usage, sample, style},
+  photoHeading, photoIntro, photography[]{_key, title, body},
   voiceHeading, voice[]{_key, title, body, doExample, dontExample}, ${SEO}
 }`)

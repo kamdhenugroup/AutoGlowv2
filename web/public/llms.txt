@@ -1,6 +1,6 @@
 # AutoGlow
 
-> AutoGlow is a premium automotive surface protection and detailing brand operating in India (Ahmedabad, Kochi, Dubai and Abu Dhabi) and the UAE (Dubai and Abu Dhabi). It is part of the Kamdhenu Group, the automotive business founded in 2000 by brothers Maulesh Thakker and Dhaval Thakkar. AutoGlow provides Paint Protection Film (PPF), ceramic and graphene coatings, window tint, paint correction, detailing, and its proprietary GlanzPro protection line. This file covers AutoGlow India (autoglowcare.in).
+> AutoGlow is a premium automotive surface protection and detailing brand operating in India (Ahmedabad and Kochi) and the UAE (Dubai and Abu Dhabi). It is part of the Kamdhenu Group, the automotive business founded in 2000 by brothers Maulesh Thakker and Dhaval Thakkar. AutoGlow provides Paint Protection Film (PPF), ceramic and graphene coatings, window tint, paint correction, detailing, and its proprietary GlanzPro protection line. This file covers AutoGlow India (autoglowcare.in).
 
 Key facts:
 - Brand: AutoGlow (India operations at autoglowcare.in, UAE operations at autoglow.ae)
@@ -36,5 +36,6 @@ Key facts:
 ## Optional
 
 - [Full knowledge base](https://autoglowcare.in/llms-full.txt): Complete company knowledge for AI assistants, including philosophy, processes, recommendations, and FAQ
-- [Kamdhenu Cars India](https://www.kamdhenucars.com/): Sister brand, certified pre-owned and luxury used cars in Ahmedabad, Kochi, Dubai and Abu Dhabi
+- [AutoGlow UAE](https://autoglow.ae/): AutoGlow's website for its Dubai and Abu Dhabi studios
+- [Kamdhenu Cars India](https://www.kamdhenucars.com/): Sister brand, certified pre-owned and luxury used cars in Ahmedabad and Kochi
 - [Kamdhenu Cars UAE](https://kamdhenucars.ae/): Sister brand, pre-owned vehicles in Dubai and Abu Dhabi

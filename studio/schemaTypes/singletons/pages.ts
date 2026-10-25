@@ -212,6 +212,13 @@ export const privacyPage = page('privacyPage', 'Privacy', [
   defineField({name: 'backLink', type: 'link', group: 'content'}),
 ])
 
+export const termsPage = page('termsPage', 'Terms', [
+  str('heading'),
+  defineField({name: 'updated', title: 'Last updated', type: 'date', group: 'content'}),
+  defineField({name: 'body', type: 'richText', group: 'content'}),
+  defineField({name: 'backLink', type: 'link', group: 'content'}),
+])
+
 export const brandkitPage = page('brandkitPage', 'Brand Kit', [
   str('eyebrow'),
   str('heading'),
@@ -226,6 +233,31 @@ export const brandkitPage = page('brandkitPage', 'Brand Kit', [
   str('logoHeading'),
   txt('logoBody'),
   str('logoMinWidth'),
+  defineField({
+    name: 'logos',
+    description: 'Each logo with the job it does. Shown as tiles under the logo text.',
+    type: 'array',
+    group: 'content',
+    of: [
+      defineArrayMember({
+        type: 'object',
+        name: 'logoUse',
+        fields: [
+          defineField({name: 'name', type: 'string'}),
+          defineField({name: 'usage', type: 'text', rows: 3}),
+          defineField({name: 'image', type: 'imageWithAlt'}),
+          defineField({
+            name: 'tone',
+            title: 'Tile colour',
+            type: 'string',
+            options: {list: ['white', 'mist', 'ink', 'black'], layout: 'radio', direction: 'horizontal'},
+            initialValue: 'white',
+          }),
+        ],
+        preview: {select: {title: 'name', media: 'image'}},
+      }),
+    ],
+  }),
   str('paletteHeading'),
   defineField({
     name: 'palette',
@@ -235,7 +267,11 @@ export const brandkitPage = page('brandkitPage', 'Brand Kit', [
       defineArrayMember({
         type: 'object',
         name: 'swatch',
-        fields: [defineField({name: 'name', type: 'string'}), defineField({name: 'hex', type: 'string'})],
+        fields: [
+          defineField({name: 'name', type: 'string'}),
+          defineField({name: 'hex', type: 'string'}),
+          defineField({name: 'usage', type: 'string'}),
+        ],
         preview: {select: {title: 'name', subtitle: 'hex'}},
       }),
     ],
@@ -253,11 +289,20 @@ export const brandkitPage = page('brandkitPage', 'Brand Kit', [
           defineField({name: 'name', type: 'string'}),
           defineField({name: 'usage', type: 'text', rows: 2}),
           defineField({name: 'sample', type: 'text', rows: 2}),
+          defineField({
+            name: 'style',
+            description: 'How the sample is set on the page.',
+            type: 'string',
+            options: {list: ['display', 'body', 'label'], layout: 'radio', direction: 'horizontal'},
+          }),
         ],
         preview: {select: {title: 'name', subtitle: 'eyebrow'}},
       }),
     ],
   }),
+  str('photoHeading'),
+  txt('photoIntro'),
+  arr('photography', 'feature', 'Photography rules'),
   str('voiceHeading'),
   defineField({
     name: 'voice',
@@ -290,5 +335,6 @@ export const singletonTypes = [
   whatsappPage,
   landingPage,
   privacyPage,
+  termsPage,
   brandkitPage,
 ]

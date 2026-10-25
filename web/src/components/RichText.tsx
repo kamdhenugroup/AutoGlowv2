@@ -21,7 +21,9 @@ export function headingIds(blocks: Block[]) {
       const text = plain(b)
       const id = slugger.slug(text)
       ids.set(b._key ?? '', id)
-      if (b.style === 'h2' || b.style === 'h3') toc.push({id, text, level: Number(b.style[1])})
+      // Body h1s are shown as h2 (the title is the page's only h1), so they list as sections too.
+      if (b.style === 'h1' || b.style === 'h2') toc.push({id, text, level: 2})
+      else if (b.style === 'h3') toc.push({id, text, level: 3})
     }
   }
   return {ids, toc}
