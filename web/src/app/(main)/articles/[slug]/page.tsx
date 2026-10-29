@@ -18,7 +18,8 @@ export async function generateStaticParams() {
   const items = await sanityFetch({query: ARTICLE_SLUGS_QUERY, tags: ['article']})
   return items.map((a) => ({slug: a.slug}))
 }
-export const dynamicParams = false
+// New articles published in Sanity after a deploy are built on first visit (unknown slugs still 404).
+export const dynamicParams = true
 
 export async function generateMetadata({params}: Props): Promise<Metadata> {
   const {slug} = await params

@@ -14,7 +14,8 @@ import {OG_PAGES_QUERY} from '@/sanity/queries'
  * Served from /og (not /api, which robots.txt closes to crawlers such as Twitterbot).
  */
 
-export const dynamicParams = false
+// Share images for pages added in Sanity after a deploy are built on first request.
+export const dynamicParams = true
 
 // The Sanity webhook revalidates by document type, so the images refresh with any of these.
 const OG_TAGS = ['homePage', 'service', 'article', 'aboutPage', 'servicesPage', 'brandsPage', 'articlesPage', 'bookInspectionPage', 'whatsappPage', 'privacyPage', 'termsPage']
