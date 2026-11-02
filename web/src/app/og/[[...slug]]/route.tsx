@@ -6,6 +6,7 @@ import {createImageUrlBuilder, type SanityImageSource} from '@sanity/image-url'
 import {sanityFetch} from '@/sanity/client'
 import {dataset, projectId} from '@/sanity/env'
 import {OG_PAGES_QUERY} from '@/sanity/queries'
+import {articleArtwork} from '@/lib/articleArtwork'
 
 /**
  * Share images (Open Graph / X cards), one per page: the page's own photo under a navy
@@ -44,6 +45,13 @@ function photo(image: Img, legacy?: string | null) {
 
 type Card = {eyebrow: string; title: string; image: string | null}
 
+async function localArticleImage(slug: string): Promise<string | null> {
+  const artwork = articleArtwork(slug)
+  if (!artwork) return null
+  const bytes = await readFile(join(process.cwd(), 'public', artwork.src.slice(1)))
+  return `data:image/png;base64,${bytes.toString('base64')}`
+}
+
 async function card(slug: string[]): Promise<Card | null> {
   const d = await sanityFetch({query: OG_PAGES_QUERY, tags: OG_TAGS})
   const home = photo(d.home?.hero?.image)
@@ -55,7 +63,13 @@ async function card(slug: string[]): Promise<Card | null> {
   }
   if (section === 'articles' && item) {
     const a = d.articles.find((x) => x.slug === item)
-    return a ? {eyebrow: a.category ? `Article · ${a.category}` : 'Article', title: a.title ?? '', image: photo(a.coverImage, a.legacyCoverImageUrl) ?? home} : null
+    return a
+      ? {
+          eyebrow: a.category ? `Article · ${a.category}` : 'Article',
+          title: a.title ?? '',
+          image: photo(a.coverImage, a.legacyCoverImageUrl) ?? (await localArticleImage(item)) ?? home,
+        }
+      : null
   }
   const pages: Record<string, Card> = {
     services: {eyebrow: 'Services', title: d.servicesPage?.heading ?? 'Services', image: photo(d.home?.glanzPro?.image) ?? home},

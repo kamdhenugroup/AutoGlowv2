@@ -5,6 +5,7 @@ import {imageSrc} from '@/sanity/image'
 import {getArticles} from '@/lib/data'
 import {shortDate} from '@/lib/format'
 import {pageMetadata} from '@/lib/seo'
+import {articleArtwork} from '@/lib/articleArtwork'
 import {ArticleList} from '@/components/ArticleList'
 
 const getPage = () => sanityFetch({query: ARTICLES_PAGE_QUERY, tags: ['articlesPage']})
@@ -32,7 +33,7 @@ export default async function ArticlesPage() {
             dateLabel: shortDate(a.date),
             category: a.category,
             readingTime: a.readingTime ?? '',
-            cover: imageSrc(a.coverImage, a.legacyCoverImageUrl, 1000),
+            cover: imageSrc(a.coverImage, a.legacyCoverImageUrl, 1000) ?? articleArtwork(a.slug)?.src ?? null,
           }))}
           allLabel={page?.allLabel ?? ''}
           readMore={page?.readMoreLabel ?? ''}

@@ -7,6 +7,7 @@ import {ARTICLE_QUERY, ARTICLE_SLUGS_QUERY, ARTICLES_PAGE_QUERY} from '@/sanity/
 import {imageSrc} from '@/sanity/image'
 import {longDate} from '@/lib/format'
 import {SITE_URL, social} from '@/lib/seo'
+import {articleArtwork} from '@/lib/articleArtwork'
 import {RichText, headingIds} from '@/components/RichText'
 import {ShareArticle, TableOfContents} from '@/components/ArticleAside'
 
@@ -44,7 +45,8 @@ export default async function ArticlePage({params}: Props) {
   if (!a) notFound()
   const body = (a.body ?? []) as Parameters<typeof RichText>[0]['value']
   const {toc} = headingIds(body)
-  const cover = imageSrc(a.coverImage, a.legacyCoverImageUrl, 2400)
+  const artwork = articleArtwork(slug)
+  const cover = imageSrc(a.coverImage, a.legacyCoverImageUrl, 2400) ?? artwork?.src ?? null
 
   return (
     <article>
@@ -76,7 +78,7 @@ export default async function ArticlePage({params}: Props) {
         <div className="wrap mt-[clamp(40px,5vw,72px)]">
           <div className="relative h-[clamp(260px,42vw,620px)] overflow-hidden rounded-sm bg-mist">
             <div data-parallax="0.1" className="absolute inset-0 will-change-transform">
-              <Image src={cover} alt={a.coverImage?.alt || a.title || ''} fill priority sizes="100vw" className="object-cover" />
+              <Image src={cover} alt={a.coverImage?.alt || artwork?.alt || a.title || ''} fill priority sizes="100vw" className="object-cover" />
             </div>
           </div>
         </div>
